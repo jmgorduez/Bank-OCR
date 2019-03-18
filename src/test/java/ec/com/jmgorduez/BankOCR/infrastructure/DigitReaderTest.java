@@ -1,11 +1,12 @@
 package ec.com.jmgorduez.BankOCR.infrastructure;
 
+import ec.com.jmgorduez.BankOCR.domain.Digit;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static ec.com.jmgorduez.BankOCR.utils.Constants.BINARY_MATRIX_ONE;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.BINARY_MATRIX_TWO;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DigitReaderTest {
@@ -18,8 +19,10 @@ class DigitReaderTest {
     }
 
     @Test
+    @DisplayName("It should read a digit token from a digit token matrix.")
     void readCharacter() {
-        assertThat(digitReaderUnderTest.readCharacter(generateDigitTokenNumberOneMatrix()))
+        Digit test = (Digit) digitReaderUnderTest.readCharacter(generateDigitTokenNumberOneMatrix());
+        assertThat(test)
                 .isEqualTo(DIGIT_ONE);
         assertThat(digitReaderUnderTest.readCharacter(generateDigitTokenNumberTwoMatrix()))
                 .isEqualTo(DIGIT_TWO);
@@ -42,12 +45,29 @@ class DigitReaderTest {
     }
 
     @Test
-    void toBinaryMatrix() {
-        assertThat(digitReaderUnderTest.toBinaryMatrix(generateDigitTokenNumberOneMatrix()))
+    @DisplayName("It should convert from a digit token matrix to a binary matrix.")
+    void digitTokenMatrixToBinaryMatrix() {
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberOneMatrix()))
                 .isEqualTo(BINARY_MATRIX_ONE);
-        assertThat(digitReaderUnderTest.toBinaryMatrix(generateDigitTokenNumberTwoMatrix()))
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberTwoMatrix()))
                 .isNotEqualTo(BINARY_MATRIX_ONE);
-        assertThat(digitReaderUnderTest.toBinaryMatrix(generateDigitTokenNumberTwoMatrix()))
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberTwoMatrix()))
                 .isEqualTo(BINARY_MATRIX_TWO);
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberThreeMatrix()))
+                .isEqualTo(BINARY_MATRIX_THREE);
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberFourMatrix()))
+                .isEqualTo(BINARY_MATRIX_FOUR);
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberFiveMatrix()))
+                .isEqualTo(BINARY_MATRIX_FIVE);
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberSixMatrix()))
+                .isEqualTo(BINARY_MATRIX_SIX);
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberSevenMatrix()))
+                .isEqualTo(BINARY_MATRIX_SEVEN);
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberEightMatrix()))
+                .isEqualTo(BINARY_MATRIX_EIGHT);
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberNineMatrix()))
+                .isEqualTo(BINARY_MATRIX_NINE);
+        assertThat(digitReaderUnderTest.digitTokenMatrixToBinaryMatrix(generateDigitTokenNumberZeroMatrix()))
+                .isEqualTo(BINARY_MATRIX_ZERO);
     }
 }
