@@ -6,8 +6,7 @@ import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.ICharacterReader;
 import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.ILineReader;
 import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IStringReader;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class MultiLinesStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum> implements IStringReader<CHARACTER_TYPE, TOKEN_TYPE> {
 
@@ -44,5 +43,15 @@ public class MultiLinesStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum> imp
             characterCounter++;
         }
         return charactersString;
+    }
+
+    IToken<TOKEN_TYPE>[][] takeCharacterSection(IToken<TOKEN_TYPE>[][] fullString, int characterIndex){
+        List<IToken<TOKEN_TYPE>[]> characterSection = new ArrayList<>();
+        int indexFrom = characterIndex*CHARACTER_WIDTH;
+        int indexTo = indexFrom + CHARACTER_WIDTH;
+        Arrays.stream(fullString).forEach(line -> {
+            characterSection.add(Arrays.copyOfRange(line, indexFrom, indexTo));
+        });
+        return characterSection.toArray(new IToken[][]{});
     }
 }

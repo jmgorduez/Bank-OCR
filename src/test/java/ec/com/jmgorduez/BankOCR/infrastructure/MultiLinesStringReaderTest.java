@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.generateListNumbersOne;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -64,5 +65,13 @@ class MultiLinesStringReaderTest {
         multiLinesStringReaderUnderTest.generateCharactersString(
                 generateDigitTokenNumberOneMatrix(), characterReaderMock);
         verify(characterReaderMock, atLeast(MATRIX_MODULE)).readCharacter(any());
+    }
+
+    @Test
+    @DisplayName("It should take a section of a string, this section represent a character.")
+    void takeCharacterSection(){
+        assertThat(multiLinesStringReaderUnderTest.takeCharacterSection(
+                generateDigitTokenNumberOneStringMatrix(MATRIX_WIDTH_27, MATRIX_HEIGHT_3), ZERO))
+                .isEqualTo(generateDigitTokenNumberOneMatrix());
     }
 }

@@ -52,11 +52,11 @@ public class DataTestGenerator {
     }
 
     public static DigitToken[][] generateDigitTokenNumberOneStringMatrix(int columns, int rows) {
-        DigitToken[][] digitTokens = new DigitToken[columns][rows];
-        for (int i = 0; i < columns; i++) {
-            for (int j = 0; j < rows; j++) {
+        DigitToken[][] digitTokens = new DigitToken[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 DigitToken.TokenType tokenType = PIPE;
-                if (j == 0 || i != 2) {
+                if (i == 0 || j != 2) {
                     tokenType = BLANK_SPACE;
                 }
                 digitTokens[i][j] = new DigitToken(tokenType);
