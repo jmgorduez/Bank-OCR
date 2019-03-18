@@ -1,6 +1,7 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -15,6 +16,7 @@ class DigitTokenTest {
     private DigitToken digitTokenUnderTest;
 
     @Test
+    @DisplayName("It should return the digit token value.")
     void getValue() {
         digitTokenUnderTest = new DigitToken(DigitToken.TokenType.BLANK_SPACE.getValue());
         assertThat(digitTokenUnderTest.getValue()).isEqualTo(DigitToken.TokenType.BLANK_SPACE);
@@ -27,6 +29,7 @@ class DigitTokenTest {
     }
 
     @Test
+    @DisplayName("It should tell if the digit token is equal to other one")
     void equals() {
         digitTokenUnderTest = new DigitToken(DigitToken.TokenType.PIPE);
         assertThat(digitTokenUnderTest.equals(new DigitToken(DigitToken.TokenType.UNDERSCORE))).isFalse();
@@ -36,6 +39,7 @@ class DigitTokenTest {
     }
 
     @Test
+    @DisplayName("It should return the digit token hash code.")
     void hashCodeTest() {
         digitTokenUnderTest = new DigitToken(DigitToken.TokenType.UNDERSCORE);
         assertThat(digitTokenUnderTest.hashCode()).isEqualTo(Objects.hashCode(DigitToken.TokenType.UNDERSCORE));
@@ -43,6 +47,7 @@ class DigitTokenTest {
     }
 
     @Test
+    @DisplayName("It should tell if the digit token is or not a visible token.")
     void isVisible(){
         digitTokenUnderTest = new DigitToken(DigitToken.TokenType.BLANK_SPACE.getValue());
         assertThat(digitTokenUnderTest.isVisible()).isFalse();
