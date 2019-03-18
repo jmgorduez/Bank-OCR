@@ -4,48 +4,106 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.mockito.MockitoAnnotations;
 
 import java.util.Objects;
 
-import static ec.com.jmgorduez.BankOCR.DataTestGenerator.BINARY_CODE_ONE;
-import static ec.com.jmgorduez.BankOCR.DataTestGenerator.BINARY_CODE_THREE;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.THREE;
+import static ec.com.jmgorduez.BankOCR.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class DigitTest {
 
     private Digit digitUnderTest;
-    private static final int ONE = 1;
 
     @BeforeAll
     void setUp(){
-        MockitoAnnotations.initMocks(this);
         digitUnderTest = new Digit(ONE);
     }
 
     @Test
+    @DisplayName("It should return the Integer that represent the digit value")
     void getValue() {
+        digitUnderTest = DIGIT_ONE;
         assertThat(digitUnderTest.getValue()).isEqualTo(ONE);
     }
 
     @Test
+    @DisplayName("It should tell if the digit value is equal to other one")
     void equals() {
+        digitUnderTest = DIGIT_ONE;
         assertThat(digitUnderTest.equals(new Digit(ONE))).isTrue();
     }
 
     @Test
+    @DisplayName("It should return the digit hash code")
     void hashCodeTest() {
+        digitUnderTest = DIGIT_ONE;
         assertThat(digitUnderTest.hashCode()).isEqualTo(Objects.hashCode(ONE));
     }
 
     @Test
     @DisplayName("It should calculate the binary code for a digit.")
-    void getBinaryCode(){
-        digitUnderTest = new Digit(ONE);
+    void getBinaryCode() {
+        digitUnderTest = DIGIT_ONE;
         assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_ONE);
-        digitUnderTest = new Digit(THREE);
+        digitUnderTest = DIGIT_THREE;
         assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_THREE);
+    }
+
+    @Test
+    @DisplayName("It should generate a binary matrix for each digit")
+    void generateBinaryMatrixForDigit() {
+        digitUnderTest = DIGIT_FIVE;
+        assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(FIVE))
+                .isEqualTo(BINARY_MATRIX_FIVE);
+        digitUnderTest = DIGIT_ZERO;
+        assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(ZERO))
+                .isEqualTo(BINARY_MATRIX_ZERO);
+    }
+
+    @Test
+    @DisplayName("It should generate a binary code from a binary matrix.")
+    void binaryMatrixToBinaryCode() {
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_ONE))
+                .isEqualTo(BINARY_CODE_ONE);
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_THREE))
+                .isEqualTo(BINARY_CODE_THREE);
+    }
+
+    @Test
+    @DisplayName("It should instantiate a digit from its binary code.")
+    void binaryCodeToDigit(){
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_ONE))
+                .isEqualTo(DIGIT_ONE);
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_THREE))
+                .isEqualTo(DIGIT_THREE);
+    }
+
+    @Test
+    @DisplayName("It should generate a binary code for each digit")
+    void generateBinaryCodesForDigits(){
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(ONE))
+                .isEqualTo(BINARY_CODE_ONE);
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(THREE))
+                .isEqualTo(BINARY_CODE_THREE);
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(ZERO))
+                .isEqualTo(BINARY_CODE_ZERO);
+    }
+
+    @Test
+    @DisplayName("It should calculate the digit successor.")
+    void successor(){
+        digitUnderTest = DIGIT_ZERO;
+        assertThat(digitUnderTest.successor())
+                .isEqualTo(DIGIT_ONE);
+        digitUnderTest = DIGIT_THREE;
+        assertThat(digitUnderTest.successor())
+                .isEqualTo(DIGIT_FOUR);
+        assertThatThrownBy(() -> {
+            digitUnderTest = DIGIT_NINE;
+            digitUnderTest.successor();
+        }).isInstanceOf(UnsupportedOperationException.class);
     }
 }

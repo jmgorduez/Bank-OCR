@@ -1,19 +1,17 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
-import ec.com.jmgorduez.BankOCR.utils.MathOperations;
-import sun.misc.FloatingDecimal;
 
-import java.math.MathContext;
 import java.util.*;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
-import static ec.com.jmgorduez.BankOCR.utils.MathOperations.binaryToDecimal;
-import static ec.com.jmgorduez.BankOCR.utils.MathOperations.intArrayToDecimal;
+import static ec.com.jmgorduez.BankOCR.utils.MathOperations.bitsArrayToNumberBaseTen;
+import static ec.com.jmgorduez.BankOCR.utils.MathOperations.digitsArrayToNumberBaseTen;
 
 public class Digit implements ICharacter<Integer> {
 
-    private static final HashMap<Integer, Integer[][]> binaryMatrixForDigit = generateBinaryMatrixForDigit();
+    private static final HashMap<Integer, Integer[][]> binaryMatricesForDigits = generateBinaryMatricesForDigits();
+    private static final HashMap<Integer, Integer> binaryCodesForDigits = generateBinaryCodesForDigits();
 
     private Integer value;
     private final Integer[][] binaryMatrix;
@@ -21,7 +19,7 @@ public class Digit implements ICharacter<Integer> {
     public Digit(Integer value) {
 
         this.value = value;
-        binaryMatrix = binaryMatrixForDigit.get(value);
+        binaryMatrix = binaryMatricesForDigits.get(value);
     }
 
     @Override
@@ -31,14 +29,12 @@ public class Digit implements ICharacter<Integer> {
 
     @Override
     public int getBinaryCode() {
-        List<Integer> binaryCode = new ArrayList<>();
-        Arrays.stream(binaryMatrix).forEach(row -> {
-            binaryCode.add(binaryToDecimal(row));
-        });
-        return (int) intArrayToDecimal(binaryCode.toArray(new Integer[binaryCode.size()]));
+
+        return binaryMatrixToBinaryCode(binaryMatrix);
     }
 
     public boolean equals(Object other) {
+
         if (other == this) {
             return true;
         }
@@ -49,10 +45,12 @@ public class Digit implements ICharacter<Integer> {
     }
 
     public int hashCode() {
+
         return Objects.hashCode(this.value);
     }
 
-    private static HashMap<Integer, Integer[][]> generateBinaryMatrixForDigit() {
+    static HashMap<Integer, Integer[][]> generateBinaryMatricesForDigits() {
+
         HashMap<Integer, Integer[][]> binaryMatrixMap = new HashMap<>();
         binaryMatrixMap.put(ONE, BINARY_MATRIX_ONE);
         binaryMatrixMap.put(TWO, BINARY_MATRIX_TWO);
@@ -65,6 +63,45 @@ public class Digit implements ICharacter<Integer> {
         binaryMatrixMap.put(NINE, BINARY_MATRIX_NINE);
         binaryMatrixMap.put(ZERO, BINARY_MATRIX_ZERO);
         return binaryMatrixMap;
+    }
+
+    static HashMap<Integer, Integer> generateBinaryCodesForDigits() {
+        HashMap<Integer, Integer> binaryCodesForDigits = new HashMap<>();
+        for (Digit digit = new Digit(ZERO); digit.value <= 9; ) {
+            binaryCodesForDigits.put(digit.value, digit.getBinaryCode());
+            try {
+                digit = digit.successor();
+            }catch (UnsupportedOperationException error){
+                break;
+            }
+        }
+        return binaryCodesForDigits;
+    }
+
+    public static int binaryMatrixToBinaryCode(Integer[][] binaryMatrix) {
+        List<Integer> binaryCode = new ArrayList<>();
+        Arrays.stream(binaryMatrix).forEach(row -> {
+            binaryCode.add(bitsArrayToNumberBaseTen(row));
+        });
+        return (int) digitsArrayToNumberBaseTen(binaryCode.toArray(new Integer[binaryCode.size()]));
+    }
+
+    public static Digit binaryCodeToDigit(Integer binaryCode) {
+        List<Digit> digitFound = new ArrayList<>();
+        binaryCodesForDigits.forEach((digit, binCode) -> {
+            if (binaryCode.equals(binCode)) {
+                digitFound.add(new Digit(digit));
+            }
+        });
+        return digitFound.get(0);
+    }
+
+    public Digit successor() throws UnsupportedOperationException {
+        if (value == NINE) {
+            throw new UnsupportedOperationException();
+        }
+        int successorValue = value + ONE;
+        return new Digit(successorValue);
     }
 
 }
