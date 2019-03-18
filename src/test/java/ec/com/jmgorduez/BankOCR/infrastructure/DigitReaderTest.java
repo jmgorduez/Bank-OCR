@@ -21,8 +21,7 @@ class DigitReaderTest {
     @Test
     @DisplayName("It should read a digit token from a digit token matrix.")
     void readCharacter() {
-        Digit test = (Digit) digitReaderUnderTest.readCharacter(generateDigitTokenNumberOneMatrix());
-        assertThat(test)
+        assertThat(digitReaderUnderTest.readCharacter(generateDigitTokenNumberOneMatrix()))
                 .isEqualTo(DIGIT_ONE);
         assertThat(digitReaderUnderTest.readCharacter(generateDigitTokenNumberTwoMatrix()))
                 .isEqualTo(DIGIT_TWO);
