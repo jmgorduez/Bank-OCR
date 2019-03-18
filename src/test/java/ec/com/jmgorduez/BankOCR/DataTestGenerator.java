@@ -32,9 +32,7 @@ public class DataTestGenerator {
     public static final Digit DIGIT_NINE = new Digit(NINE);
     public static final Digit DIGIT_ZERO = new Digit(ZERO);
 
-    public static final int BINARY_CODE_ONE = 11;
     public static final Integer[] BINARY_CODE_ONE_ARRAY = new Integer[]{0, 1, 1};
-    public static final int BINARY_CODE_THREE = 233;
 
     public static final Integer[] ONE_BASE_TWO_ARRAY = new Integer[]{0, 0, 1};
     public static final Integer[] THREE_BASE_TWO_ARRAY = new Integer[]{0, 1, 1};
