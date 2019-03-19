@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ec.com.jmgorduez.BankOCR.domain.Digit.binaryCodeToDigit;
+import static ec.com.jmgorduez.BankOCR.domain.Digit.binaryMatrixToBinaryCode;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;
 
@@ -20,10 +22,9 @@ public class MultilineDigitReader implements IMultilineCharacterReader<Integer, 
     @Override
     public ICharacter<Integer> readCharacter(IMultilineString<IToken<DigitToken.TokenType>> digitTokenMatrix) {
 
-        /*Integer[][] binaryMatrix = digitTokenMatrixToBinaryMatrix(digitTokenMatrix);
+        Integer[][] binaryMatrix = digitTokenMatrixToBinaryMatrix(digitTokenMatrix);
         Integer binaryCode = binaryMatrixToBinaryCode(binaryMatrix);
-        return binaryCodeToDigit(binaryCode);*/
-        return null;
+        return binaryCodeToDigit(binaryCode);
     }
 
     Integer[][] digitTokenMatrixToBinaryMatrix(IMultilineString<IToken<DigitToken.TokenType>> digitTokenMatrix) {
