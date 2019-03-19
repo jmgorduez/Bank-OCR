@@ -12,11 +12,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LineConsoleReader implements ILineReader<DigitToken.TokenType> {
+public class LineReader implements ILineReader<DigitToken.TokenType> {
     @Override
     public List<IToken<DigitToken.TokenType>> readLine(BufferedReader reader)
             throws IOException {
+        String line = reader.readLine();
         List<IToken<DigitToken.TokenType>> lineOfTokens = new ArrayList<>();
+        line.chars().forEach(character -> {
+            lineOfTokens.add(new DigitToken(String.valueOf(character)));
+        });
         return lineOfTokens;
     }
 }

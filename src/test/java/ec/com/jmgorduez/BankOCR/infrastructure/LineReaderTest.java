@@ -4,7 +4,6 @@ import ec.com.jmgorduez.BankOCR.DataTestGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.io.BufferedReader;
@@ -13,12 +12,11 @@ import java.io.IOException;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.BLANK_SPACE_STRING_27;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.generateListTokensBlankSpace;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-class LineConsoleReaderTest {
+class LineReaderTest {
 
-    private LineConsoleReader lineConsoleReaderUnderTest;
+    private LineReader lineConsoleReaderUnderTest;
     @Mock
     private BufferedReader bufferedReaderMock;
 
@@ -26,7 +24,7 @@ class LineConsoleReaderTest {
     void setUp() {
 
         MockitoAnnotations.initMocks(this);
-        lineConsoleReaderUnderTest = new LineConsoleReader();
+        lineConsoleReaderUnderTest = new LineReader();
         try {
             when(bufferedReaderMock.readLine())
                     .thenReturn(BLANK_SPACE_STRING_27);
