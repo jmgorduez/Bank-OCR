@@ -20,9 +20,9 @@ public class MultilineDigitReader implements IMultilineCharacterReader<Integer, 
     @Override
     public ICharacter<Integer> readCharacter(IMultilineString<IToken<DigitToken.TokenType>> digitTokenMatrix) {
 
-        Integer[][] binaryMatrix = digitTokenMatrixToBinaryMatrix(digitTokenMatrix);
+        /*Integer[][] binaryMatrix = digitTokenMatrixToBinaryMatrix(digitTokenMatrix);
         Integer binaryCode = binaryMatrixToBinaryCode(binaryMatrix);
-        return binaryCodeToDigit(binaryCode);
+        return binaryCodeToDigit(binaryCode);*/
         return null;
     }
 
