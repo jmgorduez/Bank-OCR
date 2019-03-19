@@ -2,8 +2,10 @@ package ec.com.jmgorduez.BankOCR.infrastructure;
 
 import ec.com.jmgorduez.BankOCR.domain.Digit;
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.ICharacterReader;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
+import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineCharacterReader;
 import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.ILineReader;
+import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,65 +15,58 @@ import org.mockito.MockitoAnnotations;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.generateListNumbersOne;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-class MultiLinesStringReaderTest {
+class MultilineStringReaderTest {
 
-    private MultiLinesStringReader<Integer, DigitToken.TokenType> multiLinesStringReaderUnderTest;
+    private MultilineDigitStringReader<Integer, DigitToken.TokenType> multilineStringReaderUnderTest;
     @Mock
-    private ICharacterReader<Integer, DigitToken.TokenType> characterReaderMock;
+    private IMultilineCharacterReader<Integer, DigitToken.TokenType> characterReaderMock;
     @Mock
     private ILineReader<DigitToken.TokenType> lineReaderMock;
-    private DigitToken[][] digitTokenMatrix;
+    @Mock
+    private IMultilineString<IToken<DigitToken.TokenType>> multilineStringMock;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        multiLinesStringReaderUnderTest = new MultiLinesStringReader<>(STRING_LENGTH);
+        multilineStringReaderUnderTest = new MultilineDigitStringReader<>(STRING_LENGTH);
         when(lineReaderMock.readLine())
-                .thenReturn(generateDigitTokenBlankSpaceArray());
-        digitTokenMatrix = generateDigitTokenNumberOneMatrix();
+                .thenReturn(generateLineWithNineDigitTokenBlankSpace());
         when(characterReaderMock.readCharacter(any()))
                 .thenReturn(new Digit(ONE));
+        when(multilineStringMock.getCharacterSection(any()))
+                .thenReturn(multilineThatRepresentsDigitOne());
     }
 
     @Test
     @DisplayName("It should reads a multilines string.")
     void read() {
-        assertThat(multiLinesStringReaderUnderTest.read(lineReaderMock, characterReaderMock))
+        assertThat(multilineStringReaderUnderTest.read(lineReaderMock, characterReaderMock))
                 .isEqualTo(generateListNumbersOne());
     }
 
     @Test
     @DisplayName("It should generate characters string.")
     void generateCharactersString() {
-        assertThat(multiLinesStringReaderUnderTest.generateCharactersString(
-                                          generateDigitTokenNumberOneStringMatrix(MATRIX_WIDTH_27, MATRIX_HEIGHT_3), characterReaderMock))
+        assertThat(multilineStringReaderUnderTest.generateCharactersString(
+                (MultilineString<IToken<DigitToken.TokenType>>) multilineStringMock, characterReaderMock))
                                         .isEqualTo(generateListNumbersOne());
     }
 
     @Test
     @DisplayName("It should verify that readLine is called")
     void verifyExecutionRead() {
-        multiLinesStringReaderUnderTest.read(lineReaderMock, characterReaderMock);
+        multilineStringReaderUnderTest.read(lineReaderMock, characterReaderMock);
         verify(lineReaderMock, atLeast(MATRIX_HEIGHT_3)).readLine();
     }
 
     @Test
     @DisplayName("It should verify that generateCharactersString is called")
     void verifyExecutionGenerateCharactersString() {
-        multiLinesStringReaderUnderTest.generateCharactersString(
-                generateDigitTokenNumberOneMatrix(), characterReaderMock);
+        /*multilineStringReaderUnderTest.generateCharactersString(0)
+                generateDigitTokenNumberOneMatrix(), characterReaderMock);*/
         verify(characterReaderMock, atLeast(MATRIX_MODULE)).readCharacter(any());
-    }
-
-    @Test
-    @DisplayName("It should take a section of a string, this section represent a character.")
-    void takeCharacterSection(){
-        assertThat(multiLinesStringReaderUnderTest.takeCharacterSection(
-                generateDigitTokenNumberOneStringMatrix(MATRIX_WIDTH_27, MATRIX_HEIGHT_3), ZERO))
-                .isEqualTo(generateDigitTokenNumberOneMatrix());
     }
 }
