@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class DigitToken implements IToken<DigitToken.TokenType> {
 
-    public static final String BLANK_SPACE = " ";
-    public static final String UNDERSCORE = "_";
-    public static final String PIPE = "|";
-    public static final String UNDEFINED = null;
+    private static final String BLANK_SPACE = " ";
+    private static final String UNDERSCORE = "_";
+    private static final String PIPE = "|";
+    private static final String UNDEFINED = null;
 
     public enum TokenType{
         BLANK_SPACE(DigitToken.BLANK_SPACE, Boolean.FALSE),

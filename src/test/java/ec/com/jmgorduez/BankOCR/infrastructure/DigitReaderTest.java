@@ -1,6 +1,5 @@
 package ec.com.jmgorduez.BankOCR.infrastructure;
 
-import ec.com.jmgorduez.BankOCR.domain.Digit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,11 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DigitReaderTest {
 
-    private DigitReader digitReaderUnderTest;
+    private MultilineDigitReader digitReaderUnderTest;
 
     @BeforeEach
     void setUp() {
-        digitReaderUnderTest = new DigitReader();
+        digitReaderUnderTest = new MultilineDigitReader();
     }
 
     @Test
