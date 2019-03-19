@@ -8,6 +8,8 @@ import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineString;
 import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineStringReader;
 import ec.com.jmgorduez.BankOCR.utils.Constants;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.*;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
@@ -23,12 +25,14 @@ public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum>
     }
 
     @Override
-    public List<ICharacter<CHARACTER_TYPE>> read(ILineReader<TOKEN_TYPE> lineReader,
-                                                 IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader) {
+    public List<ICharacter<CHARACTER_TYPE>> read(BufferedReader bufferedReader,
+                                                 ILineReader<TOKEN_TYPE> lineReader,
+                                                 IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader)
+    throws IOException {
         MultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(Constants.MATRIX_WIDTH_3);
         int lineCounter = 0;
         do {
-            multilineString.add(lineReader.readLine());
+            multilineString.add(lineReader.readLine(bufferedReader));
             lineCounter++;
         } while (lineCounter < CHARACTER_HEIGHT);
         return this.generateCharactersString(multilineString, characterReader);

@@ -19,6 +19,8 @@ import static org.mockito.Mockito.mock;
 
 public class DataTestGenerator {
 
+    public static final String BLANK_SPACE_STRING_27 = "                           ";
+
     public static final int STRING_LENGTH = 9;
     public static final int MATRIX_WIDTH_27 = 27;
     public static final int MATRIX_HEIGHT_3 = 3;

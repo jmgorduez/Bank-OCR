@@ -2,8 +2,11 @@ package ec.com.jmgorduez.BankOCR.infrastructure.abstractions;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 
 public interface ILineReader<T extends Enum> {
-    List<IToken<T>> readLine();
+    List<IToken<T>> readLine(BufferedReader reader) throws IOException;
 }

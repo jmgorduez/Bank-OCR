@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.generateListNumbersOne;
@@ -32,8 +35,12 @@ class MultilineStringReaderTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         multilineStringReaderUnderTest = new MultilineDigitStringReader<>(STRING_LENGTH);
-        when(lineReaderMock.readLine())
-                .thenReturn(generateLineWithNineDigitTokenBlankSpace());
+        try {
+            when(lineReaderMock.readLine(any()))
+                    .thenReturn(generateLineWithNineDigitTokenBlankSpace());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         when(characterReaderMock.readCharacter(any()))
                 .thenReturn(new Digit(ONE));
         when(multilineStringMock.getCharacterSection(any()))
@@ -43,8 +50,12 @@ class MultilineStringReaderTest {
     @Test
     @DisplayName("It should reads a multilines string.")
     void read() {
-        assertThat(multilineStringReaderUnderTest.read(lineReaderMock, characterReaderMock))
-                .isEqualTo(generateListNumbersOne());
+        try {
+            assertThat(multilineStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock))
+                    .isEqualTo(generateListNumbersOne());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -58,8 +69,16 @@ class MultilineStringReaderTest {
     @Test
     @DisplayName("It should verify that readLine is called")
     void verifyExecutionRead() {
-        multilineStringReaderUnderTest.read(lineReaderMock, characterReaderMock);
-        verify(lineReaderMock, atLeast(MATRIX_HEIGHT_3)).readLine();
+        try {
+            multilineStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            verify(lineReaderMock, atLeast(MATRIX_HEIGHT_3)).readLine(any());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
