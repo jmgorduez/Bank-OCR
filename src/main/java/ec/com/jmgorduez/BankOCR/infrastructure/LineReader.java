@@ -18,9 +18,10 @@ public class LineReader implements ILineReader<DigitToken.TokenType> {
             throws IOException {
         String line = reader.readLine();
         List<IToken<DigitToken.TokenType>> lineOfTokens = new ArrayList<>();
-        line.chars().forEach(character -> {
-            lineOfTokens.add(new DigitToken(String.valueOf(character)));
-        });
+        line.chars().mapToObj(character -> (char) character)
+                .forEach(character -> {
+                    lineOfTokens.add(new DigitToken(Character.toString(character)));
+                });
         return lineOfTokens;
     }
 }
