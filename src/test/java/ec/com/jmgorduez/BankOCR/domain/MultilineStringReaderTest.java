@@ -1,4 +1,4 @@
-package ec.com.jmgorduez.BankOCR.infrastructure;
+package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.Digit;
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
