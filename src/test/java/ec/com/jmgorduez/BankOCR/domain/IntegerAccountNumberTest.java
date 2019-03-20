@@ -7,8 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.ACCOUNT_NUMBER_111111111;
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.INTEGER_ACCOUNT_NUMBER_111111111;
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.accountNumber111111111;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
@@ -32,7 +32,7 @@ class IntegerAccountNumberTest {
     void equals() {
         assertThat(integerAccountNumberUnderTest.equals(this))
                 .isFalse();
-        assertThat(integerAccountNumberUnderTest.equals(accountNumber111111111()))
+        assertThat(integerAccountNumberUnderTest.equals(ACCOUNT_NUMBER_111111111))
                 .isTrue();
         assertThat(integerAccountNumberUnderTest.equals(integerAccountNumberUnderTest))
                 .isTrue();

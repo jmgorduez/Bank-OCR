@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -19,15 +20,19 @@ class IntegerAccountNumberReaderTest {
 
     private IntegerAccountNumberReader integerAccountNumberReaderUnderTest;
     @Mock
-    private IMultilineStringReader<Integer, DigitToken.TokenType> multilineStringReaderMock;
+    private IMultilineStringReader<Integer, DigitToken.TokenType> multilineString111111111ReaderMock;
+    @Mock
+    private IMultilineStringReader<Integer, DigitToken.TokenType> multilineString000000000ReaderMock;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
         integerAccountNumberReaderUnderTest = new IntegerAccountNumberReader();
         try {
-            when(multilineStringReaderMock.read(any(), any(), any()))
+            when(multilineString111111111ReaderMock.read(any(), any(), any()))
                     .thenReturn(generateListSameDigits(ONE));
+            when(multilineString000000000ReaderMock.read(any(), any(), any()))
+                    .thenReturn(generateListSameDigits(ZERO));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,9 +43,13 @@ class IntegerAccountNumberReaderTest {
     void readAccountNumber() {
         try {
             assertThat(integerAccountNumberReaderUnderTest
-                                .readAccountNumber(
-                                        multilineStringReaderMock.read(any(), any(), any())))
-                    .isEqualTo(accountNumber111111111());
+                    .readAccountNumber(
+                            multilineString111111111ReaderMock.read(any(), any(), any())))
+                    .isEqualTo(ACCOUNT_NUMBER_111111111);
+            assertThat(integerAccountNumberReaderUnderTest
+                    .readAccountNumber(
+                            multilineString000000000ReaderMock.read(any(), any(), any())))
+                    .isEqualTo(ACCOUNT_NUMBER_000000000);
         } catch (IOException e) {
             e.printStackTrace();
         }

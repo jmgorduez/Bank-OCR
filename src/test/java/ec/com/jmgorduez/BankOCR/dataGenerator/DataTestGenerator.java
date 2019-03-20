@@ -21,7 +21,13 @@ public class DataTestGenerator {
 
     public static final String BLANK_SPACE_STRING_27 = "                           ";
 
+    public static final Integer INTEGER_ACCOUNT_NUMBER_000000000 = 000000000;
     public static final Integer INTEGER_ACCOUNT_NUMBER_111111111 = 111111111;
+
+    public static final IAccountNumber<Integer> ACCOUNT_NUMBER_000000000
+            = new IntegerAccountNumber(INTEGER_ACCOUNT_NUMBER_000000000);
+    public static final IAccountNumber<Integer> ACCOUNT_NUMBER_111111111
+            = new IntegerAccountNumber(INTEGER_ACCOUNT_NUMBER_111111111);
 
     public static final int MATRIX_WIDTH_27 = 27;
     public static final int MATRIX_HEIGHT_3 = 3;
@@ -341,9 +347,5 @@ public class DataTestGenerator {
         character.add(generateListTokensSecondLineDigitOne());
         character.add(generateListTokensThirdLineDigitOne());
         return character;
-    }
-
-    public static IAccountNumber<Integer> accountNumber111111111() {
-        return new IntegerAccountNumber(INTEGER_ACCOUNT_NUMBER_111111111);
     }
 }
