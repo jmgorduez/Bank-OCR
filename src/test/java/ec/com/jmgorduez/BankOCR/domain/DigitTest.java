@@ -7,7 +7,7 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.util.Objects;
 
-import static ec.com.jmgorduez.BankOCR.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -18,7 +18,7 @@ class DigitTest {
     private Digit digitUnderTest;
 
     @BeforeAll
-    void setUp(){
+    void setUp() {
         digitUnderTest = new Digit(ONE);
     }
 
@@ -33,7 +33,12 @@ class DigitTest {
     @DisplayName("It should tell if the digit value is equal to other one")
     void equals() {
         digitUnderTest = DIGIT_ONE;
-        assertThat(digitUnderTest.equals(new Digit(ONE))).isTrue();
+        assertThat(digitUnderTest.equals(new Digit(ONE)))
+                .isTrue();
+        assertThat(digitUnderTest.equals(this))
+                .isFalse();
+        assertThat(digitUnderTest.equals(digitUnderTest))
+                .isTrue();
     }
 
     @Test
@@ -74,7 +79,7 @@ class DigitTest {
 
     @Test
     @DisplayName("It should instantiate a digit from its binary code.")
-    void binaryCodeToDigit(){
+    void binaryCodeToDigit() {
         assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_ONE))
                 .isEqualTo(DIGIT_ONE);
         assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_THREE))
@@ -83,7 +88,7 @@ class DigitTest {
 
     @Test
     @DisplayName("It should generate a binary code for each digit")
-    void generateBinaryCodesForDigits(){
+    void generateBinaryCodesForDigits() {
         assertThat(digitUnderTest.generateBinaryCodesForDigits().get(ONE))
                 .isEqualTo(BINARY_CODE_ONE);
         assertThat(digitUnderTest.generateBinaryCodesForDigits().get(THREE))
@@ -94,7 +99,7 @@ class DigitTest {
 
     @Test
     @DisplayName("It should calculate the digit successor.")
-    void successor(){
+    void successor() {
         digitUnderTest = DIGIT_ZERO;
         assertThat(digitUnderTest.successor())
                 .isEqualTo(DIGIT_ONE);
