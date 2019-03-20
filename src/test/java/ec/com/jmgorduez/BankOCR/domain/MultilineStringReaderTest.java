@@ -1,8 +1,5 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
-import ec.com.jmgorduez.BankOCR.domain.Digit;
-import ec.com.jmgorduez.BankOCR.domain.DigitToken;
-import ec.com.jmgorduez.BankOCR.domain.MultilineDigitStringReader;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineCharacterReader;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ILineReader;
@@ -17,7 +14,8 @@ import java.io.IOException;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.generateListDigitsOne;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.generateListSameDigits;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -52,7 +50,7 @@ class MultilineStringReaderTest {
     void read() {
         try {
             assertThat(multilineStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock))
-                    .isEqualTo(generateListDigitsOne());
+                    .isEqualTo(generateListSameDigits(ONE));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,7 +61,7 @@ class MultilineStringReaderTest {
     void generateCharactersString() {
         assertThat(multilineStringReaderUnderTest.generateCharactersString(
                 multilineStringMock, characterReaderMock))
-                                        .isEqualTo(generateListDigitsOne());
+                                        .isEqualTo(generateListSameDigits(ONE));
     }
 
     @Test

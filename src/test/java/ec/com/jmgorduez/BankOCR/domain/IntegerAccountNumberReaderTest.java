@@ -9,8 +9,8 @@ import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
 
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.accountNumber111111111;
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.generateListDigitsOne;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -27,7 +27,7 @@ class IntegerAccountNumberReaderTest {
         integerAccountNumberReaderUnderTest = new IntegerAccountNumberReader();
         try {
             when(multilineStringReaderMock.read(any(), any(), any()))
-                    .thenReturn(generateListDigitsOne());
+                    .thenReturn(generateListSameDigits(ONE));
         } catch (IOException e) {
             e.printStackTrace();
         }

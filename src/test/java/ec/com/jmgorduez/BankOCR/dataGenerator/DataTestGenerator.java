@@ -286,10 +286,10 @@ public class DataTestGenerator {
         return multilineString;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitsOne() {
+    public static List<ICharacter<Integer>> generateListSameDigits(Integer integerDigit) {
         List<ICharacter<Integer>> digits = new ArrayList<>();
         for (int i = ZERO; i < NINE; i++) {
-            digits.add(new Digit(new Integer(ONE)));
+            digits.add(new Digit(new Integer(integerDigit)));
         }
         return digits;
     }
