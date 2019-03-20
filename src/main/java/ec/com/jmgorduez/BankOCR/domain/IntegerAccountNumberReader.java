@@ -9,16 +9,14 @@ import java.util.stream.Collectors;
 
 import static ec.com.jmgorduez.BankOCR.utils.MathOperations.digitsArrayToNumberBaseTen;
 
-public class IntegerAccountNumberReader implements IAccountNumberReader<DigitToken.TokenType, Integer, Integer> {
+public class IntegerAccountNumberReader implements IAccountNumberReader<DigitToken.TokenType, Integer> {
 
     @Override
-    public IAccountNumber<Integer> readAccountNumber(List<ICharacter<Integer>> iCharacters) {
-        List<Integer> digitsOfAccountNumber =
+    public IAccountNumber readAccountNumber(List<ICharacter<Integer>> iCharacters) {
+        String accountNumber =
                 iCharacters.stream().map(character -> {
-                    return character.getValue();
-                }).collect(Collectors.toList());
-        Integer accountNumber = digitsArrayToNumberBaseTen(
-                digitsOfAccountNumber.toArray(new Integer[]{}));
+                    return String.valueOf(character.getValue());
+                }).collect(Collectors.joining());
         return new IntegerAccountNumber(accountNumber);
     }
 }

@@ -2,16 +2,16 @@ package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 
-public class IntegerAccountNumber implements IAccountNumber<Integer> {
+public class IntegerAccountNumber implements IAccountNumber {
 
-    private Integer value;
+    private String value;
 
-    public IntegerAccountNumber(Integer value){
+    public IntegerAccountNumber(String value){
         this.value = value;
     }
     
     @Override
-    public Integer getValue() {
+    public String getValue() {
         return this.value;
     }
 
