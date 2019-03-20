@@ -1,6 +1,5 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
-import ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -8,23 +7,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.ACCOUNT_NUMBER_111111111;
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.INTEGER_ACCOUNT_NUMBER_111111111;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.STRING_ACCOUNT_NUMBER_111111111;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class IntegerAccountNumberTest {
 
-    private IAccountNumber<Integer> integerAccountNumberUnderTest;
+    private IAccountNumber integerAccountNumberUnderTest;
 
     @BeforeAll
     void setUp() {
-        integerAccountNumberUnderTest = new IntegerAccountNumber(INTEGER_ACCOUNT_NUMBER_111111111);
+        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111);
     }
 
     @Test
     void getValue() {
         assertThat(integerAccountNumberUnderTest.getValue())
-                .isEqualTo(INTEGER_ACCOUNT_NUMBER_111111111);
+                .isEqualTo(STRING_ACCOUNT_NUMBER_111111111);
     }
 
     @Test
