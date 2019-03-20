@@ -43,12 +43,12 @@ class IntegerAccountNumberReaderTest {
     void readAccountNumber() {
         try {
             assertThat(integerAccountNumberReaderUnderTest
-                    .readAccountNumber(
-                            multilineString111111111ReaderMock.read(any(), any(), any())))
+                    .readAccountNumber(any(), any(), any(),
+                            multilineString111111111ReaderMock))
                     .isEqualTo(ACCOUNT_NUMBER_111111111);
             assertThat(integerAccountNumberReaderUnderTest
-                    .readAccountNumber(
-                            multilineString000000000ReaderMock.read(any(), any(), any())))
+                    .readAccountNumber(any(), any(), any(),
+                            multilineString000000000ReaderMock))
                     .isEqualTo(ACCOUNT_NUMBER_000000000);
         } catch (IOException e) {
             e.printStackTrace();

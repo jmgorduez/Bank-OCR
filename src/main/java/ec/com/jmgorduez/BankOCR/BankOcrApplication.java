@@ -16,26 +16,28 @@ import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
 public class BankOcrApplication {
 
     private static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\input.txt";
+    private static IMultilineStringReader multilineStringReader =
+            new MultilineDigitStringReader(STRING_LENGTH);
+    private static ILineReader<DigitToken.TokenType> lineReader
+            = new LineReader();
+    private static IMultilineCharacterReader<Integer, DigitToken.TokenType> multilineCharacterReader =
+            new MultilineDigitReader();
+    private static IAccountNumberReader<DigitToken.TokenType, Integer> accountNumberReader =
+            new IntegerAccountNumberReader();
 
     public static void main(String[] args) {
         try {
+            BufferedReader bufferedReader =
+                    new BufferedReader(new FileReader(FILE_PATH));
             do {
-                BufferedReader bufferedReader =
-                        new BufferedReader(new FileReader(FILE_PATH));
-                IMultilineStringReader multilineStringReader =
-                        new MultilineDigitStringReader(STRING_LENGTH);
-                ILineReader<DigitToken.TokenType> lineReader
-                        = new LineReader();
-                IMultilineCharacterReader<Integer, DigitToken.TokenType> multilineCharacterReader =
-                        new MultilineDigitReader();
-                List<ICharacter<Integer>> characters
-                        = multilineStringReader.read(bufferedReader, lineReader, multilineCharacterReader);
-                IAccountNumberReader<DigitToken.TokenType, Integer, Integer> accountNumberReader =
-                        new IntegerAccountNumberReader();
-                IAccountNumber<Integer> accountNumber
-                        = accountNumberReader.readAccountNumber(characters);
+
+                IAccountNumber accountNumber = accountNumberReader
+                        .readAccountNumber(bufferedReader,
+                                lineReader,
+                                multilineCharacterReader,
+                                multilineStringReader);
                 System.out.println(accountNumber.getValue());
-            }while (true);
+            } while (true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
