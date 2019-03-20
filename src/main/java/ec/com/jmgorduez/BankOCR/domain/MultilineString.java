@@ -1,14 +1,12 @@
-package ec.com.jmgorduez.BankOCR.infrastructure;
+package ec.com.jmgorduez.BankOCR.domain;
 
-import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineString;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.MATRIX_WIDTH_3;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;
 
 public class MultilineString<TOKEN extends IToken> implements IMultilineString<TOKEN> {
 

@@ -1,14 +1,12 @@
-package ec.com.jmgorduez.BankOCR.infrastructure;
+package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.ILineReader;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.ILineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LineReader implements ILineReader<DigitToken.TokenType> {

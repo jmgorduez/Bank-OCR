@@ -1,6 +1,7 @@
 package ec.com.jmgorduez.BankOCR.infrastructure;
 
 import ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator;
+import ec.com.jmgorduez.BankOCR.domain.LineReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

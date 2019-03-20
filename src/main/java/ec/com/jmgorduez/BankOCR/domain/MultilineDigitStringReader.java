@@ -1,12 +1,11 @@
-package ec.com.jmgorduez.BankOCR.infrastructure;
+package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineCharacterReader;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.ILineReader;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineString;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineStringReader;
-import ec.com.jmgorduez.BankOCR.utils.Constants;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineCharacterReader;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.ILineReader;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineStringReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,7 +1,4 @@
-package ec.com.jmgorduez.BankOCR.infrastructure.abstractions;
-
-import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
+package ec.com.jmgorduez.BankOCR.domain.abstractions;
 
 import java.util.List;
 

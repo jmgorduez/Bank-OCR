@@ -1,4 +1,4 @@
-package ec.com.jmgorduez.BankOCR.infrastructure.abstractions;
+package ec.com.jmgorduez.BankOCR.domain.abstractions;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 

@@ -4,15 +4,13 @@ import ec.com.jmgorduez.BankOCR.domain.Digit;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import ec.com.jmgorduez.BankOCR.infrastructure.MultilineString;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineString;
+import ec.com.jmgorduez.BankOCR.domain.MultilineString;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-import static ec.com.jmgorduez.BankOCR.domain.Digit.*;
 import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.mockito.Mockito.mock;

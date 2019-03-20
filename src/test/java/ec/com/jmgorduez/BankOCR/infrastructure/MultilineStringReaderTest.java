@@ -2,10 +2,11 @@ package ec.com.jmgorduez.BankOCR.infrastructure;
 
 import ec.com.jmgorduez.BankOCR.domain.Digit;
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
+import ec.com.jmgorduez.BankOCR.domain.MultilineDigitStringReader;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineCharacterReader;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.ILineReader;
-import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.IMultilineString;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineCharacterReader;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.ILineReader;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

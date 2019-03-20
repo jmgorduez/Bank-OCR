@@ -1,6 +1,4 @@
-package ec.com.jmgorduez.BankOCR.infrastructure.abstractions;
-
-import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
+package ec.com.jmgorduez.BankOCR.domain.abstractions;
 
 import java.io.BufferedReader;
 import java.io.IOException;

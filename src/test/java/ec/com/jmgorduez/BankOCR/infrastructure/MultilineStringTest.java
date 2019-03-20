@@ -1,8 +1,8 @@
 package ec.com.jmgorduez.BankOCR.infrastructure;
 
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
+import ec.com.jmgorduez.BankOCR.domain.MultilineString;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
