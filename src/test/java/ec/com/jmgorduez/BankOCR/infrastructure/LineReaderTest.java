@@ -1,7 +1,6 @@
 package ec.com.jmgorduez.BankOCR.infrastructure;
 
-import ec.com.jmgorduez.BankOCR.DataTestGenerator;
-import org.junit.jupiter.api.BeforeAll;
+import ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,8 +10,8 @@ import org.mockito.MockitoAnnotations;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import static ec.com.jmgorduez.BankOCR.DataTestGenerator.BLANK_SPACE_STRING_27;
-import static ec.com.jmgorduez.BankOCR.DataTestGenerator.generateListTokensBlankSpace;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.BLANK_SPACE_STRING_27;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.generateListTokensBlankSpace;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Mockito.when;
 
