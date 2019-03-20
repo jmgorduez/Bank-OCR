@@ -15,8 +15,8 @@ import org.mockito.MockitoAnnotations;
 import java.io.IOException;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
-import static ec.com.jmgorduez.BankOCR.DataTestGenerator.*;
-import static ec.com.jmgorduez.BankOCR.DataTestGenerator.generateListDigitsOne;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.generateListDigitsOne;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 

@@ -1,16 +1,13 @@
 package ec.com.jmgorduez.BankOCR.infrastructure;
 
-import ec.com.jmgorduez.BankOCR.DataTestGenerator;
-import ec.com.jmgorduez.BankOCR.utils.Constants;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import static ec.com.jmgorduez.BankOCR.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class MultilineDigitReaderTest {
