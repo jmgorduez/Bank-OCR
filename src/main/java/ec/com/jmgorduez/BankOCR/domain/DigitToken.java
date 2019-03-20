@@ -4,18 +4,15 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 
 import java.util.Objects;
 
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
+
 public class DigitToken implements IToken<DigitToken.TokenType> {
 
-    private static final String BLANK_SPACE = " ";
-    private static final String UNDERSCORE = "_";
-    private static final String PIPE = "|";
-    private static final String UNDEFINED = null;
-
     public enum TokenType{
-        BLANK_SPACE(DigitToken.BLANK_SPACE, Boolean.FALSE),
-        UNDERSCORE(DigitToken.UNDERSCORE, Boolean.TRUE),
-        PIPE(DigitToken.PIPE, Boolean.TRUE),
-        UNDEFINED(DigitToken.UNDEFINED, Boolean.TRUE);
+        BLANK_SPACE(BLANK_SPACE_STRING, Boolean.FALSE),
+        UNDERSCORE(UNDERSCORE_STRING, Boolean.TRUE),
+        PIPE(PIPE_STRING, Boolean.TRUE),
+        UNDEFINED(UNDEFINED_STRING, Boolean.TRUE);
 
         private final String value;
         private final boolean isVisible;

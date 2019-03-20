@@ -1,14 +1,13 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.util.Objects;
 
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class DigitTokenTest {
@@ -57,5 +56,16 @@ class DigitTokenTest {
         assertThat(digitTokenUnderTest.isVisible()).isTrue();
         digitTokenUnderTest = new DigitToken(DigitToken.TokenType.UNDEFINED);
         assertThat(digitTokenUnderTest.isVisible()).isTrue();
+    }
+
+    @Test
+    @DisplayName("It should parse a string to TokenType")
+    void parse(){
+        assertThat(DigitToken.TokenType.parse(PIPE_STRING))
+        .isEqualTo(DigitToken.TokenType.PIPE);
+        assertThat(DigitToken.TokenType.parse(UNDEFINED_STRING))
+                .isEqualTo(DigitToken.TokenType.UNDEFINED);
+        assertThat(DigitToken.TokenType.parse(UNDERSCORE_STRING))
+                .isEqualTo(DigitToken.TokenType.UNDERSCORE);
     }
 }

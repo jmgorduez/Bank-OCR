@@ -76,4 +76,9 @@ public class Constants {
     public static final int BINARY_CODE_EIGHT = 277;
     public static final int BINARY_CODE_NINE = 274;
     public static final int BINARY_CODE_ZERO = 257;
+
+    public static final String BLANK_SPACE_STRING = " ";
+    public static final String UNDERSCORE_STRING = "_";
+    public static final String PIPE_STRING = "|";
+    public static final String UNDEFINED_STRING = "UNDEFINED";
 }
