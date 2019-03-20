@@ -74,14 +74,6 @@ class MultilineStringTest {
     }
 
     @Test
-    @DisplayName("It should return number of line of a multiline string")
-    void lineCount() {
-        setUp();
-        assertThat(multilineStringUnderTest.lineCount())
-                .isEqualTo(MATRIX_HEIGHT_3);
-    }
-
-    @Test
     @DisplayName("It should return the rows of a multiline.")
     void rows() {
         setUp();

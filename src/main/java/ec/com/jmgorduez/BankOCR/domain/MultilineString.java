@@ -42,11 +42,6 @@ public class MultilineString<TOKEN extends IToken> implements IMultilineString<T
     }
 
     @Override
-    public Integer lineCount() {
-        return multilineString.size();
-    }
-
-    @Override
     public List<List<TOKEN>> rows() {
         return multilineString;
     }

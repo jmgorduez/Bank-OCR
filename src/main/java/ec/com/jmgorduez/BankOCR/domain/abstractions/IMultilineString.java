@@ -6,6 +6,5 @@ public interface IMultilineString<TOKEN extends IToken> {
     void add(List<TOKEN> line);
     Integer characterWidth();
     IMultilineString<TOKEN> getCharacterSection(Integer index);
-    Integer lineCount();
     List<List<TOKEN>> rows();
 }

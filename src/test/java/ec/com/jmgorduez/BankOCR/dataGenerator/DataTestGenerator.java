@@ -1,6 +1,8 @@
 package ec.com.jmgorduez.BankOCR.dataGenerator;
 
+import ec.com.jmgorduez.BankOCR.domain.IntegerAccountNumber;
 import ec.com.jmgorduez.BankOCR.domain.Digit;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
@@ -18,6 +20,8 @@ import static org.mockito.Mockito.mock;
 public class DataTestGenerator {
 
     public static final String BLANK_SPACE_STRING_27 = "                           ";
+
+    public static final Integer INTEGER_ACCOUNT_NUMBER_111111111 = 111111111;
 
     public static final int STRING_LENGTH = 9;
     public static final int MATRIX_WIDTH_27 = 27;
@@ -159,7 +163,7 @@ public class DataTestGenerator {
                 new DigitToken(BLANK_SPACE)
         };
         multilineString.add(Arrays.asList(digitTokens));
-        digitTokens =  new DigitToken[]{
+        digitTokens = new DigitToken[]{
                 new DigitToken(BLANK_SPACE),
                 new DigitToken(UNDERSCORE),
                 new DigitToken(PIPE)
@@ -182,7 +186,7 @@ public class DataTestGenerator {
                 new DigitToken(BLANK_SPACE)
         };
         multilineString.add(Arrays.asList(digitTokens));
-        digitTokens =  new DigitToken[]{
+        digitTokens = new DigitToken[]{
                 new DigitToken(PIPE),
                 new DigitToken(UNDERSCORE),
                 new DigitToken(PIPE)
@@ -222,7 +226,7 @@ public class DataTestGenerator {
                 new DigitToken(BLANK_SPACE)
         };
         multilineString.add(Arrays.asList(digitTokens));
-        digitTokens =  new DigitToken[]{
+        digitTokens = new DigitToken[]{
                 new DigitToken(PIPE),
                 new DigitToken(UNDERSCORE),
                 new DigitToken(PIPE)
@@ -245,13 +249,13 @@ public class DataTestGenerator {
                 new DigitToken(BLANK_SPACE)
         };
         multilineString.add(Arrays.asList(digitTokens));
-        digitTokens =   new DigitToken[]{
+        digitTokens = new DigitToken[]{
                 new DigitToken(PIPE),
                 new DigitToken(UNDERSCORE),
                 new DigitToken(PIPE)
         };
         multilineString.add(Arrays.asList(digitTokens));
-        digitTokens =  new DigitToken[]{
+        digitTokens = new DigitToken[]{
                 new DigitToken(BLANK_SPACE),
                 new DigitToken(BLANK_SPACE),
                 new DigitToken(PIPE)
@@ -268,13 +272,13 @@ public class DataTestGenerator {
                 new DigitToken(BLANK_SPACE)
         };
         multilineString.add(Arrays.asList(digitTokens));
-        digitTokens =   new DigitToken[]{
+        digitTokens = new DigitToken[]{
                 new DigitToken(PIPE),
                 new DigitToken(BLANK_SPACE),
                 new DigitToken(PIPE)
         };
         multilineString.add(Arrays.asList(digitTokens));
-        digitTokens =  new DigitToken[]{
+        digitTokens = new DigitToken[]{
                 new DigitToken(PIPE),
                 new DigitToken(UNDERSCORE),
                 new DigitToken(PIPE)
@@ -338,5 +342,9 @@ public class DataTestGenerator {
         character.add(generateListTokensSecondLineDigitOne());
         character.add(generateListTokensThirdLineDigitOne());
         return character;
+    }
+
+    public static IAccountNumber<Integer> accountNumber111111111() {
+        return new IntegerAccountNumber(INTEGER_ACCOUNT_NUMBER_111111111);
     }
 }
