@@ -1,4 +1,4 @@
-package ec.com.jmgorduez.BankOCR;
+package ec.com.jmgorduez.BankOCR.dataGenerator;
 
 import ec.com.jmgorduez.BankOCR.domain.Digit;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
