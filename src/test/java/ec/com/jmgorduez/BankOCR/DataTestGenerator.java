@@ -43,9 +43,9 @@ public class DataTestGenerator {
     public static final Integer[] THREE_BASE_TWO_ARRAY = new Integer[]{0, 1, 1};
     public static final Integer[] FIVE_BASE_TWO_ARRAY = new Integer[]{1, 0, 1};
 
-    public static List<IToken<DigitToken.TokenType>> generateLineWithNineDigitTokenBlankSpace() {
+    public static List<IToken<DigitToken.TokenType>> generateLineWithTwentySevenBlankSpaceDigitToken() {
         List<IToken<DigitToken.TokenType>> line = new ArrayList<>();
-        for (int i = ONE; i <= NINE; i++) {
+        for (int i = ONE; i <= MATRIX_WIDTH_27; i++) {
             line.add(new DigitToken(BLANK_SPACE));
         }
         return line;
@@ -285,9 +285,9 @@ public class DataTestGenerator {
         return multilineString;
     }
 
-    public static List<ICharacter<Integer>> generateListNumbersOne() {
+    public static List<ICharacter<Integer>> generateListDigitsOne() {
         List<ICharacter<Integer>> digits = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
+        for (int i = ZERO; i < NINE; i++) {
             digits.add(new Digit(new Integer(ONE)));
         }
         return digits;

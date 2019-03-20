@@ -12,12 +12,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static ec.com.jmgorduez.BankOCR.DataTestGenerator.*;
-import static ec.com.jmgorduez.BankOCR.DataTestGenerator.generateListNumbersOne;
+import static ec.com.jmgorduez.BankOCR.DataTestGenerator.generateListDigitsOne;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -37,7 +36,7 @@ class MultilineStringReaderTest {
         multilineStringReaderUnderTest = new MultilineDigitStringReader<>(STRING_LENGTH);
         try {
             when(lineReaderMock.readLine(any()))
-                    .thenReturn(generateLineWithNineDigitTokenBlankSpace());
+                    .thenReturn(generateLineWithTwentySevenBlankSpaceDigitToken());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +51,7 @@ class MultilineStringReaderTest {
     void read() {
         try {
             assertThat(multilineStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock))
-                    .isEqualTo(generateListNumbersOne());
+                    .isEqualTo(generateListDigitsOne());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,8 +61,8 @@ class MultilineStringReaderTest {
     @DisplayName("It should generate characters string.")
     void generateCharactersString() {
         assertThat(multilineStringReaderUnderTest.generateCharactersString(
-                (MultilineString<IToken<DigitToken.TokenType>>) multilineStringMock, characterReaderMock))
-                                        .isEqualTo(generateListNumbersOne());
+                multilineStringMock, characterReaderMock))
+                                        .isEqualTo(generateListDigitsOne());
     }
 
     @Test
@@ -85,7 +84,7 @@ class MultilineStringReaderTest {
     @DisplayName("It should verify that generateCharactersString is called")
     void verifyExecutionGenerateCharactersString() {
         multilineStringReaderUnderTest.generateCharactersString(
-                (MultilineString<IToken<DigitToken.TokenType>>) multilineStringMock, characterReaderMock);
+                multilineStringMock, characterReaderMock);
         verify(characterReaderMock, atLeast(MATRIX_MODULE)).readCharacter(any());
     }
 }

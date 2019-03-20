@@ -12,7 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
-import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum> implements IMultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE> {
 
@@ -29,7 +29,7 @@ public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum>
                                                  ILineReader<TOKEN_TYPE> lineReader,
                                                  IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader)
     throws IOException {
-        MultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(Constants.MATRIX_WIDTH_3);
+        IMultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(MATRIX_WIDTH_3);
         int lineCounter = 0;
         do {
             multilineString.add(lineReader.readLine(bufferedReader));
@@ -38,11 +38,11 @@ public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum>
         return this.generateCharactersString(multilineString, characterReader);
     }
 
-    List<ICharacter<CHARACTER_TYPE>> generateCharactersString(MultilineString<IToken<TOKEN_TYPE>> multilineString,
+    List<ICharacter<CHARACTER_TYPE>> generateCharactersString(IMultilineString<IToken<TOKEN_TYPE>> multilineString,
                                                                       IMultilineCharacterReader<CHARACTER_TYPE,TOKEN_TYPE> characterReader) {
         List<ICharacter<CHARACTER_TYPE>> charactersString = new ArrayList<>();
-        for (int i = ONE; i <= stringLength; i++) {
-            IMultilineString<IToken<TOKEN_TYPE>> multilineCharacter = multilineString.getCharacterSection(CHARACTER_WIDTH);
+        for (int i = ZERO; i < stringLength; i++) {
+            IMultilineString<IToken<TOKEN_TYPE>> multilineCharacter = multilineString.getCharacterSection(i);
             charactersString.add(characterReader.readCharacter(multilineCharacter));
         }
         return charactersString;

@@ -40,9 +40,8 @@ class MultilineStringTest {
     @Test
     @DisplayName("It should return the character section of a index")
     void getCharacterSection() {
-        MultilineString<IToken<DigitToken.TokenType>> character = multilineThatRepresentsDigitOne();
         assertThat(multilineStringUnderTest.getCharacterSection(ZERO))
-                .isEqualTo(character);
+                .isEqualTo(multilineThatRepresentsDigitOne());
     }
 
     @Test

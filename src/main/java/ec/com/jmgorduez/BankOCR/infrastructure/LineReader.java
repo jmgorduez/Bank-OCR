@@ -1,6 +1,5 @@
 package ec.com.jmgorduez.BankOCR.infrastructure;
 
-import com.sun.deploy.util.ArrayUtil;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.infrastructure.abstractions.ILineReader;

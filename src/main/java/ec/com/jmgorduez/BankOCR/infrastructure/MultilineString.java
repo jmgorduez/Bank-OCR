@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.MATRIX_WIDTH_3;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;
 
 public class MultilineString<TOKEN extends IToken> implements IMultilineString<TOKEN> {
 
@@ -31,15 +32,15 @@ public class MultilineString<TOKEN extends IToken> implements IMultilineString<T
 
     @Override
     public IMultilineString<TOKEN> getCharacterSection(Integer index) {
-        IMultilineString<DigitToken> character = new MultilineString<>(MATRIX_WIDTH_3);
+        IMultilineString<TOKEN> character = new MultilineString<>(MATRIX_WIDTH_3);
         int indexFrom = index* characterWidth();
         int indexTo = indexFrom + characterWidth();
         multilineString.stream().forEach(line -> {
-            List<DigitToken> characterSection = (List<DigitToken>)line.subList(indexFrom, indexTo);
+            List<TOKEN> characterSection = line.subList(indexFrom, indexTo);
             character.add(characterSection);
 
         });
-        return (IMultilineString<TOKEN>) character;
+        return character;
     }
 
     @Override
