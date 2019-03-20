@@ -84,8 +84,8 @@ class MultilineStringReaderTest {
     @Test
     @DisplayName("It should verify that generateCharactersString is called")
     void verifyExecutionGenerateCharactersString() {
-        /*multilineStringReaderUnderTest.generateCharactersString(0)
-                generateDigitTokenNumberOneMatrix(), characterReaderMock);*/
+        multilineStringReaderUnderTest.generateCharactersString(
+                (MultilineString<IToken<DigitToken.TokenType>>) multilineStringMock, characterReaderMock);
         verify(characterReaderMock, atLeast(MATRIX_MODULE)).readCharacter(any());
     }
 }

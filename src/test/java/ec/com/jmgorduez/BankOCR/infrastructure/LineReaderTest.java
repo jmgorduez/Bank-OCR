@@ -1,7 +1,9 @@
 package ec.com.jmgorduez.BankOCR.infrastructure;
 
 import ec.com.jmgorduez.BankOCR.DataTestGenerator;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -33,6 +35,7 @@ class LineReaderTest {
     }
 
     @Test
+    @DisplayName("It should take a line and convert it a token list.")
     void readLine() {
 
         try {

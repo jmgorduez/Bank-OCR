@@ -26,6 +26,7 @@ class MultilineStringTest {
     }
 
     @Test
+    @DisplayName("It should add a line at the list of multiline.")
     void add() {
     }
 
