@@ -23,7 +23,6 @@ public class DataTestGenerator {
 
     public static final Integer INTEGER_ACCOUNT_NUMBER_111111111 = 111111111;
 
-    public static final int STRING_LENGTH = 9;
     public static final int MATRIX_WIDTH_27 = 27;
     public static final int MATRIX_HEIGHT_3 = 3;
     public static final int MATRIX_MODULE = MATRIX_HEIGHT_3 * MATRIX_WIDTH_3;

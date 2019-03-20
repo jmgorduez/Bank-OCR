@@ -36,7 +36,6 @@ public class MultilineString<TOKEN extends IToken> implements IMultilineString<T
         multilineString.stream().forEach(line -> {
             List<TOKEN> characterSection = line.subList(indexFrom, indexTo);
             character.add(characterSection);
-
         });
         return character;
     }

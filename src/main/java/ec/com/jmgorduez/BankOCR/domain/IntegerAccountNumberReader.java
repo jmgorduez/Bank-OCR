@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static ec.com.jmgorduez.BankOCR.utils.MathOperations.digitsArrayToNumberBaseTen;
 
-public class IntegerAccountNumberReader implements IAccountNumberReader<DigitToken.TokenType, Integer> {
+public class IntegerAccountNumberReader implements IAccountNumberReader<DigitToken.TokenType, Integer, Integer> {
 
     @Override
     public IAccountNumber<Integer> readAccountNumber(List<ICharacter<Integer>> iCharacters) {

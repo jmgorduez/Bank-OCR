@@ -81,4 +81,6 @@ public class Constants {
     public static final String UNDERSCORE_STRING = "_";
     public static final String PIPE_STRING = "|";
     public static final String UNDEFINED_STRING = "UNDEFINED";
+
+    public static final int STRING_LENGTH = 9;
 }
