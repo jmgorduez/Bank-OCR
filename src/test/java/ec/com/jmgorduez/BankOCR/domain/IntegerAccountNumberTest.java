@@ -13,7 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class IntegerAccountNumberTest {
 
-    private IAccountNumber integerAccountNumberUnderTest;
+    private IntegerAccountNumber integerAccountNumberUnderTest;
 
     @BeforeAll
     void setUp() {

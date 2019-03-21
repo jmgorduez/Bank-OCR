@@ -31,7 +31,11 @@ public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum>
         IMultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(MATRIX_WIDTH_3);
         int lineCounter = 0;
         do {
-            multilineString.add(lineReader.readLine(bufferedReader));
+            List<IToken<TOKEN_TYPE>> tokensRead = lineReader.readLine(bufferedReader);
+            if(tokensRead.isEmpty()){
+                tokensRead = lineReader.generateBlankSpaceCharactersLineLikeRefillOfEmptyLine();
+            }
+            multilineString.add(tokensRead);
             lineCounter++;
         } while (lineCounter < CHARACTER_HEIGHT);
         lineReader.passEmptyLine(bufferedReader);

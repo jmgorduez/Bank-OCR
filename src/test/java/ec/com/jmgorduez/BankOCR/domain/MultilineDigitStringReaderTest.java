@@ -11,11 +11,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.generateListSameDigits;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -27,6 +28,8 @@ class MultilineDigitStringReaderTest {
     @Mock
     private ILineReader<DigitToken.TokenType> lineReaderMock;
     @Mock
+    private ILineReader<DigitToken.TokenType> emptyLineReaderMock;
+    @Mock
     private IMultilineString<IToken<DigitToken.TokenType>> multilineStringMock;
 
     @BeforeEach
@@ -36,6 +39,11 @@ class MultilineDigitStringReaderTest {
         try {
             when(lineReaderMock.readLine(any()))
                     .thenReturn(generateLineWithTwentySevenBlankSpaceDigitToken());
+            List<IToken<DigitToken.TokenType>> emptyLine = new ArrayList<>();
+            when(emptyLineReaderMock.readLine(any()))
+                    .thenReturn(emptyLine);
+            when(emptyLineReaderMock.generateBlankSpaceCharactersLineLikeRefillOfEmptyLine())
+                    .thenReturn(generateListTokensBlankSpace(MATRIX_WIDTH_27));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,10 +73,11 @@ class MultilineDigitStringReaderTest {
     }
 
     @Test
-    @DisplayName("It should verify that readLine is called")
+    @DisplayName("It should verify that readLine and passEmptyLine are called")
     void verifyExecutionReadMultilineString() {
         try {
-            multilineDigitStringReaderUnderTest.readMultilineString(any(), lineReaderMock, characterReaderMock);
+            multilineDigitStringReaderUnderTest
+                    .readMultilineString(any(), lineReaderMock, characterReaderMock);
             verify(lineReaderMock, atLeast(MATRIX_HEIGHT_3)).readLine(any());
             verify(lineReaderMock, times(ONE)).passEmptyLine(any());
         } catch (IOException e) {
@@ -77,10 +86,22 @@ class MultilineDigitStringReaderTest {
     }
 
     @Test
+    @DisplayName("It should verify that generateBlankSpaceCharactersLineLikeRefillOfEmptyLine is called for a empty line")
+    void verifyThatExecutionReadMultilineStringSupportReadEmptyLine() {
+        try {
+            multilineDigitStringReaderUnderTest
+                    .readMultilineString(any(), emptyLineReaderMock, characterReaderMock);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        verify(emptyLineReaderMock, atLeast(ONE)).generateBlankSpaceCharactersLineLikeRefillOfEmptyLine();
+    }
+
+    @Test
     @DisplayName("It should verify that generateCharactersString is called")
     void verifyExecutionGenerateCharactersString() {
-        multilineDigitStringReaderUnderTest.generateCharactersString(
-                multilineStringMock, characterReaderMock);
+        multilineDigitStringReaderUnderTest
+                .generateCharactersString(multilineStringMock, characterReaderMock);
         verify(characterReaderMock, atLeast(MATRIX_MODULE)).readCharacter(any());
     }
 }
