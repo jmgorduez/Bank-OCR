@@ -3,6 +3,7 @@ package ec.com.jmgorduez.BankOCR.utils;
 public class Constants {
 
     public static final int MATRIX_WIDTH_3 = 3;
+    public static final int MATRIX_WIDTH_27 = 27;
 
     public static final Integer ONE = 1;
     public static final Integer TWO = 2;

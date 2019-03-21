@@ -12,6 +12,8 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
@@ -31,7 +33,6 @@ public class DataTestGenerator {
     public static final IAccountNumber ACCOUNT_NUMBER_111111111
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111);
 
-    public static final int MATRIX_WIDTH_27 = 27;
     public static final int MATRIX_HEIGHT_3 = 3;
     public static final int MATRIX_MODULE = MATRIX_HEIGHT_3 * MATRIX_WIDTH_3;
 
@@ -319,11 +320,9 @@ public class DataTestGenerator {
     }
 
     public static List<IToken<DigitToken.TokenType>> generateListTokensBlankSpace(Integer length) {
-        List<IToken<DigitToken.TokenType>> list = new ArrayList<>();
-        for (int i = ONE; i <= length; i++) {
-            list.add(new DigitToken(BLANK_SPACE));
-        }
-        return list;
+        Stream<DigitToken> stream = Stream.generate(
+                () -> new DigitToken(BLANK_SPACE)).limit(length);
+        return stream.collect(Collectors.toList());
     }
 
     public static List<IToken<DigitToken.TokenType>> generateListTokensFirstLineDigitOne() {

@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.MATRIX_WIDTH_27;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Mockito.*;
