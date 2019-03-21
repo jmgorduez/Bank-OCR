@@ -19,7 +19,7 @@ class DigitReaderTest {
     }
 
     @Test
-    @DisplayName("It should read a digit token from a digit token matrix.")
+    @DisplayName("It should readMultilineString a digit token from a digit token matrix.")
     void readCharacter() {
         assertThat(digitReaderUnderTest.readCharacter(generateDigitTokenNumberOneMatrix()))
                 .isEqualTo(DIGIT_ONE);

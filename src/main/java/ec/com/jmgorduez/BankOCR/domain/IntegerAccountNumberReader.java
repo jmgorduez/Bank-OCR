@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ec.com.jmgorduez.BankOCR.utils.MathOperations.digitsArrayToNumberBaseTen;
-
 public class IntegerAccountNumberReader implements IAccountNumberReader<DigitToken.TokenType, Integer> {
 
     @Override
@@ -17,7 +15,7 @@ public class IntegerAccountNumberReader implements IAccountNumberReader<DigitTok
                                             IMultilineCharacterReader<Integer, DigitToken.TokenType> charaterReader,
                                             IMultilineStringReader<Integer, DigitToken.TokenType> multilineStringReader) throws IOException {
         List<ICharacter<Integer>> iCharacters =
-                multilineStringReader.read(bufferedReader, lineReader, charaterReader);
+                multilineStringReader.readMultilineString(bufferedReader, lineReader, charaterReader);
         String accountNumber =
                 iCharacters.stream().map(character -> {
                     return String.valueOf(character.getValue());

@@ -24,9 +24,9 @@ public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum>
     }
 
     @Override
-    public List<ICharacter<CHARACTER_TYPE>> read(BufferedReader bufferedReader,
-                                                 ILineReader<TOKEN_TYPE> lineReader,
-                                                 IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader)
+    public List<ICharacter<CHARACTER_TYPE>> readMultilineString(BufferedReader bufferedReader,
+                                                                ILineReader<TOKEN_TYPE> lineReader,
+                                                                IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader)
     throws IOException {
         IMultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(MATRIX_WIDTH_3);
         int lineCounter = 0;

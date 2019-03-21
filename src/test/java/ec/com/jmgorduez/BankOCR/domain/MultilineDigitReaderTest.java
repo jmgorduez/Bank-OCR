@@ -21,7 +21,7 @@ class MultilineDigitReaderTest {
     }
 
     @Test
-    @DisplayName("It should read a character from a section of a multiline string")
+    @DisplayName("It should readMultilineString a character from a section of a multiline string")
     void readCharacter() {
         assertThat(multilineDigitReaderUnderTest.readCharacter(
                 generateDigitTokenNumberOneMatrix()))

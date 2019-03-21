@@ -49,7 +49,7 @@ class MultilineDigitStringReaderTest {
     @DisplayName("It should reads a multilines string.")
     void read() {
         try {
-            assertThat(multilineDigitStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock))
+            assertThat(multilineDigitStringReaderUnderTest.readMultilineString(any(), lineReaderMock, characterReaderMock))
                     .isEqualTo(generateListSameDigits(ONE));
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,7 +68,7 @@ class MultilineDigitStringReaderTest {
     @DisplayName("It should verify that readLine is called")
     void verifyExecutionRead() {
         try {
-            multilineDigitStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock);
+            multilineDigitStringReaderUnderTest.readMultilineString(any(), lineReaderMock, characterReaderMock);
             verify(lineReaderMock, atLeast(MATRIX_HEIGHT_3)).readLine(any());
             verify(lineReaderMock, times(ONE)).passEmptyLine(any());
         } catch (IOException e) {

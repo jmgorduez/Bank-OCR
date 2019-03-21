@@ -29,9 +29,9 @@ class IntegerAccountNumberReaderTest {
         MockitoAnnotations.initMocks(this);
         integerAccountNumberReaderUnderTest = new IntegerAccountNumberReader();
         try {
-            when(multilineString111111111ReaderMock.read(any(), any(), any()))
+            when(multilineString111111111ReaderMock.readMultilineString(any(), any(), any()))
                     .thenReturn(generateListSameDigits(ONE));
-            when(multilineString000000000ReaderMock.read(any(), any(), any()))
+            when(multilineString000000000ReaderMock.readMultilineString(any(), any(), any()))
                     .thenReturn(generateListSameDigits(ZERO));
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ class IntegerAccountNumberReaderTest {
     }
 
     @Test
-    @DisplayName("It should read a account number from a characters list.")
+    @DisplayName("It should readMultilineString a account number from a characters list.")
     void readAccountNumber() {
         try {
             assertThat(integerAccountNumberReaderUnderTest
