@@ -6,4 +6,4 @@
 .idea/modules/
 .idea/vcs.xml
 .idea/workspace.xml
-
+*.class
