@@ -30,7 +30,6 @@ public class BankOcrApplication {
             BufferedReader bufferedReader =
                     new BufferedReader(new FileReader(FILE_PATH));
             do {
-
                 IAccountNumber accountNumber = accountNumberReader
                         .readAccountNumber(bufferedReader,
                                 lineReader,

@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 
 class MultilineDigitStringReaderTest {
 
-    private MultilineDigitStringReader<Integer, DigitToken.TokenType> multilineStringReaderUnderTest;
+    private MultilineDigitStringReader<Integer, DigitToken.TokenType> multilineDigitStringReaderUnderTest;
     @Mock
     private IMultilineCharacterReader<Integer, DigitToken.TokenType> characterReaderMock;
     @Mock
@@ -32,7 +32,7 @@ class MultilineDigitStringReaderTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        multilineStringReaderUnderTest = new MultilineDigitStringReader<>(STRING_LENGTH);
+        multilineDigitStringReaderUnderTest = new MultilineDigitStringReader<>(STRING_LENGTH);
         try {
             when(lineReaderMock.readLine(any()))
                     .thenReturn(generateLineWithTwentySevenBlankSpaceDigitToken());
@@ -49,7 +49,7 @@ class MultilineDigitStringReaderTest {
     @DisplayName("It should reads a multilines string.")
     void read() {
         try {
-            assertThat(multilineStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock))
+            assertThat(multilineDigitStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock))
                     .isEqualTo(generateListSameDigits(ONE));
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,7 +59,7 @@ class MultilineDigitStringReaderTest {
     @Test
     @DisplayName("It should generate characters string.")
     void generateCharactersString() {
-        assertThat(multilineStringReaderUnderTest.generateCharactersString(
+        assertThat(multilineDigitStringReaderUnderTest.generateCharactersString(
                 multilineStringMock, characterReaderMock))
                                         .isEqualTo(generateListSameDigits(ONE));
     }
@@ -68,7 +68,7 @@ class MultilineDigitStringReaderTest {
     @DisplayName("It should verify that readLine is called")
     void verifyExecutionRead() {
         try {
-            multilineStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock);
+            multilineDigitStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,7 +82,7 @@ class MultilineDigitStringReaderTest {
     @Test
     @DisplayName("It should verify that generateCharactersString is called")
     void verifyExecutionGenerateCharactersString() {
-        multilineStringReaderUnderTest.generateCharactersString(
+        multilineDigitStringReaderUnderTest.generateCharactersString(
                 multilineStringMock, characterReaderMock);
         verify(characterReaderMock, atLeast(MATRIX_MODULE)).readCharacter(any());
     }
