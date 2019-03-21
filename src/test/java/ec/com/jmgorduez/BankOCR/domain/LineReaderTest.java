@@ -1,7 +1,6 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator;
-import ec.com.jmgorduez.BankOCR.domain.LineReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,25 +10,29 @@ import org.mockito.MockitoAnnotations;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.BLANK_SPACE_STRING_27;
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.generateListTokensBlankSpace;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class LineReaderTest {
 
-    private LineReader lineConsoleReaderUnderTest;
+    private LineReader lineReaderUnderTest;
     @Mock
     private BufferedReader bufferedReaderMock;
+    @Mock
+    private BufferedReader bufferedReaderEmptyLineMock;
 
     @BeforeEach
     void setUp() {
 
         MockitoAnnotations.initMocks(this);
-        lineConsoleReaderUnderTest = new LineReader();
+        lineReaderUnderTest = new LineReader();
         try {
             when(bufferedReaderMock.readLine())
                     .thenReturn(BLANK_SPACE_STRING_27);
+            when(bufferedReaderEmptyLineMock.readLine())
+                    .thenReturn(EMPTY_STRING);
         } catch (IOException error) {
         }
     }
@@ -39,10 +42,21 @@ class LineReaderTest {
     void readLine() {
 
         try {
-            assertThat(lineConsoleReaderUnderTest.readLine(bufferedReaderMock))
+            assertThat(lineReaderUnderTest.readLine(bufferedReaderMock))
                     .isEqualTo(generateListTokensBlankSpace(DataTestGenerator.MATRIX_WIDTH_27));
         } catch (IOException error) {
 
+        }
+    }
+
+    @Test
+    @DisplayName("It should pass a empty line.")
+    void passEmptyLine(){
+        try {
+            lineReaderUnderTest.passEmptyLine(bufferedReaderEmptyLineMock);
+            verify(bufferedReaderEmptyLineMock, times(ONE)).readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
