@@ -1,5 +1,9 @@
 package ec.com.jmgorduez.BankOCR.utils;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 public class MathOperations {

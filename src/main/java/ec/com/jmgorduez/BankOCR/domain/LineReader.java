@@ -18,11 +18,12 @@ public class LineReader implements ILineReader<DigitToken.TokenType> {
     public List<IToken<DigitToken.TokenType>> readLine(BufferedReader reader)
             throws IOException {
         String line = reader.readLine();
-        List<IToken<DigitToken.TokenType>> lineOfTokens = new ArrayList<>();
-        line.chars().mapToObj(character -> (char) character)
-                .forEach(character -> {
-                    lineOfTokens.add(new DigitToken(Character.toString(character)));
-                });
+        List<IToken<DigitToken.TokenType>> lineOfTokens =
+                line.chars()
+                        .mapToObj(characterString -> (char) characterString)
+                        .map(character -> {
+                            return new DigitToken(Character.toString(character));
+                        }).collect(Collectors.toList());
         return lineOfTokens;
     }
 

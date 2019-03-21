@@ -3,6 +3,7 @@ package ec.com.jmgorduez.BankOCR.domain;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static ec.com.jmgorduez.BankOCR.utils.MathOperations.bitsArrayToNumberBaseTen;
@@ -67,11 +68,11 @@ public class Digit implements ICharacter<Integer> {
 
     static HashMap<Integer, Integer> generateBinaryCodesForDigits() {
         HashMap<Integer, Integer> binaryCodesForDigits = new HashMap<>();
-        for (Digit digit = new Digit(ZERO); digit.value <= 9; ) {
+        for (Digit digit = new Digit(ZERO); digit.value <= NINE; ) {
             binaryCodesForDigits.put(digit.value, digit.getBinaryCode());
             try {
                 digit = digit.successor();
-            }catch (UnsupportedOperationException error){
+            } catch (UnsupportedOperationException error) {
                 break;
             }
         }
@@ -79,11 +80,11 @@ public class Digit implements ICharacter<Integer> {
     }
 
     public static int binaryMatrixToBinaryCode(Integer[][] binaryMatrix) {
-        List<Integer> binaryCode = new ArrayList<>();
-        Arrays.stream(binaryMatrix).forEach(row -> {
-            binaryCode.add(bitsArrayToNumberBaseTen(row));
-        });
-        return (int) digitsArrayToNumberBaseTen(binaryCode.toArray(new Integer[binaryCode.size()]));
+        Integer[] binaryNumber =
+                Arrays.stream(binaryMatrix).map(row -> {
+                    return bitsArrayToNumberBaseTen(row);
+                }).toArray(Integer[]::new);
+        return digitsArrayToNumberBaseTen(binaryNumber);
     }
 
     public static Digit binaryCodeToDigit(Integer binaryCode) {

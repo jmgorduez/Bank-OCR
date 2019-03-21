@@ -9,7 +9,10 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineStringReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
@@ -27,12 +30,12 @@ public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum>
     public List<ICharacter<CHARACTER_TYPE>> readMultilineString(BufferedReader bufferedReader,
                                                                 ILineReader<TOKEN_TYPE> lineReader,
                                                                 IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader)
-    throws IOException {
-        IMultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(MATRIX_WIDTH_3);
+            throws IOException {
+        IMultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(CHARACTER_WIDTH);
         int lineCounter = 0;
         do {
             List<IToken<TOKEN_TYPE>> tokensRead = lineReader.readLine(bufferedReader);
-            if(tokensRead.isEmpty()){
+            if (tokensRead.isEmpty()) {
                 tokensRead = lineReader.generateBlankSpaceCharactersLineLikeRefillOfEmptyLine();
             }
             multilineString.add(tokensRead);
@@ -43,12 +46,14 @@ public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum>
     }
 
     List<ICharacter<CHARACTER_TYPE>> generateCharactersString(IMultilineString<IToken<TOKEN_TYPE>> multilineString,
-                                                                      IMultilineCharacterReader<CHARACTER_TYPE,TOKEN_TYPE> characterReader) {
-        List<ICharacter<CHARACTER_TYPE>> charactersString = new ArrayList<>();
-        for (int i = ZERO; i < stringLength; i++) {
-            IMultilineString<IToken<TOKEN_TYPE>> multilineCharacter = multilineString.getCharacterSection(i);
-            charactersString.add(characterReader.readCharacter(multilineCharacter));
-        }
+                                                              IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader) {
+        List<ICharacter<CHARACTER_TYPE>> charactersString =
+                Stream.iterate(ZERO, index -> index++).limit(stringLength)
+                        .map(index -> {
+                            IMultilineString<IToken<TOKEN_TYPE>> multilineCharacter
+                                    = multilineString.getCharacterSection(index);
+                            return characterReader.readCharacter(multilineCharacter);
+                        }).collect(Collectors.toList());
         return charactersString;
     }
 }

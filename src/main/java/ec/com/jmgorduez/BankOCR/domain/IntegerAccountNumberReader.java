@@ -14,10 +14,10 @@ public class IntegerAccountNumberReader implements IAccountNumberReader<DigitTok
                                             ILineReader<DigitToken.TokenType> lineReader,
                                             IMultilineCharacterReader<Integer, DigitToken.TokenType> charaterReader,
                                             IMultilineStringReader<Integer, DigitToken.TokenType> multilineStringReader) throws IOException {
-        List<ICharacter<Integer>> iCharacters =
+        List<ICharacter<Integer>> characters =
                 multilineStringReader.readMultilineString(bufferedReader, lineReader, charaterReader);
         String accountNumber =
-                iCharacters.stream().map(character -> {
+                characters.stream().map(character -> {
                     return String.valueOf(character.getValue());
                 }).collect(Collectors.joining());
         return new IntegerAccountNumber(accountNumber);
