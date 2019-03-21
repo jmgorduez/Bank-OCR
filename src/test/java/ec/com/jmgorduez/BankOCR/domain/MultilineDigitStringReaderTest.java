@@ -66,7 +66,7 @@ class MultilineDigitStringReaderTest {
 
     @Test
     @DisplayName("It should verify that readLine is called")
-    void verifyExecutionRead() {
+    void verifyExecutionReadMultilineString() {
         try {
             multilineDigitStringReaderUnderTest.readMultilineString(any(), lineReaderMock, characterReaderMock);
             verify(lineReaderMock, atLeast(MATRIX_HEIGHT_3)).readLine(any());
