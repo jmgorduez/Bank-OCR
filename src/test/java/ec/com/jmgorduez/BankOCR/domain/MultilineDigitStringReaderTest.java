@@ -69,11 +69,8 @@ class MultilineDigitStringReaderTest {
     void verifyExecutionRead() {
         try {
             multilineDigitStringReaderUnderTest.read(any(), lineReaderMock, characterReaderMock);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
             verify(lineReaderMock, atLeast(MATRIX_HEIGHT_3)).readLine(any());
+            verify(lineReaderMock, times(ONE)).passEmptyLine(any());
         } catch (IOException e) {
             e.printStackTrace();
         }
