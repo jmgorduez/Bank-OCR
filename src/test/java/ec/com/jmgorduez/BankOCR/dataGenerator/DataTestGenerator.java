@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.*;
@@ -52,14 +53,6 @@ public class DataTestGenerator {
     public static final Integer[] ONE_BASE_TWO_ARRAY = new Integer[]{0, 0, 1};
     public static final Integer[] THREE_BASE_TWO_ARRAY = new Integer[]{0, 1, 1};
     public static final Integer[] FIVE_BASE_TWO_ARRAY = new Integer[]{1, 0, 1};
-
-    public static List<IToken<DigitToken.TokenType>> generateLineWithTwentySevenBlankSpaceDigitToken() {
-        List<IToken<DigitToken.TokenType>> line = new ArrayList<>();
-        for (int i = ONE; i <= MATRIX_WIDTH_27; i++) {
-            line.add(new DigitToken(BLANK_SPACE));
-        }
-        return line;
-    }
 
     public static IMultilineString<IToken<DigitToken.TokenType>> generateDigitTokenNumberOneMatrix() {
         IMultilineString<IToken<DigitToken.TokenType>> multilineString = new MultilineString<>(MATRIX_WIDTH_3);
@@ -296,11 +289,9 @@ public class DataTestGenerator {
     }
 
     public static List<ICharacter<Integer>> generateListSameDigits(Integer integerDigit) {
-        List<ICharacter<Integer>> digits = new ArrayList<>();
-        for (int i = ZERO; i < NINE; i++) {
-            digits.add(new Digit(new Integer(integerDigit)));
-        }
-        return digits;
+      Stream<Digit> stream = Stream.generate(
+                () -> new Digit(new Integer(integerDigit))).limit(NINE);
+        return stream.collect(Collectors.toList());
     }
 
     public static List<List<IToken<DigitToken.TokenType>>> generateThreeRowsWithTwentySevenTokensThatRepresentsDigitOneMutilineString() {

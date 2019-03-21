@@ -38,7 +38,7 @@ class MultilineDigitStringReaderTest {
         multilineDigitStringReaderUnderTest = new MultilineDigitStringReader<>(STRING_LENGTH);
         try {
             when(lineReaderMock.readLine(any()))
-                    .thenReturn(generateLineWithTwentySevenBlankSpaceDigitToken());
+                    .thenReturn(generateListTokensBlankSpace(MATRIX_WIDTH_27));
             List<IToken<DigitToken.TokenType>> emptyLine = new ArrayList<>();
             when(emptyLineReaderMock.readLine(any()))
                     .thenReturn(emptyLine);
