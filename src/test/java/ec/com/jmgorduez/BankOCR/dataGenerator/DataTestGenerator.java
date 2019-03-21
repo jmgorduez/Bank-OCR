@@ -19,6 +19,8 @@ import static org.mockito.Mockito.mock;
 
 public class DataTestGenerator {
 
+    public static final String EMPTY_STRING = null;
+
     public static final String BLANK_SPACE_STRING_27 = "                           ";
 
     public static final String STRING_ACCOUNT_NUMBER_000000000 = "000000000";

@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface ILineReader<T extends Enum> {
     List<IToken<T>> readLine(BufferedReader reader) throws IOException;
+    void passEmptyLine(BufferedReader bufferedReader) throws IOException;
 }

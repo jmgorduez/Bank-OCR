@@ -21,4 +21,9 @@ public class LineReader implements ILineReader<DigitToken.TokenType> {
                 });
         return lineOfTokens;
     }
+
+    @Override
+    public void passEmptyLine(BufferedReader bufferedReader) throws IOException {
+        bufferedReader.readLine();
+    }
 }
