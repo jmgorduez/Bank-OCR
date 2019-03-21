@@ -1,7 +1,6 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ILineReader;
 
 import java.io.BufferedReader;
@@ -27,7 +26,8 @@ public class LineReader implements ILineReader<DigitToken.TokenType> {
         return lineOfTokens;
     }
 
-    List<IToken<DigitToken.TokenType>> refillEmptyLineWithBlankSpaceCharacters(){
+    @Override
+    public List<IToken<DigitToken.TokenType>> generateBlankSpaceCharactersLineLikeRefillOfEmptyLine() {
         Stream<DigitToken> stream = Stream.generate(
                 () -> new DigitToken(BLANK_SPACE)).limit(MATRIX_WIDTH_27);
         return stream.collect(Collectors.toList());

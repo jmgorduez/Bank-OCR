@@ -1,6 +1,5 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
-import ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,8 +51,8 @@ class LineReaderTest {
 
     @Test
     @DisplayName("It should refill a empty line with blank space characters")
-    void refillEmptyLineWithBlankSpaceCharacters(){
-        assertThat(lineReaderUnderTest.refillEmptyLineWithBlankSpaceCharacters())
+    void generateBlankSpaceCharactersLineLikeRefillOfEmptyLine(){
+        assertThat(lineReaderUnderTest.generateBlankSpaceCharactersLineLikeRefillOfEmptyLine())
                 .isEqualTo(generateListTokensBlankSpace(MATRIX_WIDTH_27));
     }
 
