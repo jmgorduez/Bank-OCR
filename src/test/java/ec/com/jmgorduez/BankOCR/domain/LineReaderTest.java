@@ -50,6 +50,13 @@ class LineReaderTest {
     }
 
     @Test
+    @DisplayName("It should refill a empty line with blank space characters")
+    void refillEmptyLineWithBlankSpaceCharacters(){
+        assertThat(lineReaderUnderTest.refillEmptyLineWithBlankSpaceCharacters())
+                .isEqualTo(generateListTokensBlankSpace(MATRIX_WIDTH_27));
+    }
+
+    @Test
     @DisplayName("It should pass a empty line.")
     void passEmptyLine(){
         try {

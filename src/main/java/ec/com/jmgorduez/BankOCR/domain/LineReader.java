@@ -22,6 +22,10 @@ public class LineReader implements ILineReader<DigitToken.TokenType> {
         return lineOfTokens;
     }
 
+    List<IToken<DigitToken.TokenType>> refillEmptyLineWithBlankSpaceCharacters(){
+        return null;
+    }
+
     @Override
     public void passEmptyLine(BufferedReader bufferedReader) throws IOException {
         bufferedReader.readLine();
