@@ -19,7 +19,7 @@ import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-class MultilineStringReaderTest {
+class MultilineDigitStringReaderTest {
 
     private MultilineDigitStringReader<Integer, DigitToken.TokenType> multilineStringReaderUnderTest;
     @Mock
