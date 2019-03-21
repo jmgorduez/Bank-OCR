@@ -44,7 +44,7 @@ class LineReaderTest {
 
         try {
             assertThat(lineReaderUnderTest.readLine(bufferedReaderMock))
-                    .isEqualTo(generateListTokensBlankSpace(DataTestGenerator.MATRIX_WIDTH_27));
+                    .isEqualTo(generateListTokensBlankSpace(MATRIX_WIDTH_27));
         } catch (IOException error) {
 
         }
