@@ -8,6 +8,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.BLANK_SPACE;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 public class LineReader implements ILineReader<DigitToken.TokenType> {
     @Override
@@ -23,7 +28,9 @@ public class LineReader implements ILineReader<DigitToken.TokenType> {
     }
 
     List<IToken<DigitToken.TokenType>> refillEmptyLineWithBlankSpaceCharacters(){
-        return null;
+        Stream<DigitToken> stream = Stream.generate(
+                () -> new DigitToken(BLANK_SPACE)).limit(MATRIX_WIDTH_27);
+        return stream.collect(Collectors.toList());
     }
 
     @Override
