@@ -34,6 +34,7 @@ public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum>
             multilineString.add(lineReader.readLine(bufferedReader));
             lineCounter++;
         } while (lineCounter < CHARACTER_HEIGHT);
+        lineReader.passEmptyLine(bufferedReader);
         return this.generateCharactersString(multilineString, characterReader);
     }
 
