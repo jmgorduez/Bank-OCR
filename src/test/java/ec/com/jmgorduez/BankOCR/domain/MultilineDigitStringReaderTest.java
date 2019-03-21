@@ -47,7 +47,7 @@ class MultilineDigitStringReaderTest {
 
     @Test
     @DisplayName("It should reads a multilines string.")
-    void read() {
+    void readMultilineString() {
         try {
             assertThat(multilineDigitStringReaderUnderTest.readMultilineString(any(), lineReaderMock, characterReaderMock))
                     .isEqualTo(generateListSameDigits(ONE));
