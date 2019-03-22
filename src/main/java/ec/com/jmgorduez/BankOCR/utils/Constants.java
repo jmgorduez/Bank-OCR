@@ -70,7 +70,7 @@ public class Constants {
     public static final int BINARY_CODE_ONE = 11;
     public static final int BINARY_CODE_TWO = 236;
     public static final int BINARY_CODE_THREE = 233;
-    public static final int BINARY_CODE_FOUR = 17;
+    public static final int BINARY_CODE_FOUR = 71;
     public static final int BINARY_CODE_FIVE = 263;
     public static final int BINARY_CODE_SIX = 267;
     public static final int BINARY_CODE_SEVEN = 211;
