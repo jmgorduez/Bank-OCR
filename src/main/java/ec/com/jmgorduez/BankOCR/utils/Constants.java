@@ -59,7 +59,7 @@ public class Constants {
     public static final Integer[][] BINARY_MATRIX_NINE = new Integer[][]{
             new Integer[]{ZERO, ONE, ZERO},
             new Integer[]{ONE, ONE, ONE},
-            new Integer[]{ZERO, ZERO, ONE}
+            new Integer[]{ZERO, ONE, ONE}
     };
     public static final Integer[][] BINARY_MATRIX_ZERO = new Integer[][]{
             new Integer[]{ZERO, ONE, ZERO},
@@ -75,7 +75,7 @@ public class Constants {
     public static final int BINARY_CODE_SIX = 267;
     public static final int BINARY_CODE_SEVEN = 211;
     public static final int BINARY_CODE_EIGHT = 277;
-    public static final int BINARY_CODE_NINE = 274;
+    public static final int BINARY_CODE_NINE = 273;
     public static final int BINARY_CODE_ZERO = 257;
 
     public static final String BLANK_SPACE_STRING = " ";

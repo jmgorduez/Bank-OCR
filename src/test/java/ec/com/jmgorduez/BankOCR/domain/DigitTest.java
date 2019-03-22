@@ -60,9 +60,30 @@ class DigitTest {
     @Test
     @DisplayName("It should generate a binary matrix for each digit")
     void generateBinaryMatrixForDigit() {
+        digitUnderTest = DIGIT_ONE;
+        assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(ONE))
+                .isEqualTo(BINARY_MATRIX_ONE);
+        digitUnderTest = DIGIT_THREE;
+        assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(THREE))
+                .isEqualTo(BINARY_MATRIX_THREE);
+        digitUnderTest = DIGIT_FOUR;
+        assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(FOUR))
+                .isEqualTo(BINARY_MATRIX_FOUR);
         digitUnderTest = DIGIT_FIVE;
         assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(FIVE))
                 .isEqualTo(BINARY_MATRIX_FIVE);
+        digitUnderTest = DIGIT_SIX;
+        assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(SIX))
+                .isEqualTo(BINARY_MATRIX_SIX);
+        digitUnderTest = DIGIT_SEVEN;
+        assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(SEVEN))
+                .isEqualTo(BINARY_MATRIX_SEVEN);
+        digitUnderTest = DIGIT_EIGHT;
+        assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(EIGHT))
+                .isEqualTo(BINARY_MATRIX_EIGHT);
+        digitUnderTest = DIGIT_NINE;
+        assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(NINE))
+                .isEqualTo(BINARY_MATRIX_NINE);
         digitUnderTest = DIGIT_ZERO;
         assertThat(digitUnderTest.generateBinaryMatricesForDigits().get(ZERO))
                 .isEqualTo(BINARY_MATRIX_ZERO);
@@ -73,8 +94,24 @@ class DigitTest {
     void binaryMatrixToBinaryCode() {
         assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_ONE))
                 .isEqualTo(BINARY_CODE_ONE);
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_TWO))
+                .isEqualTo(BINARY_CODE_TWO);
         assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_THREE))
                 .isEqualTo(BINARY_CODE_THREE);
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_FOUR))
+                .isEqualTo(BINARY_CODE_FOUR);
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_FIVE))
+                .isEqualTo(BINARY_CODE_FIVE);
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_SIX))
+                .isEqualTo(BINARY_CODE_SIX);
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_SEVEN))
+                .isEqualTo(BINARY_CODE_SEVEN);
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_EIGHT))
+                .isEqualTo(BINARY_CODE_EIGHT);
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_NINE))
+                .isEqualTo(BINARY_CODE_NINE);
+        assertThat(digitUnderTest.binaryMatrixToBinaryCode(BINARY_MATRIX_ZERO))
+                .isEqualTo(BINARY_CODE_ZERO);
     }
 
     @Test
@@ -107,8 +144,22 @@ class DigitTest {
     void generateBinaryCodesForDigits() {
         assertThat(digitUnderTest.generateBinaryCodesForDigits().get(ONE))
                 .isEqualTo(BINARY_CODE_ONE);
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(TWO))
+                .isEqualTo(BINARY_CODE_TWO);
         assertThat(digitUnderTest.generateBinaryCodesForDigits().get(THREE))
                 .isEqualTo(BINARY_CODE_THREE);
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(FOUR))
+                .isEqualTo(BINARY_CODE_FOUR);
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(FIVE))
+                .isEqualTo(BINARY_CODE_FIVE);
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(SIX))
+                .isEqualTo(BINARY_CODE_SIX);
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(SEVEN))
+                .isEqualTo(BINARY_CODE_SEVEN);
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(EIGHT))
+                .isEqualTo(BINARY_CODE_EIGHT);
+        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(NINE))
+                .isEqualTo(BINARY_CODE_NINE);
         assertThat(digitUnderTest.generateBinaryCodesForDigits().get(ZERO))
                 .isEqualTo(BINARY_CODE_ZERO);
     }
