@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ILineReader<TOKEN_TYPE extends Enum> {
-    List<IToken<TOKEN_TYPE>> readLine(BufferedReader reader) throws IOException;
+    List<IToken<TOKEN_TYPE>> readLine(BufferedReader reader) throws IOException, UnsupportedOperationException;
     void passEmptyLine(BufferedReader bufferedReader) throws IOException;
     List<IToken<TOKEN_TYPE>> generateBlankSpaceCharactersLineLikeRefillOfEmptyLine();
 }

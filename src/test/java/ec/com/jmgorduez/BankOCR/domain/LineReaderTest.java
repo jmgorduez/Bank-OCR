@@ -21,6 +21,8 @@ class LineReaderTest {
     @Mock
     private BufferedReader bufferedReaderMock;
     @Mock
+    private BufferedReader bufferedReaderNullLineMock;
+    @Mock
     private BufferedReader bufferedReaderEmptyLineMock;
 
     @BeforeEach
@@ -33,6 +35,8 @@ class LineReaderTest {
                     .thenReturn(BLANK_SPACE_STRING_27);
             when(bufferedReaderEmptyLineMock.readLine())
                     .thenReturn(EMPTY_STRING);
+            when(bufferedReaderNullLineMock.readLine())
+                    .thenReturn(Null_STRING);
         } catch (IOException error) {
         }
     }
@@ -57,11 +61,26 @@ class LineReaderTest {
     }
 
     @Test
-    @DisplayName("It should pass a empty line.")
-    void passEmptyLine(){
+    @DisplayName("It should verify that bufferedReader.readLine() is called")
+    void verifyThatExecutionReadLineCallReadLine(){
         try {
-            lineReaderUnderTest.passEmptyLine(bufferedReaderEmptyLineMock);
-            verify(bufferedReaderEmptyLineMock, times(ONE)).readLine();
+            lineReaderUnderTest.passEmptyLine(bufferedReaderNullLineMock);
+            verify(bufferedReaderNullLineMock, times(ONE)).readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @DisplayName("It should verify that UnsupportedOperationException is thrown for a null line")
+    void verifyThatExecutionReadLineThrowUnsupportedOperationException() {
+        try {
+            try {
+                lineReaderUnderTest
+                        .readLine(bufferedReaderNullLineMock);
+            }catch (UnsupportedOperationException error){
+                assertThat(error).isInstanceOf(UnsupportedOperationException.class);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
