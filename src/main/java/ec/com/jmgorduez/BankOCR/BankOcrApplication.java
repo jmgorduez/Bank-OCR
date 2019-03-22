@@ -41,7 +41,9 @@ public class BankOcrApplication {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("----------------THE END-----------------");
+        }
+        catch (UnsupportedOperationException e) {
+            System.out.println("----------------THE END OF THE FILE-----------------");
         }
     }
 

@@ -22,7 +22,8 @@ import static org.mockito.Mockito.mock;
 
 public class DataTestGenerator {
 
-    public static final String EMPTY_STRING = null;
+    public static final String Null_STRING = null;
+    public static final String EMPTY_STRING = "";
 
     public static final String BLANK_SPACE_STRING_27 = "                           ";
 
