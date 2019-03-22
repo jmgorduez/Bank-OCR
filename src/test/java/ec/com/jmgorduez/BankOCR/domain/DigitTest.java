@@ -53,8 +53,24 @@ class DigitTest {
     void getBinaryCode() {
         digitUnderTest = DIGIT_ONE;
         assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_ONE);
+        digitUnderTest = DIGIT_TWO;
+        assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_TWO);
         digitUnderTest = DIGIT_THREE;
         assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_THREE);
+        digitUnderTest = DIGIT_FOUR;
+        assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_FOUR);
+        digitUnderTest = DIGIT_FIVE;
+        assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_FIVE);
+        digitUnderTest = DIGIT_SIX;
+        assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_SIX);
+        digitUnderTest = DIGIT_SEVEN;
+        assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_SEVEN);
+        digitUnderTest = DIGIT_EIGHT;
+        assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_EIGHT);
+        digitUnderTest = DIGIT_NINE;
+        assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_NINE);
+        digitUnderTest = DIGIT_ZERO;
+        assertThat(digitUnderTest.getBinaryCode()).isEqualTo(BINARY_CODE_ZERO);
     }
 
     @Test
