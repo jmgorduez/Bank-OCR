@@ -8,6 +8,7 @@ import org.junit.jupiter.api.TestInstance;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
@@ -23,9 +24,11 @@ class MultilineDigitReaderTest {
     @Test
     @DisplayName("It should readMultilineString a character from a section of a multiline string")
     void readCharacter() {
-        assertThat(multilineDigitReaderUnderTest.readCharacter(
-                generateDigitTokenNumberOneMatrix()))
+        assertThat(multilineDigitReaderUnderTest
+                .readCharacter(generateDigitTokenNumberOneMatrix()))
                 .isEqualTo(DIGIT_ONE);
+        assertThat(multilineDigitReaderUnderTest.readCharacter(generateDigitTokenUndefidedCharacterMatrix()))
+                .isInstanceOf(UndefinedCharacter.class);
     }
 
     @Test

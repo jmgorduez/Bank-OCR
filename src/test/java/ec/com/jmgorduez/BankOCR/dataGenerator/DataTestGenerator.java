@@ -55,6 +55,8 @@ public class DataTestGenerator {
     public static final Integer[] THREE_BASE_TWO_ARRAY = new Integer[]{0, 1, 1};
     public static final Integer[] FIVE_BASE_TWO_ARRAY = new Integer[]{1, 0, 1};
 
+    public static final int WRONG_BINARY_CODE = -1;
+
     public static IMultilineString<IToken<DigitToken.TokenType>> generateDigitTokenNumberOneMatrix() {
         IMultilineString<IToken<DigitToken.TokenType>> multilineString = new MultilineString<>(MATRIX_WIDTH_3);
         DigitToken[] digitTokens = new DigitToken[]{
@@ -283,6 +285,29 @@ public class DataTestGenerator {
         digitTokens = new DigitToken[]{
                 new DigitToken(PIPE),
                 new DigitToken(UNDERSCORE),
+                new DigitToken(PIPE)
+        };
+        multilineString.add(Arrays.asList(digitTokens));
+        return multilineString;
+    }
+
+    public static IMultilineString<IToken<DigitToken.TokenType>> generateDigitTokenUndefidedCharacterMatrix() {
+        IMultilineString<IToken<DigitToken.TokenType>> multilineString = new MultilineString<>(MATRIX_WIDTH_3);
+        DigitToken[] digitTokens = new DigitToken[]{
+                new DigitToken(PIPE),
+                new DigitToken(BLANK_SPACE),
+                new DigitToken(PIPE)
+        };
+        multilineString.add(Arrays.asList(digitTokens));
+        digitTokens = new DigitToken[]{
+                new DigitToken(BLANK_SPACE),
+                new DigitToken(BLANK_SPACE),
+                new DigitToken(PIPE)
+        };
+        multilineString.add(Arrays.asList(digitTokens));
+        digitTokens = new DigitToken[]{
+                new DigitToken(BLANK_SPACE),
+                new DigitToken(BLANK_SPACE),
                 new DigitToken(PIPE)
         };
         multilineString.add(Arrays.asList(digitTokens));

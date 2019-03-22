@@ -153,6 +153,10 @@ class DigitTest {
                 .isEqualTo(DIGIT_NINE);
         assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_ZERO))
                 .isEqualTo(DIGIT_ZERO);
+
+        assertThatThrownBy(() -> {
+            digitUnderTest.binaryCodeToDigit(WRONG_BINARY_CODE);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

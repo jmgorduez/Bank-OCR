@@ -87,13 +87,17 @@ public class Digit implements ICharacter<Integer> {
         return digitsArrayToNumberBaseTen(binaryNumber);
     }
 
-    public static Digit binaryCodeToDigit(Integer binaryCode) {
+    public static Digit binaryCodeToDigit(Integer binaryCode)
+            throws IllegalArgumentException {
         List<Digit> digitFound = new ArrayList<>();
         binaryCodesForDigits.forEach((digit, binCode) -> {
             if (binaryCode.equals(binCode)) {
                 digitFound.add(new Digit(digit));
             }
         });
+        if (digitFound.isEmpty()){
+            throw new IllegalArgumentException();
+        }
         return digitFound.get(0);
     }
 
