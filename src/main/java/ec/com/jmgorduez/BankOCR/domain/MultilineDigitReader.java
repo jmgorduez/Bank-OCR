@@ -19,11 +19,15 @@ import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;
 public class MultilineDigitReader implements IMultilineCharacterReader<Integer, DigitToken.TokenType> {
 
     @Override
-    public ICharacter<Integer> readCharacter(IMultilineString<IToken<DigitToken.TokenType>> digitTokenMatrix) {
+    public ICharacter readCharacter(IMultilineString<IToken<DigitToken.TokenType>> digitTokenMatrix) {
 
         Integer[][] binaryMatrix = digitTokenMatrixToBinaryMatrix(digitTokenMatrix);
         Integer binaryCode = binaryMatrixToBinaryCode(binaryMatrix);
-        return binaryCodeToDigit(binaryCode);
+        try {
+            return binaryCodeToDigit(binaryCode);
+        } catch (IllegalArgumentException error) {
+            return new UndefinedCharacter(binaryMatrix);
+        }
     }
 
     Integer[][] digitTokenMatrixToBinaryMatrix(IMultilineString<IToken<DigitToken.TokenType>> digitTokenMatrix) {
