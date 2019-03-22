@@ -16,8 +16,11 @@ import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 public class LineReader implements ILineReader<DigitToken.TokenType> {
     @Override
     public List<IToken<DigitToken.TokenType>> readLine(BufferedReader reader)
-            throws IOException {
+            throws IOException,UnsupportedOperationException {
         String line = reader.readLine();
+        if (line == null){
+            throw new UnsupportedOperationException();
+        }
         List<IToken<DigitToken.TokenType>> lineOfTokens =
                 line.chars()
                         .mapToObj(characterString -> (char) characterString)
