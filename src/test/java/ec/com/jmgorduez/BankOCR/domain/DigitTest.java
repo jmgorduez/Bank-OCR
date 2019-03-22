@@ -82,8 +82,24 @@ class DigitTest {
     void binaryCodeToDigit() {
         assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_ONE))
                 .isEqualTo(DIGIT_ONE);
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_TWO))
+                .isEqualTo(DIGIT_TWO);
         assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_THREE))
                 .isEqualTo(DIGIT_THREE);
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_FOUR))
+                .isEqualTo(DIGIT_FOUR);
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_FIVE))
+                .isEqualTo(DIGIT_FIVE);
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_SIX))
+                .isEqualTo(DIGIT_SIX);
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_SEVEN))
+                .isEqualTo(DIGIT_SEVEN);
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_EIGHT))
+                .isEqualTo(DIGIT_EIGHT);
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_NINE))
+                .isEqualTo(DIGIT_NINE);
+        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_ZERO))
+                .isEqualTo(DIGIT_ZERO);
     }
 
     @Test
