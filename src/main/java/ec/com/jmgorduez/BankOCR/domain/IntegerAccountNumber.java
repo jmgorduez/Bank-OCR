@@ -16,6 +16,11 @@ public class IntegerAccountNumber implements IAccountNumber {
     }
 
     @Override
+    public Integer calculateCheckSum() {
+        return null;
+    }
+
+    @Override
     public boolean equals(Object other){
         if (this == other){
             return true;

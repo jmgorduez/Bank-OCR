@@ -1,13 +1,11 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.ACCOUNT_NUMBER_111111111;
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.STRING_ACCOUNT_NUMBER_111111111;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
+import static java.math.BigInteger.TEN;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
@@ -15,7 +13,7 @@ class IntegerAccountNumberTest {
 
     private IntegerAccountNumber integerAccountNumberUnderTest;
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111);
     }
@@ -35,5 +33,15 @@ class IntegerAccountNumberTest {
                 .isTrue();
         assertThat(integerAccountNumberUnderTest.equals(integerAccountNumberUnderTest))
                 .isTrue();
+    }
+
+    @Test
+    @DisplayName("It should calculate the checksum of account number.")
+    void calculateCheckSum(){
+        assertThat(integerAccountNumberUnderTest.calculateCheckSum())
+                .isEqualTo(ONE);
+        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789);
+        assertThat(integerAccountNumberUnderTest.calculateCheckSum())
+                .isEqualTo(TEN);
     }
 }
