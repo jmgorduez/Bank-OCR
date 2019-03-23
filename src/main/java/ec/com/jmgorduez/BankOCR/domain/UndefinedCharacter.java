@@ -1,6 +1,9 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
+import ec.com.jmgorduez.BankOCR.utils.Constants;
+
+import static ec.com.jmgorduez.BankOCR.utils.Constants.UNDEFINED_CHARACTER_VALUE;
 
 public class UndefinedCharacter implements ICharacter<String> {
 
@@ -10,7 +13,7 @@ public class UndefinedCharacter implements ICharacter<String> {
 
     @Override
     public String getValue() {
-        return null;
+        return UNDEFINED_CHARACTER_VALUE;
     }
 
     @Override
