@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.MATRIX_WIDTH_27;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -19,7 +20,11 @@ class LineReaderTest {
 
     private LineReader lineReaderUnderTest;
     @Mock
-    private BufferedReader bufferedReaderMock;
+    private BufferedReader bufferedReader27BlankSpaceMock;
+    @Mock
+    private BufferedReader bufferedReader27PipeMock;
+    @Mock
+    private BufferedReader bufferedReader27UnderScoreMock;
     @Mock
     private BufferedReader bufferedReaderNullLineMock;
     @Mock
@@ -31,8 +36,12 @@ class LineReaderTest {
         MockitoAnnotations.initMocks(this);
         lineReaderUnderTest = new LineReader();
         try {
-            when(bufferedReaderMock.readLine())
+            when(bufferedReader27BlankSpaceMock.readLine())
                     .thenReturn(BLANK_SPACE_STRING_27);
+            when(bufferedReader27PipeMock.readLine())
+                    .thenReturn(PIPE_STRING_27);
+            when(bufferedReader27UnderScoreMock.readLine())
+                    .thenReturn(UNDER_SCORE_STRING_27);
             when(bufferedReaderEmptyLineMock.readLine())
                     .thenReturn(EMPTY_STRING);
             when(bufferedReaderNullLineMock.readLine())
@@ -46,8 +55,12 @@ class LineReaderTest {
     void readLine() {
 
         try {
-            assertThat(lineReaderUnderTest.readLine(bufferedReaderMock))
-                    .isEqualTo(generateListTokensBlankSpace(MATRIX_WIDTH_27));
+            assertThat(lineReaderUnderTest.readLine(bufferedReader27BlankSpaceMock))
+                    .isEqualTo(generateListTokens(BLANK_SPACE, MATRIX_WIDTH_27));
+            assertThat(lineReaderUnderTest.readLine(bufferedReader27PipeMock))
+                    .isEqualTo(generateListTokens(PIPE, MATRIX_WIDTH_27));
+            assertThat(lineReaderUnderTest.readLine(bufferedReader27UnderScoreMock))
+                    .isEqualTo(generateListTokens(UNDERSCORE, MATRIX_WIDTH_27));
         } catch (IOException error) {
 
         }
@@ -57,7 +70,7 @@ class LineReaderTest {
     @DisplayName("It should refill a empty line with blank space characters")
     void generateBlankSpaceCharactersLineLikeRefillOfEmptyLine(){
         assertThat(lineReaderUnderTest.generateBlankSpaceCharactersLineLikeRefillOfEmptyLine())
-                .isEqualTo(generateListTokensBlankSpace(MATRIX_WIDTH_27));
+                .isEqualTo(generateListTokens(BLANK_SPACE, MATRIX_WIDTH_27));
     }
 
     @Test

@@ -1,7 +1,5 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
-import ec.com.jmgorduez.BankOCR.domain.DigitToken;
-import ec.com.jmgorduez.BankOCR.domain.MultilineString;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.BLANK_SPACE;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,12 +29,12 @@ class MultilineStringTest {
     void add() {
         multilineStringUnderTest = new MultilineString<>(MATRIX_WIDTH_3);
         multilineStringUnderTest.add(
-                generateListTokensBlankSpace(MATRIX_WIDTH_27));
+                generateListTokens(BLANK_SPACE, MATRIX_WIDTH_27));
         List<List<IToken<DigitToken.TokenType>>> listExpected = new ArrayList<>();
-        listExpected.add(generateListTokensBlankSpace(MATRIX_WIDTH_27));
+        listExpected.add(generateListTokens(BLANK_SPACE, MATRIX_WIDTH_27));
         assertThat(multilineStringUnderTest.rows())
                 .isEqualTo(listExpected);
-        listExpected.add(generateListTokensBlankSpace(MATRIX_WIDTH_27));
+        listExpected.add(generateListTokens(BLANK_SPACE,MATRIX_WIDTH_27));
         assertThat(multilineStringUnderTest.rows())
                 .isNotEqualTo(listExpected);
     }

@@ -2,20 +2,18 @@ package ec.com.jmgorduez.BankOCR;
 
 import ec.com.jmgorduez.BankOCR.domain.*;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.*;
-import ec.com.jmgorduez.BankOCR.utils.Constants;
-import javafx.scene.control.Dialog;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
 
 public class BankOcrApplication {
 
-    private static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\input.txt";
+    //private static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\input.txt";
+    private static final String FILE_PATH = "/home/jm/projects/java/Bank-OCR/inputFiles/input.txt";
     private static IMultilineStringReader multilineStringReader =
             new MultilineDigitStringReader(STRING_LENGTH);
     private static ILineReader<DigitToken.TokenType> lineReader

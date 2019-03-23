@@ -48,7 +48,7 @@ public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum>
     List<ICharacter<CHARACTER_TYPE>> generateCharactersString(IMultilineString<IToken<TOKEN_TYPE>> multilineString,
                                                               IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader) {
         List<ICharacter<CHARACTER_TYPE>> charactersString =
-                Stream.iterate(ZERO, index -> index++).limit(stringLength)
+                Stream.iterate(ZERO, index -> index + ONE).limit(stringLength)
                         .map(index -> {
                             IMultilineString<IToken<TOKEN_TYPE>> multilineCharacter
                                     = multilineString.getCharacterSection(index);

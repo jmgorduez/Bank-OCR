@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.*;
@@ -25,10 +24,13 @@ public class DataTestGenerator {
     public static final String Null_STRING = null;
     public static final String EMPTY_STRING = "";
 
-    public static final String BLANK_SPACE_STRING_27 = "                           ";
+    public static final String BLANK_SPACE_STRING_27    = "                           ";
+    public static final String PIPE_STRING_27           = "|||||||||||||||||||||||||||";
+    public static final String UNDER_SCORE_STRING_27    = "___________________________";
 
     public static final String STRING_ACCOUNT_NUMBER_000000000 = "000000000";
     public static final String STRING_ACCOUNT_NUMBER_111111111 = "111111111";
+    public static final String STRING_ACCOUNT_NUMBER_123456789 = "123456789";
 
     public static final IAccountNumber ACCOUNT_NUMBER_000000000
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_000000000);
@@ -336,14 +338,14 @@ public class DataTestGenerator {
         return rows;
     }
 
-    public static List<IToken<DigitToken.TokenType>> generateListTokensBlankSpace(Integer length) {
+    public static List<IToken<DigitToken.TokenType>> generateListTokens(DigitToken.TokenType tokenType, Integer length) {
         Stream<DigitToken> stream = Stream.generate(
-                () -> new DigitToken(BLANK_SPACE)).limit(length);
+                () -> new DigitToken(tokenType)).limit(length);
         return stream.collect(Collectors.toList());
     }
 
     public static List<IToken<DigitToken.TokenType>> generateListTokensFirstLineDigitOne() {
-        return generateListTokensBlankSpace(MATRIX_WIDTH_3);
+        return generateListTokens(BLANK_SPACE, MATRIX_WIDTH_3);
     }
 
     public static List<IToken<DigitToken.TokenType>> generateListTokensSecondLineDigitOne() {

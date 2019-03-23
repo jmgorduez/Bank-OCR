@@ -16,6 +16,7 @@ import java.util.List;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.generateListSameDigits;
+import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.BLANK_SPACE;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -38,12 +39,12 @@ class MultilineDigitStringReaderTest {
         multilineDigitStringReaderUnderTest = new MultilineDigitStringReader<>(STRING_LENGTH);
         try {
             when(lineReaderMock.readLine(any()))
-                    .thenReturn(generateListTokensBlankSpace(MATRIX_WIDTH_27));
+                    .thenReturn(generateListTokens(BLANK_SPACE, MATRIX_WIDTH_27));
             List<IToken<DigitToken.TokenType>> emptyLine = new ArrayList<>();
             when(emptyLineReaderMock.readLine(any()))
                     .thenReturn(emptyLine);
             when(emptyLineReaderMock.generateBlankSpaceCharactersLineLikeRefillOfEmptyLine())
-                    .thenReturn(generateListTokensBlankSpace(MATRIX_WIDTH_27));
+                    .thenReturn(generateListTokens(BLANK_SPACE,MATRIX_WIDTH_27));
         } catch (IOException e) {
             e.printStackTrace();
         }
