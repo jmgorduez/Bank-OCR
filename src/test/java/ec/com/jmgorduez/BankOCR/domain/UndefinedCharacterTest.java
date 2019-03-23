@@ -4,7 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.BINARY_MATRIX_UNDEFINED_CHARACTER;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.WRONG_BINARY_CODE;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.WRONG_BINARY_MATRIX;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.UNDEFINED_CHARACTER_VALUE;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -16,7 +17,7 @@ class UndefinedCharacterTest {
     @BeforeAll
     void setUp(){
         undefinedCharacterUnderTest
-                = new UndefinedCharacter(BINARY_MATRIX_UNDEFINED_CHARACTER);
+                = new UndefinedCharacter(WRONG_BINARY_MATRIX);
     }
 
     @Test
@@ -28,6 +29,6 @@ class UndefinedCharacterTest {
     @Test
     void getBinaryCode() {
         assertThat(undefinedCharacterUnderTest.getBinaryCode())
-                .isEqualTo(BINARY_MATRIX_UNDEFINED_CHARACTER);
+                .isEqualTo(WRONG_BINARY_CODE);
     }
 }

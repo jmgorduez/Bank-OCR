@@ -45,7 +45,7 @@ class LineReaderTest {
             when(bufferedReaderEmptyLineMock.readLine())
                     .thenReturn(EMPTY_STRING);
             when(bufferedReaderNullLineMock.readLine())
-                    .thenReturn(Null_STRING);
+                    .thenReturn(NULL_STRING);
         } catch (IOException error) {
         }
     }

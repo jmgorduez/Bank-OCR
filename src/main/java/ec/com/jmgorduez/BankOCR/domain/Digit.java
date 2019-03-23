@@ -1,37 +1,19 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
-import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.AbstractCharacter;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
-import static ec.com.jmgorduez.BankOCR.utils.MathOperations.bitsArrayToNumberBaseTen;
-import static ec.com.jmgorduez.BankOCR.utils.MathOperations.digitsArrayToNumberBaseTen;
 
-public class Digit implements ICharacter<Integer> {
+public class Digit extends AbstractCharacter<Integer> {
 
     private static final HashMap<Integer, Integer[][]> binaryMatricesForDigits = generateBinaryMatricesForDigits();
     private static final HashMap<Integer, Integer> binaryCodesForDigits = generateBinaryCodesForDigits();
 
-    private Integer value;
-    private final Integer[][] binaryMatrix;
-
     public Digit(Integer value) {
-
+        super(binaryMatricesForDigits.get(value));
         this.value = value;
-        binaryMatrix = binaryMatricesForDigits.get(value);
-    }
-
-    @Override
-    public Integer getValue() {
-        return this.value;
-    }
-
-    @Override
-    public int getBinaryCode() {
-
-        return binaryMatrixToBinaryCode(binaryMatrix);
     }
 
     public boolean equals(Object other) {
@@ -79,13 +61,7 @@ public class Digit implements ICharacter<Integer> {
         return binaryCodesForDigits;
     }
 
-    public static int binaryMatrixToBinaryCode(Integer[][] binaryMatrix) {
-        Integer[] binaryNumber =
-                Arrays.stream(binaryMatrix).map(row -> {
-                    return bitsArrayToNumberBaseTen(row);
-                }).toArray(Integer[]::new);
-        return digitsArrayToNumberBaseTen(binaryNumber);
-    }
+
 
     public static Digit binaryCodeToDigit(Integer binaryCode)
             throws IllegalArgumentException {

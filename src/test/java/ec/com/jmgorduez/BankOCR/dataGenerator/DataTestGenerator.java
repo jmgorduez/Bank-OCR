@@ -21,7 +21,7 @@ import static org.mockito.Mockito.mock;
 
 public class DataTestGenerator {
 
-    public static final String Null_STRING = null;
+    public static final String NULL_STRING = null;
     public static final String EMPTY_STRING = "";
 
     public static final String BLANK_SPACE_STRING_27    = "                           ";
@@ -57,9 +57,9 @@ public class DataTestGenerator {
     public static final Integer[] THREE_BASE_TWO_ARRAY = new Integer[]{0, 1, 1};
     public static final Integer[] FIVE_BASE_TWO_ARRAY = new Integer[]{1, 0, 1};
 
-    public static final int WRONG_BINARY_CODE = -1;
+    public static final int WRONG_BINARY_CODE = 757;
 
-    public static final Integer[][] BINARY_MATRIX_UNDEFINED_CHARACTER = new Integer[][]{
+    public static final Integer[][] WRONG_BINARY_MATRIX = new Integer[][]{
             new Integer[]{ONE, ONE, ONE},
             new Integer[]{ONE, ZERO, ONE},
             new Integer[]{ONE, ONE, ONE}
