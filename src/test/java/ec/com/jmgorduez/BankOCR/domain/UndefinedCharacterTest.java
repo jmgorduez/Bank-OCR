@@ -1,6 +1,7 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -21,12 +22,14 @@ class UndefinedCharacterTest {
     }
 
     @Test
+    @DisplayName("It should return the value ?.")
     void getValue() {
         assertThat(undefinedCharacterUnderTest.getValue())
                 .isEqualTo(UNDEFINED_CHARACTER_VALUE);
     }
 
     @Test
+    @DisplayName("It should calculate the binary code.")
     void getBinaryCode() {
         assertThat(undefinedCharacterUnderTest.getBinaryCode())
                 .isEqualTo(WRONG_BINARY_CODE);
