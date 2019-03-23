@@ -27,5 +27,7 @@ class UndefinedCharacterTest {
 
     @Test
     void getBinaryCode() {
+        assertThat(undefinedCharacterUnderTest.getBinaryCode())
+                .isEqualTo(BINARY_MATRIX_UNDEFINED_CHARACTER);
     }
 }
