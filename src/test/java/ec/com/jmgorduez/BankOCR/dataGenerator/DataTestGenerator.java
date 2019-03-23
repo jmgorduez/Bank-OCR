@@ -59,6 +59,12 @@ public class DataTestGenerator {
 
     public static final int WRONG_BINARY_CODE = -1;
 
+    public static final Integer[][] BINARY_MATRIX_UNDEFINED_CHARACTER = new Integer[][]{
+            new Integer[]{ONE, ONE, ONE},
+            new Integer[]{ONE, ZERO, ONE},
+            new Integer[]{ONE, ONE, ONE}
+    };
+
     public static IMultilineString<IToken<DigitToken.TokenType>> generateDigitTokenNumberOneMatrix() {
         IMultilineString<IToken<DigitToken.TokenType>> multilineString = new MultilineString<>(MATRIX_WIDTH_3);
         DigitToken[] digitTokens = new DigitToken[]{
