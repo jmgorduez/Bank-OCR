@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.BINARY_MATRIX_UNDEFINED_CHARACTER;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.UNDEFINED_CHARACTER_VALUE;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class UndefinedCharacterTest {
 
-    private final static String UNDEFINED_CHARACTER_VALUE = "?";
     private UndefinedCharacter undefinedCharacterUnderTest;
 
     @BeforeAll
