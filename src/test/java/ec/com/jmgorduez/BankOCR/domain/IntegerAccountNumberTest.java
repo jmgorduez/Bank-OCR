@@ -54,7 +54,7 @@ class IntegerAccountNumberTest {
 
     @Test
     @DisplayName("It should return the characters of a account number.")
-    void getCharacters(){
+    void getCharacters() {
         assertThat(integerAccountNumberUnderTest.getCharacters())
                 .isEqualTo(CHARACTERS_ACCOUNT_NUMBER_111111111);
         assertThat(integerAccountNumberUnderTest.getCharacters())
@@ -66,6 +66,10 @@ class IntegerAccountNumberTest {
     void isRightAccountNumber() {
         assertThat(integerAccountNumberUnderTest.isIllegibleAccountNumber())
                 .isFalse();
+        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
+                CHARACTERS_ACCOUNT_NUMBER_49006771_);
+        assertThat(integerAccountNumberUnderTest.isIllegibleAccountNumber())
+                .isTrue();
     }
 
     @Test
