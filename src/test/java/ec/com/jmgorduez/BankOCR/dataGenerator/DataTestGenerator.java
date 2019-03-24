@@ -46,6 +46,9 @@ public class DataTestGenerator {
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
                                         CHARACTERS_ACCOUNT_NUMBER_111111111);
 
+    public static final Integer CHECK_SUM_111111111 = 1;
+    public static final Integer CHECK_SUM_123456789 = 10;
+
     public static final int MATRIX_HEIGHT_3 = 3;
     public static final int MATRIX_MODULE = MATRIX_HEIGHT_3 * MATRIX_WIDTH_3;
 

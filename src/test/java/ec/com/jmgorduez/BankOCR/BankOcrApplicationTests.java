@@ -14,8 +14,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.STRING_ACCOUNT_NUMBER_111111111;
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.STRING_ACCOUNT_NUMBER_123456789;
+import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -41,7 +41,7 @@ public class BankOcrApplicationTests {
     @DisplayName("It should read 1111111111")
     void readAccountNumber111111111() {
         try {
-            assertThat(readAccountNumber(FILE_PATH_111111111))
+            assertThat(readAccountNumber(FILE_PATH_111111111).getValue())
                     .isEqualTo(STRING_ACCOUNT_NUMBER_111111111);
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,25 +52,46 @@ public class BankOcrApplicationTests {
     @DisplayName("It should read 123456789")
     void readAccountNumber123456789() {
         try {
-            assertThat(readAccountNumber(FILE_PATH_123456789))
+            assertThat(readAccountNumber(FILE_PATH_123456789).getValue())
                     .isEqualTo(STRING_ACCOUNT_NUMBER_123456789);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private String readAccountNumber(String filePath) throws IOException {
+    private IAccountNumber readAccountNumber(String filePath) throws IOException {
 
         BufferedReader bufferedReader =
                 new BufferedReader(new FileReader(filePath));
 
-        IAccountNumber accountNumber = accountNumberReader
+        return accountNumberReader
                 .readAccountNumber(bufferedReader,
                         lineReader,
                         multilineCharacterReader,
                         multilineStringReader);
-        return accountNumber.getValue();
 
+    }
+
+    @Test
+    @DisplayName("It should verify check sum of 1111111111")
+    void verifyCheckSumAccountNumber111111111() {
+        try {
+            assertThat(readAccountNumber(FILE_PATH_111111111).calculateCheckSum())
+                    .isEqualTo(CHECK_SUM_111111111);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @DisplayName("It should verify check sum of 123456789")
+    void verifyCheckSumAccountNumber123456789() {
+        try {
+            assertThat(readAccountNumber(FILE_PATH_123456789).calculateCheckSum())
+                    .isEqualTo(CHECK_SUM_123456789);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
