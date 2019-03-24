@@ -12,12 +12,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static ec.com.jmgorduez.BankOCR.utils.Constants.BLANK_SPACE_STRING;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
 
 public class BankOcrApplication {
 
     //private static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\input.txt";
     private static final String FILE_PATH = "/home/jm/projects/java/Bank-OCR/inputFiles/input.txt";
+    private static final String STRING_ILL = "ILL";
+    private static final String STRING_ERR = "ERR";
     private static IMultilineStringReader multilineStringReader =
             new MultilineDigitStringReader(STRING_LENGTH);
     private static ILineReader<DigitToken.TokenType> lineReader
@@ -37,7 +40,16 @@ public class BankOcrApplication {
                                 lineReader,
                                 multilineCharacterReader,
                                 multilineStringReader);
-                System.out.println(accountNumber.getValue());
+                StringBuilder stringBuilder =
+                        new StringBuilder(accountNumber.getValue());
+                stringBuilder.append(BLANK_SPACE_STRING);
+                if (accountNumber.isIllegibleAccountNumber()){
+                    stringBuilder.append(STRING_ILL);
+                }
+                if(accountNumber.isRightAccountNumber()){
+                    stringBuilder.append(STRING_ERR);
+                }
+                System.out.println(stringBuilder);
             } while (true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
