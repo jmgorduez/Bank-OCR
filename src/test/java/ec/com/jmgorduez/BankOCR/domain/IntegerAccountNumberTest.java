@@ -64,7 +64,12 @@ class IntegerAccountNumberTest {
     @Test
     @DisplayName("It should return true if is a right account number.")
     void isRightAccountNumber() {
-
+        assertThat(integerAccountNumberUnderTest.isRightAccountNumber())
+                .isFalse();
+        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
+                CHARACTERS_ACCOUNT_NUMBER_123456789);
+        assertThat(integerAccountNumberUnderTest.isIllegibleAccountNumber())
+                .isTrue();
     }
 
     @Test
