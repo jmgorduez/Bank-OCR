@@ -21,9 +21,9 @@ public class IntegerAccountNumberReader implements IAccountNumberReader<DigitTok
                 multilineStringReader.readMultilineString(bufferedReader, lineReader, charaterReader);
         List<Integer> integerCharacters = new ArrayList<>();
         String accountNumber =
-                characters.stream().map(character -> {
-                    integerCharacters.add(character.getValue());
-                    return String.valueOf(character.getValue());
+                characters.stream().map(digit -> {
+                    integerCharacters.add(digit.getValue());
+                    return digit.getStringValue();
                 }).collect(Collectors.joining());
 
         return new IntegerAccountNumber(accountNumber,
