@@ -26,16 +26,26 @@ public class IntegerAccountNumber implements IAccountNumber {
     public Integer calculateCheckSum() {
         Integer checkSum = Stream.iterate(ONE, index -> index + ONE).limit(characters.length)
                 .mapToInt(index -> {
-                    Integer digit = characters[index -ONE];
+                    Integer digit = characters[characters.length - index];
                     return index*digit;
                 })
                 .sum();
-        return checkSum%ELEVEN;
+        return checkSum;
     }
 
     @Override
     public Integer[] getCharacters() {
         return this.characters;
+    }
+
+    @Override
+    public Boolean isRightAccountNumber() {
+        return null;
+    }
+
+    @Override
+    public Boolean isIllegibleAccountNumber() {
+        return null;
     }
 
     @Override

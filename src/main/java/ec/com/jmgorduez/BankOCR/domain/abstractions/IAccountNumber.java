@@ -4,4 +4,6 @@ public interface IAccountNumber {
     String getValue();
     Integer calculateCheckSum();
     Integer[] getCharacters();
+    Boolean isRightAccountNumber();
+    Boolean isIllegibleAccountNumber();
 }
