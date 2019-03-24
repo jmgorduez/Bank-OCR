@@ -38,7 +38,7 @@ class IntegerAccountNumberReaderTest {
             when(multilineString000000000ReaderMock.readMultilineString(any(), any(), any()))
                     .thenReturn(generateListSameDigits(ZERO));
             when(multilineString49006771_ReaderMock.readMultilineString(any(), any(), any()))
-                    .thenReturn(generateListSameDigits(ZERO));
+                    .thenReturn(generateCharactersListOf49006771_());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +58,7 @@ class IntegerAccountNumberReaderTest {
                     .isEqualTo(ACCOUNT_NUMBER_000000000);
             assertThat(integerAccountNumberReaderUnderTest
                     .readAccountNumber(any(), any(), any(),
-                            multilineString000000000ReaderMock))
+                            multilineString49006771_ReaderMock))
                     .isEqualTo(ACCOUNT_NUMBER_49006771_);
         } catch (IOException e) {
             e.printStackTrace();
