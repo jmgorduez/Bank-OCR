@@ -25,6 +25,8 @@ class IntegerAccountNumberReaderTest {
     private IMultilineStringReader<Integer, DigitToken.TokenType> multilineString111111111ReaderMock;
     @Mock
     private IMultilineStringReader<Integer, DigitToken.TokenType> multilineString000000000ReaderMock;
+    @Mock
+    private IMultilineStringReader<Integer, DigitToken.TokenType> multilineString49006771_ReaderMock;
 
     @BeforeEach
     void setUp() {
@@ -34,6 +36,8 @@ class IntegerAccountNumberReaderTest {
             when(multilineString111111111ReaderMock.readMultilineString(any(), any(), any()))
                     .thenReturn(generateListSameDigits(ONE));
             when(multilineString000000000ReaderMock.readMultilineString(any(), any(), any()))
+                    .thenReturn(generateListSameDigits(ZERO));
+            when(multilineString49006771_ReaderMock.readMultilineString(any(), any(), any()))
                     .thenReturn(generateListSameDigits(ZERO));
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,6 +56,10 @@ class IntegerAccountNumberReaderTest {
                     .readAccountNumber(any(), any(), any(),
                             multilineString000000000ReaderMock))
                     .isEqualTo(ACCOUNT_NUMBER_000000000);
+            assertThat(integerAccountNumberReaderUnderTest
+                    .readAccountNumber(any(), any(), any(),
+                            multilineString000000000ReaderMock))
+                    .isEqualTo(ACCOUNT_NUMBER_49006771_);
         } catch (IOException e) {
             e.printStackTrace();
         }
