@@ -56,6 +56,9 @@ public class DataTestGenerator {
     public static final Integer CHECK_SUM_123456789 = 165;
     public static final Integer CHECK_SUM_345882865 = 231;
 
+    public static final String STRING_ILL = "ILL";
+    public static final String STRING_ERR = "ERR";
+
     public static final int MATRIX_HEIGHT_3 = 3;
     public static final int MATRIX_MODULE = MATRIX_HEIGHT_3 * MATRIX_WIDTH_3;
 

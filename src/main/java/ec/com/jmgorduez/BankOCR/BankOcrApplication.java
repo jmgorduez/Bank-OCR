@@ -19,8 +19,7 @@ public class BankOcrApplication {
 
     //private static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\input.txt";
     private static final String FILE_PATH = "/home/jm/projects/java/Bank-OCR/inputFiles/input.txt";
-    private static final String STRING_ILL = "ILL";
-    private static final String STRING_ERR = "ERR";
+
     private static IMultilineStringReader multilineStringReader =
             new MultilineDigitStringReader(STRING_LENGTH);
     private static ILineReader<DigitToken.TokenType> lineReader
@@ -40,16 +39,7 @@ public class BankOcrApplication {
                                 lineReader,
                                 multilineCharacterReader,
                                 multilineStringReader);
-                StringBuilder stringBuilder =
-                        new StringBuilder(accountNumber.getValue());
-                stringBuilder.append(BLANK_SPACE_STRING);
-                if (accountNumber.isIllegibleAccountNumber()){
-                    stringBuilder.append(STRING_ILL);
-                }
-                if(accountNumber.isRightAccountNumber()){
-                    stringBuilder.append(STRING_ERR);
-                }
-                System.out.println(stringBuilder);
+                System.out.println(classifyAccountNumber(accountNumber));
             } while (true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -59,6 +49,10 @@ public class BankOcrApplication {
         catch (UnsupportedOperationException e) {
             System.out.println("----------------THE END OF THE FILE-----------------");
         }
+    }
+
+    public static String classifyAccountNumber(IAccountNumber accountNumber){
+        return null;
     }
 
 }

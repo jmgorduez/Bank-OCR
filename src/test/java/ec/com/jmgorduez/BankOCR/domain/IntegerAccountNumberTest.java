@@ -70,6 +70,10 @@ class IntegerAccountNumberTest {
                 CHARACTERS_ACCOUNT_NUMBER_123456789);
         assertThat(integerAccountNumberUnderTest.isRightAccountNumber())
                 .isTrue();
+        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_000000000,
+                CHARACTERS_ACCOUNT_NUMBER_000000000);
+        assertThat(integerAccountNumberUnderTest.isRightAccountNumber())
+                .isTrue();
     }
 
     @Test
