@@ -41,11 +41,11 @@ class IntegerAccountNumberTest {
     @DisplayName("It should calculate the checksum of account number.")
     void calculateCheckSum() {
         assertThat(integerAccountNumberUnderTest.calculateCheckSum())
-                .isEqualTo(ONE);
+                .isEqualTo(CHECK_SUM_111111111);
         integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
                 CHARACTERS_ACCOUNT_NUMBER_123456789);
         assertThat(integerAccountNumberUnderTest.calculateCheckSum())
-                .isEqualTo(TEN);
+                .isEqualTo(CHECK_SUM_123456789);
     }
 
     @Test
