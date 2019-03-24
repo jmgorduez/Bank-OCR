@@ -284,7 +284,7 @@ public class DataTestGenerator {
         multilineString.add(Arrays.asList(digitTokens));
         digitTokens = new DigitToken[]{
                 new DigitToken(BLANK_SPACE),
-                new DigitToken(BLANK_SPACE),
+                new DigitToken(UNDERSCORE),
                 new DigitToken(PIPE)
         };
         multilineString.add(Arrays.asList(digitTokens));
