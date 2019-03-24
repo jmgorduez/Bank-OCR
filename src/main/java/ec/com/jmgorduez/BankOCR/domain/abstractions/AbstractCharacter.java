@@ -12,7 +12,8 @@ public abstract class AbstractCharacter<CHARACTER_TYPE> implements ICharacter<CH
     protected CHARACTER_TYPE value;
     protected Integer[][] binaryMatrix;
 
-    public AbstractCharacter(Integer[][] binaryMatrix){
+    public AbstractCharacter(CHARACTER_TYPE value, Integer[][] binaryMatrix){
+        this.value = value;
         this.binaryMatrix = binaryMatrix;
     }
 
@@ -23,7 +24,6 @@ public abstract class AbstractCharacter<CHARACTER_TYPE> implements ICharacter<CH
 
     @Override
     public int getBinaryCode() {
-
         return binaryMatrixToBinaryCode(binaryMatrix);
     }
 

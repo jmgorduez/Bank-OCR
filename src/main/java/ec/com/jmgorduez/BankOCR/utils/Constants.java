@@ -87,5 +87,6 @@ public class Constants {
 
     public static final int STRING_LENGTH = 9;
 
-    public static final String UNDEFINED_CHARACTER_VALUE = "?";
+    public static final Integer UNDEFINED_CHARACTER_VALUE = -1;
+    public static final String UNDEFINED_CHARACTER_VALUE_STRING = "?";
 }

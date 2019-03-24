@@ -12,8 +12,7 @@ public class Digit extends AbstractCharacter<Integer> {
     private static final HashMap<Integer, Integer> binaryCodesForDigits = generateBinaryCodesForDigits();
 
     public Digit(Integer value) {
-        super(binaryMatricesForDigits.get(value));
-        this.value = value;
+        super(value, binaryMatricesForDigits.get(value));
     }
 
     public boolean equals(Object other) {
@@ -85,4 +84,8 @@ public class Digit extends AbstractCharacter<Integer> {
         return new Digit(successorValue);
     }
 
+    @Override
+    public String getValueString() {
+        return null;
+    }
 }

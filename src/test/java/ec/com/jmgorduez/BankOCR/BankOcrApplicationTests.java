@@ -24,6 +24,7 @@ public class BankOcrApplicationTests {
     //private static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\input.txt";
     private static final String FILE_PATH_111111111 = "/home/jm/projects/java/Bank-OCR/inputFiles/input111111111.txt";
     private static final String FILE_PATH_123456789 = "/home/jm/projects/java/Bank-OCR/inputFiles/input123456789.txt";
+    private static final String FILE_PATH_49006771_ = "/home/jm/projects/java/Bank-OCR/inputFiles/input49006771_.txt";
     private IMultilineStringReader multilineStringReader;
     private ILineReader<DigitToken.TokenType> lineReader;
     private IMultilineCharacterReader<Integer, DigitToken.TokenType> multilineCharacterReader;
@@ -54,6 +55,17 @@ public class BankOcrApplicationTests {
         try {
             assertThat(readAccountNumber(FILE_PATH_123456789).getValue())
                     .isEqualTo(STRING_ACCOUNT_NUMBER_123456789);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @DisplayName("It should read 49006771?")
+    void readAccountNumber49006771_() {
+        try {
+            assertThat(readAccountNumber(FILE_PATH_49006771_).getValue())
+                    .isEqualTo(STRING_ACCOUNT_NUMBER_49006771_);
         } catch (IOException e) {
             e.printStackTrace();
         }

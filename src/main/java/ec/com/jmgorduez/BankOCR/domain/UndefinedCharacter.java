@@ -4,14 +4,14 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.AbstractCharacter;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.UNDEFINED_CHARACTER_VALUE;
 
-public class UndefinedCharacter extends AbstractCharacter<String> {
+public class UndefinedCharacter extends AbstractCharacter<Integer> {
 
-    public UndefinedCharacter(Integer[][] binaryMatrix){
-        super(binaryMatrix);
+    public UndefinedCharacter(Integer[][] binaryMatrix) {
+        super(UNDEFINED_CHARACTER_VALUE, binaryMatrix);
     }
 
     @Override
-    public String getValue() {
-        return UNDEFINED_CHARACTER_VALUE;
+    public String getValueString() {
+        return null;
     }
 }

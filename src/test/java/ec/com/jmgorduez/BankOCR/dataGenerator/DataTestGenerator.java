@@ -1,12 +1,9 @@
 package ec.com.jmgorduez.BankOCR.dataGenerator;
 
-import ec.com.jmgorduez.BankOCR.domain.IntegerAccountNumber;
-import ec.com.jmgorduez.BankOCR.domain.Digit;
+import ec.com.jmgorduez.BankOCR.domain.*;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
-import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import ec.com.jmgorduez.BankOCR.domain.MultilineString;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
 
 import java.util.ArrayList;
@@ -31,6 +28,7 @@ public class DataTestGenerator {
     public static final String STRING_ACCOUNT_NUMBER_000000000 = "000000000";
     public static final String STRING_ACCOUNT_NUMBER_111111111 = "111111111";
     public static final String STRING_ACCOUNT_NUMBER_123456789 = "123456789";
+    public static final String STRING_ACCOUNT_NUMBER_49006771_ = "49006771?";
 
     public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_000000000
             = new Integer[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -38,6 +36,8 @@ public class DataTestGenerator {
             = new Integer[]{1, 1, 1, 1, 1, 1, 1, 1, 1};
     public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_123456789
             = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_49006771_
+            = new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1};
 
     public static final IAccountNumber ACCOUNT_NUMBER_000000000
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_000000000,
@@ -45,6 +45,9 @@ public class DataTestGenerator {
     public static final IAccountNumber ACCOUNT_NUMBER_111111111
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
                                         CHARACTERS_ACCOUNT_NUMBER_111111111);
+    public static final IAccountNumber ACCOUNT_NUMBER_49006771_
+            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
+            CHARACTERS_ACCOUNT_NUMBER_49006771_);
 
     public static final Integer CHECK_SUM_111111111 = 1;
     public static final Integer CHECK_SUM_123456789 = 10;
@@ -338,6 +341,17 @@ public class DataTestGenerator {
         Stream<Digit> stream = Stream.generate(
                 () -> new Digit(new Integer(integerDigit))).limit(NINE);
         return stream.collect(Collectors.toList());
+    }
+
+    public static List<ICharacter<Integer>> generateCharactersListOf49006771_() {
+        List<ICharacter<Integer>> charactersList = Arrays.stream(ACCOUNT_NUMBER_49006771_.getCharacters())
+                .map(integer -> {
+                    if(integer.equals(UNDEFINED_CHARACTER_VALUE)){
+                        return new UndefinedCharacter(new Integer[][]{});
+                    }
+                    return new Digit(integer);
+                }).collect(Collectors.toList());
+        return charactersList;
     }
 
     public static List<List<IToken<DigitToken.TokenType>>> generateThreeRowsWithTwentySevenTokensThatRepresentsDigitOneMutilineString() {
