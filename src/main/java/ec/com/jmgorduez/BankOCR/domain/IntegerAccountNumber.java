@@ -2,6 +2,7 @@ package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.NINE;
@@ -45,6 +46,7 @@ public class IntegerAccountNumber implements IAccountNumber {
             return false;
         }
         return ((IntegerAccountNumber) other).value.equals(this.value)
-                && ((IntegerAccountNumber) other).getCharacters().equals(this.getCharacters());
+                && Arrays.equals(((IntegerAccountNumber) other).getCharacters(),
+                                                        this.getCharacters());
     }
 }
