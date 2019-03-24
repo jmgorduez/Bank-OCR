@@ -198,4 +198,11 @@ class DigitTest {
             digitUnderTest.successor();
         }).isInstanceOf(UnsupportedOperationException.class);
     }
+
+    @Test
+    @DisplayName("It should return the string value of a digit.")
+    void getStringValue(){
+        assertThat(digitUnderTest.getStringValue())
+                .isEqualTo(ONE.toString());
+    }
 }
