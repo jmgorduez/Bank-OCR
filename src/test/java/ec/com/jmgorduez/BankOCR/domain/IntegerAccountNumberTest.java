@@ -1,11 +1,12 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
+import ec.com.jmgorduez.BankOCR.utils.Constants;
 import org.junit.jupiter.api.*;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
-import static java.math.BigInteger.TEN;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.TEN;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)

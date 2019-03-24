@@ -5,8 +5,7 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static ec.com.jmgorduez.BankOCR.utils.Constants.NINE;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 public class IntegerAccountNumber implements IAccountNumber {
 
@@ -25,11 +24,13 @@ public class IntegerAccountNumber implements IAccountNumber {
 
     @Override
     public Integer calculateCheckSum() {
-        Stream.iterate(ONE, index -> index + ONE).limit(NINE)
+        Integer checkSum = Stream.iterate(ONE, index -> index + ONE).limit(characters.length)
                 .mapToInt(index -> {
-                    return value.toCharArray()[index - 1];
-                });
-        return null;
+                    Integer digit = characters[index -ONE];
+                    return index*digit;
+                })
+                .sum();
+        return checkSum%ELEVEN;
     }
 
     @Override

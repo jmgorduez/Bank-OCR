@@ -15,6 +15,8 @@ public class Constants {
     public static final Integer EIGHT = 8;
     public static final Integer NINE = 9;
     public static final Integer ZERO = 0;
+    public static final Integer TEN = 10;
+    public static final Integer ELEVEN = 11;
 
     public static final Integer[][] BINARY_MATRIX_ONE = new Integer[][]{
             new Integer[]{ZERO, ZERO, ZERO},
