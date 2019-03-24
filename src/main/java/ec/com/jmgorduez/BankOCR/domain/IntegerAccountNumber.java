@@ -45,7 +45,10 @@ public class IntegerAccountNumber implements IAccountNumber {
 
     @Override
     public Boolean isIllegibleAccountNumber() {
-        return null;
+        Integer quantityOfIllegibleCharactes = Arrays.stream(characters).mapToInt(integer -> {
+            return integer.equals(UNDEFINED_CHARACTER_VALUE) ? ONE : ZERO;
+        }).sum();
+        return quantityOfIllegibleCharactes > 0;
     }
 
     @Override
