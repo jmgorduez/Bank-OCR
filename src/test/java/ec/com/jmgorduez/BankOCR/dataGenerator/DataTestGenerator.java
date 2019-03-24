@@ -24,18 +24,27 @@ public class DataTestGenerator {
     public static final String NULL_STRING = null;
     public static final String EMPTY_STRING = "";
 
-    public static final String BLANK_SPACE_STRING_27    = "                           ";
-    public static final String PIPE_STRING_27           = "|||||||||||||||||||||||||||";
-    public static final String UNDER_SCORE_STRING_27    = "___________________________";
+    public static final String BLANK_SPACE_STRING_27 = "                           ";
+    public static final String PIPE_STRING_27 = "|||||||||||||||||||||||||||";
+    public static final String UNDER_SCORE_STRING_27 = "___________________________";
 
     public static final String STRING_ACCOUNT_NUMBER_000000000 = "000000000";
     public static final String STRING_ACCOUNT_NUMBER_111111111 = "111111111";
     public static final String STRING_ACCOUNT_NUMBER_123456789 = "123456789";
 
+    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_000000000
+            = new Integer[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_111111111
+            = new Integer[]{1, 1, 1, 1, 1, 1, 1, 1, 1};
+    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_123456789
+            = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+
     public static final IAccountNumber ACCOUNT_NUMBER_000000000
-            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_000000000);
+            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_000000000,
+                                        CHARACTERS_ACCOUNT_NUMBER_000000000);
     public static final IAccountNumber ACCOUNT_NUMBER_111111111
-            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111);
+            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
+                                        CHARACTERS_ACCOUNT_NUMBER_111111111);
 
     public static final int MATRIX_HEIGHT_3 = 3;
     public static final int MATRIX_MODULE = MATRIX_HEIGHT_3 * MATRIX_WIDTH_3;
@@ -323,7 +332,7 @@ public class DataTestGenerator {
     }
 
     public static List<ICharacter<Integer>> generateListSameDigits(Integer integerDigit) {
-      Stream<Digit> stream = Stream.generate(
+        Stream<Digit> stream = Stream.generate(
                 () -> new Digit(new Integer(integerDigit))).limit(NINE);
         return stream.collect(Collectors.toList());
     }

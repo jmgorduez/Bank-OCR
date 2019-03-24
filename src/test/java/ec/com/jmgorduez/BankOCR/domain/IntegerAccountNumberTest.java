@@ -15,7 +15,8 @@ class IntegerAccountNumberTest {
 
     @BeforeEach
     void setUp() {
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111);
+        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
+                CHARACTERS_ACCOUNT_NUMBER_111111111);
     }
 
     @Test
@@ -37,11 +38,21 @@ class IntegerAccountNumberTest {
 
     @Test
     @DisplayName("It should calculate the checksum of account number.")
-    void calculateCheckSum(){
+    void calculateCheckSum() {
         assertThat(integerAccountNumberUnderTest.calculateCheckSum())
                 .isEqualTo(ONE);
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789);
+        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
+                CHARACTERS_ACCOUNT_NUMBER_123456789);
         assertThat(integerAccountNumberUnderTest.calculateCheckSum())
                 .isEqualTo(TEN);
+    }
+
+    @Test
+    @DisplayName("It should return the characters of a account number.")
+    void getCharacters(){
+        assertThat(integerAccountNumberUnderTest.getCharacters())
+                .isEqualTo(CHARACTERS_ACCOUNT_NUMBER_111111111);
+        assertThat(integerAccountNumberUnderTest.getCharacters())
+                .isNotEqualTo(CHARACTERS_ACCOUNT_NUMBER_000000000);
     }
 }

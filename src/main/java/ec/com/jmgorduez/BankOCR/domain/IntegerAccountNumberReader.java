@@ -20,6 +20,6 @@ public class IntegerAccountNumberReader implements IAccountNumberReader<DigitTok
                 characters.stream().map(character -> {
                     return String.valueOf(character.getValue());
                 }).collect(Collectors.joining());
-        return new IntegerAccountNumber(accountNumber);
+        return new IntegerAccountNumber(accountNumber, null);
     }
 }
