@@ -68,7 +68,7 @@ class IntegerAccountNumberTest {
                 .isFalse();
         integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
                 CHARACTERS_ACCOUNT_NUMBER_123456789);
-        assertThat(integerAccountNumberUnderTest.isIllegibleAccountNumber())
+        assertThat(integerAccountNumberUnderTest.isRightAccountNumber())
                 .isTrue();
     }
 
