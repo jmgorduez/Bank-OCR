@@ -28,6 +28,7 @@ public class DataTestGenerator {
     public static final String STRING_ACCOUNT_NUMBER_000000000 = "000000000";
     public static final String STRING_ACCOUNT_NUMBER_111111111 = "111111111";
     public static final String STRING_ACCOUNT_NUMBER_123456789 = "123456789";
+    public static final String STRING_ACCOUNT_NUMBER_345882865 = "345882865";
     public static final String STRING_ACCOUNT_NUMBER_49006771_ = "49006771?";
 
     public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_000000000
@@ -38,19 +39,22 @@ public class DataTestGenerator {
             = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
     public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_49006771_
             = new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1};
+    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_345882865
+            = new Integer[]{3, 4, 5, 8, 8, 2, 8, 6, 5};
 
     public static final IAccountNumber ACCOUNT_NUMBER_000000000
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_000000000,
-                                        CHARACTERS_ACCOUNT_NUMBER_000000000);
+            CHARACTERS_ACCOUNT_NUMBER_000000000);
     public static final IAccountNumber ACCOUNT_NUMBER_111111111
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
-                                        CHARACTERS_ACCOUNT_NUMBER_111111111);
+            CHARACTERS_ACCOUNT_NUMBER_111111111);
     public static final IAccountNumber ACCOUNT_NUMBER_49006771_
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
             CHARACTERS_ACCOUNT_NUMBER_49006771_);
 
-    public static final Integer CHECK_SUM_111111111 = 1;
-    public static final Integer CHECK_SUM_123456789 = 10;
+    public static final Integer CHECK_SUM_111111111 = 45;
+    public static final Integer CHECK_SUM_123456789 = 165;
+    public static final Integer CHECK_SUM_345882865 = 231;
 
     public static final int MATRIX_HEIGHT_3 = 3;
     public static final int MATRIX_MODULE = MATRIX_HEIGHT_3 * MATRIX_WIDTH_3;
@@ -346,7 +350,7 @@ public class DataTestGenerator {
     public static List<ICharacter<Integer>> generateCharactersListOf49006771_() {
         List<ICharacter<Integer>> charactersList = Arrays.stream(ACCOUNT_NUMBER_49006771_.getCharacters())
                 .map(integer -> {
-                    if(integer.equals(UNDEFINED_CHARACTER_VALUE)){
+                    if (integer.equals(UNDEFINED_CHARACTER_VALUE)) {
                         return new UndefinedCharacter(new Integer[][]{});
                     }
                     return new Digit(integer);
