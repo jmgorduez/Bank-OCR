@@ -110,31 +110,22 @@ public class BankOcrApplicationTests {
     void classifyAccountNumber(){
         IAccountNumber accountNumber = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
                 CHARACTERS_ACCOUNT_NUMBER_49006771_);
-        StringBuilder stringBuilder = classifyAccountNumber(accountNumber);
+        StringBuilder stringBuilder
+                = new StringBuilder(accountNumber.getValue());
+        stringBuilder.append(BLANK_SPACE_STRING).append(STRING_ILL);
         assertThat(BankOcrApplication.classifyAccountNumber(accountNumber))
                 .isEqualTo(stringBuilder.toString());
         accountNumber = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
                 CHARACTERS_ACCOUNT_NUMBER_111111111);
-        stringBuilder = classifyAccountNumber(accountNumber);
+        stringBuilder
+                = new StringBuilder(accountNumber.getValue());
+        stringBuilder.append(BLANK_SPACE_STRING).append(STRING_ERR);
         assertThat(BankOcrApplication.classifyAccountNumber(accountNumber))
                 .isEqualTo(stringBuilder.toString());
         accountNumber = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
                 CHARACTERS_ACCOUNT_NUMBER_123456789);
-        stringBuilder = classifyAccountNumber(accountNumber);
         assertThat(BankOcrApplication.classifyAccountNumber(accountNumber))
-                .isEqualTo(stringBuilder.toString());
-    }
-
-    private StringBuilder classifyAccountNumber(IAccountNumber accountNumber){
-        StringBuilder stringBuilder
-                = new StringBuilder(accountNumber.getValue());
-        stringBuilder.append(BLANK_SPACE_STRING);
-        if (accountNumber.isIllegibleAccountNumber()){
-            stringBuilder.append(STRING_ILL);
-        } else if(!accountNumber.isRightAccountNumber()){
-            stringBuilder.append(STRING_ERR);
-        }
-        return stringBuilder;
+                .isEqualTo(accountNumber.getValue());
     }
 
 }

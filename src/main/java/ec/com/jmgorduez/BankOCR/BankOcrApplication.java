@@ -12,8 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static ec.com.jmgorduez.BankOCR.utils.Constants.BLANK_SPACE_STRING;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 public class BankOcrApplication {
 
@@ -52,7 +51,14 @@ public class BankOcrApplication {
     }
 
     public static String classifyAccountNumber(IAccountNumber accountNumber){
-        return null;
+        StringBuilder stringBuilder
+                = new StringBuilder(accountNumber.getValue());
+        if (accountNumber.isIllegibleAccountNumber()){
+            stringBuilder.append(BLANK_SPACE_STRING).append(STRING_ILL);
+        } else if(!accountNumber.isRightAccountNumber()){
+            stringBuilder.append(BLANK_SPACE_STRING).append(STRING_ERR);
+        }
+        return stringBuilder.toString();
     }
 
 }
