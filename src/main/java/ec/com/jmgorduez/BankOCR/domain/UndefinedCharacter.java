@@ -2,6 +2,7 @@ package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.AbstractCharacter;
 
+import static ec.com.jmgorduez.BankOCR.utils.Constants.UNDEFINED_CHARACTER_STRING_VALUE;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.UNDEFINED_CHARACTER_VALUE;
 
 public class UndefinedCharacter extends AbstractCharacter<Integer> {
@@ -11,7 +12,7 @@ public class UndefinedCharacter extends AbstractCharacter<Integer> {
     }
 
     @Override
-    public String getValueString() {
-        return null;
+    public String getStringValue() {
+        return UNDEFINED_CHARACTER_STRING_VALUE;
     }
 }
