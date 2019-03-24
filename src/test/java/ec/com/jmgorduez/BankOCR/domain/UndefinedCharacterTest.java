@@ -8,6 +8,7 @@ import org.junit.jupiter.api.TestInstance;
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.WRONG_BINARY_CODE;
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.WRONG_BINARY_MATRIX;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.UNDEFINED_CHARACTER_VALUE;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.UNDEFINED_CHARACTER_STRING_VALUE;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
@@ -33,5 +34,12 @@ class UndefinedCharacterTest {
     void getBinaryCode() {
         assertThat(undefinedCharacterUnderTest.getBinaryCode())
                 .isEqualTo(WRONG_BINARY_CODE);
+    }
+
+    @Test
+    @DisplayName("It should return ? like string value of a undefined char.")
+    void getStringValue(){
+        assertThat(undefinedCharacterUnderTest.getStringValue())
+                .isEqualTo(UNDEFINED_CHARACTER_STRING_VALUE);
     }
 }
