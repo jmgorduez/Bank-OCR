@@ -27,7 +27,7 @@ public class IntegerAccountNumber implements IAccountNumber {
         Integer checkSum = Stream.iterate(ONE, index -> index + ONE).limit(characters.length)
                 .mapToInt(index -> {
                     Integer digit = characters[characters.length - index];
-                    return index*digit;
+                    return index * digit;
                 })
                 .sum();
         return checkSum;
@@ -40,7 +40,7 @@ public class IntegerAccountNumber implements IAccountNumber {
 
     @Override
     public Boolean isRightAccountNumber() {
-        return null;
+        return calculateCheckSum() % ELEVEN == ZERO;
     }
 
     @Override
@@ -61,6 +61,6 @@ public class IntegerAccountNumber implements IAccountNumber {
         }
         return ((IntegerAccountNumber) other).value.equals(this.value)
                 && Arrays.equals(((IntegerAccountNumber) other).getCharacters(),
-                                                        this.getCharacters());
+                this.getCharacters());
     }
 }
