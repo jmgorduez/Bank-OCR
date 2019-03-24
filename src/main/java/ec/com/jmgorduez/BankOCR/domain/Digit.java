@@ -85,7 +85,7 @@ public class Digit extends AbstractCharacter<Integer> {
     }
 
     @Override
-    public String getValueString() {
-        return null;
+    public String getStringValue() {
+        return value.toString();
     }
 }
