@@ -1,5 +1,6 @@
-package ec.com.jmgorduez.BankOCR.domain;
+package ec.com.jmgorduez.BankOCR.domain.readers;
 
+import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ILineReader;
 

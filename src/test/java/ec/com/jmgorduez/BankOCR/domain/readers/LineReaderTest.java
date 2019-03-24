@@ -1,4 +1,4 @@
-package ec.com.jmgorduez.BankOCR.domain;
+package ec.com.jmgorduez.BankOCR.domain.readers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

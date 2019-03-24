@@ -2,6 +2,10 @@ package ec.com.jmgorduez.BankOCR;
 
 import ec.com.jmgorduez.BankOCR.domain.*;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.*;
+import ec.com.jmgorduez.BankOCR.domain.readers.IntegerAccountNumberReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.LineReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitStringReader;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

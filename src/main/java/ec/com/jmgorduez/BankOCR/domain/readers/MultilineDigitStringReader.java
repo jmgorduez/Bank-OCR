@@ -1,5 +1,6 @@
-package ec.com.jmgorduez.BankOCR.domain;
+package ec.com.jmgorduez.BankOCR.domain.readers;
 
+import ec.com.jmgorduez.BankOCR.domain.MultilineString;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineCharacterReader;

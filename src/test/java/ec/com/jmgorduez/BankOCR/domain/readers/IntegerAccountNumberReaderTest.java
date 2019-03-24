@@ -1,7 +1,8 @@
-package ec.com.jmgorduez.BankOCR.domain;
+package ec.com.jmgorduez.BankOCR.domain.readers;
 
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
+import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineStringReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.IntegerAccountNumberReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

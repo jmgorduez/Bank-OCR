@@ -2,12 +2,15 @@ package ec.com.jmgorduez.BankOCR;
 
 import ec.com.jmgorduez.BankOCR.domain.*;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.*;
+import ec.com.jmgorduez.BankOCR.domain.readers.IntegerAccountNumberReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.LineReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitStringReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 

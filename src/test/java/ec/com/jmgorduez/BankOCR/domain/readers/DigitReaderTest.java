@@ -1,6 +1,6 @@
-package ec.com.jmgorduez.BankOCR.domain;
+package ec.com.jmgorduez.BankOCR.domain.readers;
 
-import ec.com.jmgorduez.BankOCR.domain.MultilineDigitReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
