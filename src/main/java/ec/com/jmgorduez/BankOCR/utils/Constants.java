@@ -2,6 +2,11 @@ package ec.com.jmgorduez.BankOCR.utils;
 
 public class Constants {
 
+    public static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\";
+    //public static final String FILE_PATH = "/home/jm/projects/java/Bank-OCR/inputFiles/";
+
+    public static final String EMPTY_STRING = "";
+
     public static final int MATRIX_WIDTH_3 = 3;
     public static final int MATRIX_WIDTH_27 = 27;
 

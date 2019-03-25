@@ -104,28 +104,4 @@ public class BankOcrApplicationTests {
             e.printStackTrace();
         }
     }
-
-    @Test
-    @DisplayName("It should classify a account number in ILL o ERR.")
-    void classifyAccountNumber(){
-        IAccountNumber accountNumber = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
-                CHARACTERS_ACCOUNT_NUMBER_49006771_);
-        StringBuilder stringBuilder
-                = new StringBuilder(accountNumber.getValue());
-        stringBuilder.append(BLANK_SPACE_STRING).append(STRING_ILL);
-        assertThat(BankOcrApplication.classifyAccountNumber(accountNumber))
-                .isEqualTo(stringBuilder.toString());
-        accountNumber = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
-                CHARACTERS_ACCOUNT_NUMBER_111111111);
-        stringBuilder
-                = new StringBuilder(accountNumber.getValue());
-        stringBuilder.append(BLANK_SPACE_STRING).append(STRING_ERR);
-        assertThat(BankOcrApplication.classifyAccountNumber(accountNumber))
-                .isEqualTo(stringBuilder.toString());
-        accountNumber = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
-                CHARACTERS_ACCOUNT_NUMBER_123456789);
-        assertThat(BankOcrApplication.classifyAccountNumber(accountNumber))
-                .isEqualTo(accountNumber.getValue());
-    }
-
 }

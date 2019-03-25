@@ -16,8 +16,7 @@ import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 public class BankOcrApplication {
 
-    //private static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\input.txt";
-    private static final String FILE_PATH = "/home/jm/projects/java/Bank-OCR/inputFiles/input.txt";
+    private static final String FILE_PATH_NAME = FILE_PATH + "input.txt";
 
     private static IMultilineStringReader multilineStringReader =
             new MultilineDigitStringReader(STRING_LENGTH);
@@ -31,14 +30,19 @@ public class BankOcrApplication {
     public static void main(String[] args) {
         try {
             BufferedReader bufferedReader =
-                    new BufferedReader(new FileReader(FILE_PATH));
+                    new BufferedReader(new FileReader(FILE_PATH_NAME));
             do {
                 IAccountNumber accountNumber = accountNumberReader
                         .readAccountNumber(bufferedReader,
                                 lineReader,
                                 multilineCharacterReader,
                                 multilineStringReader);
-                System.out.println(classifyAccountNumber(accountNumber));
+                StringBuilder stringBuilder
+                        = new StringBuilder(accountNumber.getValue());
+                stringBuilder.append(BLANK_SPACE_STRING)
+                        .append(((IntegerAccountNumber.IntegerAccountNumberClassification)
+                                accountNumber.getAccountNumberClassification()).getValue());
+                System.out.println(stringBuilder.toString());
             } while (true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -49,16 +53,4 @@ public class BankOcrApplication {
             System.out.println("----------------THE END OF THE FILE-----------------");
         }
     }
-
-    public static String classifyAccountNumber(IAccountNumber accountNumber){
-        StringBuilder stringBuilder
-                = new StringBuilder(accountNumber.getValue());
-        if (accountNumber.isIllegibleAccountNumber()){
-            stringBuilder.append(BLANK_SPACE_STRING).append(STRING_ILL);
-        } else if(!accountNumber.isRightAccountNumber()){
-            stringBuilder.append(BLANK_SPACE_STRING).append(STRING_ERR);
-        }
-        return stringBuilder.toString();
-    }
-
 }

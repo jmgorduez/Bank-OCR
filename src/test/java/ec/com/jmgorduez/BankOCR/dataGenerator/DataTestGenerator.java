@@ -19,7 +19,6 @@ import static org.mockito.Mockito.mock;
 public class DataTestGenerator {
 
     public static final String NULL_STRING = null;
-    public static final String EMPTY_STRING = "";
 
     public static final String BLANK_SPACE_STRING_27 = "                           ";
     public static final String PIPE_STRING_27 = "|||||||||||||||||||||||||||";

@@ -5,9 +5,26 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static ec.com.jmgorduez.BankOCR.domain.IntegerAccountNumber.IntegerAccountNumberClassification.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 public class IntegerAccountNumber implements IAccountNumber {
+
+    public enum IntegerAccountNumberClassification{
+        RIG(EMPTY_STRING),
+        ERR(STRING_ERR),
+        ILL(STRING_ILL);
+
+        private final String value;
+
+        private IntegerAccountNumberClassification(String value){
+            this.value = value;
+        }
+
+        public String getValue(){
+            return value;
+        }
+    }
 
     private String value;
     private Integer[] characters;
@@ -49,6 +66,17 @@ public class IntegerAccountNumber implements IAccountNumber {
             return integer.equals(UNDEFINED_CHARACTER_VALUE) ? ONE : ZERO;
         }).sum();
         return quantityOfIllegibleCharactes > 0;
+    }
+
+    @Override
+    public IntegerAccountNumberClassification getAccountNumberClassification() {
+        if (isIllegibleAccountNumber()){
+            return ILL;
+        }
+        if(!isRightAccountNumber()){
+            return ERR;
+        }
+        return RIG;
     }
 
     @Override

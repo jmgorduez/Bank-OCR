@@ -6,4 +6,5 @@ public interface IAccountNumber {
     Integer[] getCharacters();
     Boolean isRightAccountNumber();
     Boolean isIllegibleAccountNumber();
+    Enum getAccountNumberClassification();
 }

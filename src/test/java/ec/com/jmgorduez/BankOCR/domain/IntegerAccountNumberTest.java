@@ -1,12 +1,14 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
+import ec.com.jmgorduez.BankOCR.BankOcrApplication;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 import ec.com.jmgorduez.BankOCR.utils.Constants;
 import org.junit.jupiter.api.*;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.TEN;
+import static ec.com.jmgorduez.BankOCR.domain.IntegerAccountNumber.IntegerAccountNumberClassification.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_ERR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
@@ -85,5 +87,20 @@ class IntegerAccountNumberTest {
                 CHARACTERS_ACCOUNT_NUMBER_49006771_);
         assertThat(integerAccountNumberUnderTest.isIllegibleAccountNumber())
                 .isTrue();
+    }
+
+    @Test
+    @DisplayName("It should classify a account number in ILL o ERR.")
+    void getAccountNumberClassification(){
+        assertThat(integerAccountNumberUnderTest.getAccountNumberClassification())
+                .isEqualTo(ERR);
+        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
+                CHARACTERS_ACCOUNT_NUMBER_49006771_);
+        assertThat(integerAccountNumberUnderTest.getAccountNumberClassification())
+                .isEqualTo(ILL);
+        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
+                CHARACTERS_ACCOUNT_NUMBER_123456789);
+        assertThat(integerAccountNumberUnderTest.getAccountNumberClassification())
+                .isEqualTo(RIG);
     }
 }
