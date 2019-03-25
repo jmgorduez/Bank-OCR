@@ -205,4 +205,11 @@ class DigitTest {
         assertThat(digitUnderTest.getStringValue())
                 .isEqualTo(ONE.toString());
     }
+
+    @Test
+    @DisplayName("It should return the list of similar chars.")
+    void getSimilarCharacters(){
+        assertThat(  digitUnderTest.getSimilarCharacters())
+                .isEqualTo(generateListDigitOneSimilarCharacters());
+    }
 }

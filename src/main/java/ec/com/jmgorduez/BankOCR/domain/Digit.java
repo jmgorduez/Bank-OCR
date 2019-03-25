@@ -1,6 +1,7 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.AbstractCharacter;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 
 import java.util.*;
 
@@ -87,5 +88,10 @@ public class Digit extends AbstractCharacter<Integer> {
     @Override
     public String getStringValue() {
         return value.toString();
+    }
+
+    @Override
+    public List<ICharacter<Integer>> getSimilarCharacters() {
+        return null;
     }
 }

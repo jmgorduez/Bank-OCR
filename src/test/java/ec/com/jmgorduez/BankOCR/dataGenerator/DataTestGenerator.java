@@ -403,4 +403,10 @@ public class DataTestGenerator {
         character.add(generateListTokensThirdLineDigitOne());
         return character;
     }
+
+    public static List<ICharacter<Integer>> generateListDigitOneSimilarCharacters(){
+        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+        similarCharacters.add(DIGIT_SEVEN);
+        return similarCharacters;
+    }
 }

@@ -2,7 +2,9 @@ package ec.com.jmgorduez.BankOCR.domain.abstractions;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static ec.com.jmgorduez.BankOCR.utils.MathOperations.bitsArrayToNumberBaseTen;
 import static ec.com.jmgorduez.BankOCR.utils.MathOperations.digitsArrayToNumberBaseTen;
@@ -33,5 +35,10 @@ public abstract class AbstractCharacter<CHARACTER_TYPE> implements ICharacter<CH
                     return bitsArrayToNumberBaseTen(row);
                 }).toArray(Integer[]::new);
         return digitsArrayToNumberBaseTen(binaryNumber);
+    }
+
+    @Override
+    public List<ICharacter<CHARACTER_TYPE>> getSimilarCharacters() {
+        return new ArrayList<>();
     }
 }
