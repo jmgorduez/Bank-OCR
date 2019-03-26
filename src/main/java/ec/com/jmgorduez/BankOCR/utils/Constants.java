@@ -1,5 +1,7 @@
 package ec.com.jmgorduez.BankOCR.utils;
 
+import ec.com.jmgorduez.BankOCR.domain.UndefinedCharacter;
+
 public class Constants {
 
     public static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\";
