@@ -216,6 +216,31 @@ class DigitTest {
     }
 
     @Test
+    @DisplayName("It should return a copy of a binary matrix.")
+    void copyBinaryMatrix(){
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_ONE))
+                .isEqualTo(BINARY_MATRIX_ONE);
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_TWO))
+                .isEqualTo(BINARY_MATRIX_TWO);
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_THREE))
+                .isEqualTo(BINARY_MATRIX_THREE);
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_FOUR))
+                .isEqualTo(BINARY_MATRIX_FOUR);
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_FIVE))
+                .isEqualTo(BINARY_MATRIX_FIVE);
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_SIX))
+                .isEqualTo(BINARY_MATRIX_SIX);
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_SEVEN))
+                .isEqualTo(BINARY_MATRIX_SEVEN);
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_EIGHT))
+                .isEqualTo(BINARY_MATRIX_EIGHT);
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_NINE))
+                .isEqualTo(BINARY_MATRIX_NINE);
+        assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_ZERO))
+                .isEqualTo(BINARY_MATRIX_ZERO);
+    }
+
+    @Test
     @DisplayName("It should return a digit instance from a binary matrix.")
     void getInstance() {
         assertThat(digitUnderTest.getInstance(BINARY_MATRIX_ONE))
