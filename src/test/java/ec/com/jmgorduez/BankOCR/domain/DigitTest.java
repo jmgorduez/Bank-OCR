@@ -213,6 +213,24 @@ class DigitTest {
     void getSimilarCharacters() {
         assertThat(digitUnderTest.getSimilarCharacters())
                 .isEqualTo(generateListDigitOneSimilarCharacters());
+        digitUnderTest = DIGIT_SEVEN;
+        assertThat(digitUnderTest.getSimilarCharacters())
+                .isEqualTo(generateListDigitSevenSimilarCharacters());
+        digitUnderTest = DIGIT_FIVE;
+        assertThat(digitUnderTest.getSimilarCharacters())
+                .isEqualTo(generateListDigitFiveSimilarCharacters());
+        digitUnderTest = DIGIT_SIX;
+        assertThat(digitUnderTest.getSimilarCharacters())
+                .isEqualTo(generateListDigitSixSimilarCharacters());
+        digitUnderTest = DIGIT_EIGHT;
+        assertThat(digitUnderTest.getSimilarCharacters())
+                .isEqualTo(generateListDigitEightSimilarCharacters());
+        digitUnderTest = DIGIT_NINE;
+        assertThat(digitUnderTest.getSimilarCharacters())
+                .isEqualTo(generateListDigitNineSimilarCharacters());
+        digitUnderTest = DIGIT_ZERO;
+        assertThat(digitUnderTest.getSimilarCharacters())
+                .isEqualTo(generateListDigitZeroSimilarCharacters());
     }
 
     @Test

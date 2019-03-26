@@ -77,12 +77,6 @@ public class DataTestGenerator {
 
     public static final int WRONG_BINARY_CODE = 757;
 
-    public static final Integer[][] WRONG_BINARY_MATRIX = new Integer[][]{
-            new Integer[]{ONE, ONE, ONE},
-            new Integer[]{ONE, ZERO, ONE},
-            new Integer[]{ONE, ONE, ONE}
-    };
-
     public static IMultilineString<IToken<DigitToken.TokenType>> generateDigitTokenNumberOneMatrix() {
         IMultilineString<IToken<DigitToken.TokenType>> multilineString = new MultilineString<>(MATRIX_WIDTH_3);
         DigitToken[] digitTokens = new DigitToken[]{
@@ -407,6 +401,48 @@ public class DataTestGenerator {
     public static List<ICharacter<Integer>> generateListDigitOneSimilarCharacters(){
         List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_SEVEN);
+        return similarCharacters;
+    }
+
+    public static List<ICharacter<Integer>> generateListDigitSevenSimilarCharacters(){
+        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+        similarCharacters.add(DIGIT_ONE);
+        return similarCharacters;
+    }
+
+    public static List<ICharacter<Integer>> generateListDigitEightSimilarCharacters(){
+        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+        similarCharacters.add(DIGIT_ZERO);
+        similarCharacters.add(DIGIT_SIX);
+        similarCharacters.add(DIGIT_NINE);
+        return similarCharacters;
+    }
+
+    public static List<ICharacter<Integer>> generateListDigitNineSimilarCharacters(){
+        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+        similarCharacters.add(DIGIT_THREE);
+        similarCharacters.add(DIGIT_FIVE);
+        similarCharacters.add(DIGIT_EIGHT);
+        return similarCharacters;
+    }
+
+    public static List<ICharacter<Integer>> generateListDigitZeroSimilarCharacters(){
+        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+        similarCharacters.add(DIGIT_EIGHT);
+        return similarCharacters;
+    }
+
+    public static List<ICharacter<Integer>> generateListDigitFiveSimilarCharacters(){
+        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+        similarCharacters.add(DIGIT_NINE);
+        similarCharacters.add(DIGIT_SIX);
+        return similarCharacters;
+    }
+
+    public static List<ICharacter<Integer>> generateListDigitSixSimilarCharacters(){
+        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+        similarCharacters.add(DIGIT_EIGHT);
+        similarCharacters.add(DIGIT_FIVE);
         return similarCharacters;
     }
 }
