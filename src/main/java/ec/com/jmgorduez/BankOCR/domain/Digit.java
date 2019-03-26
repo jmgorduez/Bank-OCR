@@ -91,7 +91,8 @@ public class Digit extends AbstractCharacter<Integer> {
     }
 
     @Override
-    public List<ICharacter<Integer>> getSimilarCharacters() {
-        return null;
+    protected ICharacter<Integer> getInstance(Integer[][] binaryMatrix) throws IllegalArgumentException {
+        Integer binaryCode = binaryMatrixToBinaryCode(binaryMatrix);
+        return binaryCodeToDigit(binaryCode);
     }
 }
