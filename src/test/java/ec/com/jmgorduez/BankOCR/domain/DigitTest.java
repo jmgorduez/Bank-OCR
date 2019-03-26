@@ -1,5 +1,6 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
+import ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.WRONG_BINARY_MATRIX;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -201,15 +203,43 @@ class DigitTest {
 
     @Test
     @DisplayName("It should return the string value of a digit.")
-    void getStringValue(){
+    void getStringValue() {
         assertThat(digitUnderTest.getStringValue())
                 .isEqualTo(ONE.toString());
     }
 
     @Test
     @DisplayName("It should return the list of similar chars.")
-    void getSimilarCharacters(){
-        assertThat(  digitUnderTest.getSimilarCharacters())
+    void getSimilarCharacters() {
+        assertThat(digitUnderTest.getSimilarCharacters())
                 .isEqualTo(generateListDigitOneSimilarCharacters());
+    }
+
+    @Test
+    @DisplayName("It should return a digit instance from a binary matrix.")
+    void getInstance() {
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_ONE))
+                .isEqualTo(DIGIT_ONE);
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_TWO))
+                .isEqualTo(DIGIT_TWO);
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_THREE))
+                .isEqualTo(DIGIT_THREE);
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_FOUR))
+                .isEqualTo(DIGIT_FOUR);
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_FIVE))
+                .isEqualTo(DIGIT_FIVE);
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_SIX))
+                .isEqualTo(DIGIT_SIX);
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_SEVEN))
+                .isEqualTo(DIGIT_SEVEN);
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_EIGHT))
+                .isEqualTo(DIGIT_EIGHT);
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_NINE))
+                .isEqualTo(DIGIT_NINE);
+        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_ZERO))
+                .isEqualTo(DIGIT_ZERO);
+        assertThatThrownBy(() -> {
+            assertThat(digitUnderTest.getInstance(WRONG_BINARY_MATRIX));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
