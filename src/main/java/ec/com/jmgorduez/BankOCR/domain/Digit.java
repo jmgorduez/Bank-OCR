@@ -61,8 +61,6 @@ public class Digit extends AbstractCharacter<Integer> {
         return binaryCodesForDigits;
     }
 
-
-
     public static Digit binaryCodeToDigit(Integer binaryCode)
             throws IllegalArgumentException {
         List<Digit> digitFound = new ArrayList<>();

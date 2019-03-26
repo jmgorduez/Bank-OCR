@@ -74,6 +74,12 @@ public class Constants {
             new Integer[]{ONE, ONE, ONE}
     };
 
+    public static final Integer[][] WRONG_BINARY_MATRIX = new Integer[][]{
+            new Integer[]{ONE, ONE, ONE},
+            new Integer[]{ONE, ZERO, ONE},
+            new Integer[]{ONE, ONE, ONE}
+    };
+
     public static final int BINARY_CODE_ONE = 11;
     public static final int BINARY_CODE_TWO = 236;
     public static final int BINARY_CODE_THREE = 233;

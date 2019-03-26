@@ -18,4 +18,9 @@ public class UndefinedCharacter extends AbstractCharacter<Integer> {
     public String getStringValue() {
         return UNDEFINED_CHARACTER_STRING_VALUE;
     }
+
+    @Override
+    protected ICharacter<Integer> getInstance(Integer[][] binaryMatrix) throws IllegalArgumentException {
+        return new UndefinedCharacter(binaryMatrix);
+    }
 }
