@@ -31,6 +31,7 @@ public class DataTestGenerator {
     public static final String STRING_ACCOUNT_NUMBER_123456789 = "123456789";
     public static final String STRING_ACCOUNT_NUMBER_345882865 = "345882865";
     public static final String STRING_ACCOUNT_NUMBER_49006771_ = "49006771?";
+    public static final String STRING_ACCOUNT_NUMBER_490067714 = "490067714";
 
     public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_000000000
             = new Integer[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -40,6 +41,8 @@ public class DataTestGenerator {
             = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
     public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_49006771_
             = new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1};
+    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_490067714
+            = new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, 4};
     public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_345882865
             = new Integer[]{3, 4, 5, 8, 8, 2, 8, 6, 5};
 
@@ -55,6 +58,9 @@ public class DataTestGenerator {
     public static final IAccountNumber ACCOUNT_NUMBER_49006771_
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
             CHARACTERS_ACCOUNT_NUMBER_49006771_);
+    public static final IAccountNumber ACCOUNT_NUMBER_490067714
+            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_490067714,
+            CHARACTERS_ACCOUNT_NUMBER_490067714);
 
     public static final Integer CHECK_SUM_111111111 = 45;
     public static final Integer CHECK_SUM_123456789 = 165;

@@ -9,8 +9,7 @@ import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.domain.IntegerAccountNumber.IntegerAccountNumberClassification.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_ERR;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class IntegerAccountNumberTest {
@@ -113,5 +112,9 @@ class IntegerAccountNumberTest {
                     (IntegerAccountNumber) ACCOUNT_NUMBER_123456789;
             integerAccountNumberUnderTest.repairAccountNumber();
         }).isInstanceOf(UnsupportedOperationException.class);
+        integerAccountNumberUnderTest
+                = (IntegerAccountNumber) ACCOUNT_NUMBER_49006771_;
+        assertThat(integerAccountNumberUnderTest.repairAccountNumber())
+                .isEqualTo(ACCOUNT_NUMBER_490067714);
     }
 }
