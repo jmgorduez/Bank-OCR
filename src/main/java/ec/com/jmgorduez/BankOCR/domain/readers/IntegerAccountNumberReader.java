@@ -19,14 +19,6 @@ public class IntegerAccountNumberReader implements IAccountNumberReader<DigitTok
                                             IMultilineStringReader<Integer, DigitToken.TokenType> multilineStringReader) throws IOException {
         List<ICharacter<Integer>> characters =
                 multilineStringReader.readMultilineString(bufferedReader, lineReader, charaterReader);
-        List<Integer> integerCharacters = new ArrayList<>();
-        String accountNumber =
-                characters.stream().map(digit -> {
-                    integerCharacters.add(digit.getValue());
-                    return digit.getStringValue();
-                }).collect(Collectors.joining());
-
-        return new IntegerAccountNumber(accountNumber,
-                integerCharacters.toArray(new Integer[]{}));
+        return new IntegerAccountNumber(characters);
     }
 }

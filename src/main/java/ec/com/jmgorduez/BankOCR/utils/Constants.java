@@ -4,8 +4,8 @@ import ec.com.jmgorduez.BankOCR.domain.UndefinedCharacter;
 
 public class Constants {
 
-    public static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\";
-    //public static final String FILE_PATH = "/home/jm/projects/java/Bank-OCR/inputFiles/";
+    //public static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\";
+    public static final String FILE_PATH = "/home/jm/projects/java/Bank-OCR/inputFiles/";
 
     public static final String EMPTY_STRING = "";
 

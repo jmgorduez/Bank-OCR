@@ -38,7 +38,7 @@ class IntegerAccountNumberReaderTest {
             when(multilineString000000000ReaderMock.readMultilineString(any(), any(), any()))
                     .thenReturn(generateListSameDigits(ZERO));
             when(multilineString49006771_ReaderMock.readMultilineString(any(), any(), any()))
-                    .thenReturn(generateCharactersListOf49006771_());
+                    .thenReturn(CHARACTERS_ACCOUNT_NUMBER_49006771_);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -8,6 +8,7 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,34 +34,29 @@ public class DataTestGenerator {
     public static final String STRING_ACCOUNT_NUMBER_49006771_ = "49006771?";
     public static final String STRING_ACCOUNT_NUMBER_490067714 = "490067714";
 
-    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_000000000
-            = new Integer[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_111111111
-            = new Integer[]{1, 1, 1, 1, 1, 1, 1, 1, 1};
-    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_123456789
-            = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
-    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_49006771_
-            = new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1};
-    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_490067714
-            = new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, 4};
-    public static final Integer[] CHARACTERS_ACCOUNT_NUMBER_345882865
-            = new Integer[]{3, 4, 5, 8, 8, 2, 8, 6, 5};
+    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_000000000
+            = generateListDigitFromIntegerArray(new Integer[]{0, 0, 0, 0, 0, 0, 0, 0, 0});
+    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_111111111
+            = generateListDigitFromIntegerArray(new Integer[]{1, 1, 1, 1, 1, 1, 1, 1, 1});
+    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_123456789
+            = generateListDigitFromIntegerArray(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
+    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_49006771_
+            = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1});
+    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_490067714
+            = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, 4});
+    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_345882865
+            = generateListDigitFromIntegerArray(new Integer[]{3, 4, 5, 8, 8, 2, 8, 6, 5});
 
     public static final IAccountNumber ACCOUNT_NUMBER_000000000
-            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_000000000,
-            CHARACTERS_ACCOUNT_NUMBER_000000000);
+            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_000000000);
     public static final IAccountNumber ACCOUNT_NUMBER_111111111
-            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
-            CHARACTERS_ACCOUNT_NUMBER_111111111);
+            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_111111111);
     public static final IAccountNumber ACCOUNT_NUMBER_123456789
-            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
-            CHARACTERS_ACCOUNT_NUMBER_123456789);
+            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
     public static final IAccountNumber ACCOUNT_NUMBER_49006771_
-            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
-            CHARACTERS_ACCOUNT_NUMBER_49006771_);
+            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
     public static final IAccountNumber ACCOUNT_NUMBER_490067714
-            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_490067714,
-            CHARACTERS_ACCOUNT_NUMBER_490067714);
+            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_490067714);
 
     public static final Integer CHECK_SUM_111111111 = 45;
     public static final Integer CHECK_SUM_123456789 = 165;
@@ -351,17 +347,6 @@ public class DataTestGenerator {
         return stream.collect(Collectors.toList());
     }
 
-    public static List<ICharacter<Integer>> generateCharactersListOf49006771_() {
-        List<ICharacter<Integer>> charactersList = Arrays.stream(ACCOUNT_NUMBER_49006771_.getCharacters())
-                .map(integer -> {
-                    if (integer.equals(UNDEFINED_CHARACTER_VALUE)) {
-                        return new UndefinedCharacter(new Integer[][]{});
-                    }
-                    return new Digit(integer);
-                }).collect(Collectors.toList());
-        return charactersList;
-    }
-
     public static List<List<IToken<DigitToken.TokenType>>> generateThreeRowsWithTwentySevenTokensThatRepresentsDigitOneMutilineString() {
         List<List<IToken<DigitToken.TokenType>>> rows = new ArrayList<>();
         for (int i = ONE; i <= MATRIX_HEIGHT_3; i++) {
@@ -409,19 +394,19 @@ public class DataTestGenerator {
         return character;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitOneSimilarCharacters(){
+    public static List<ICharacter<Integer>> generateListDigitOneSimilarCharacters() {
         List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_SEVEN);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitSevenSimilarCharacters(){
+    public static List<ICharacter<Integer>> generateListDigitSevenSimilarCharacters() {
         List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_ONE);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitEightSimilarCharacters(){
+    public static List<ICharacter<Integer>> generateListDigitEightSimilarCharacters() {
         List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_ZERO);
         similarCharacters.add(DIGIT_SIX);
@@ -429,7 +414,7 @@ public class DataTestGenerator {
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitNineSimilarCharacters(){
+    public static List<ICharacter<Integer>> generateListDigitNineSimilarCharacters() {
         List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_THREE);
         similarCharacters.add(DIGIT_FIVE);
@@ -437,23 +422,34 @@ public class DataTestGenerator {
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitZeroSimilarCharacters(){
+    public static List<ICharacter<Integer>> generateListDigitZeroSimilarCharacters() {
         List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_EIGHT);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitFiveSimilarCharacters(){
+    public static List<ICharacter<Integer>> generateListDigitFiveSimilarCharacters() {
         List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_NINE);
         similarCharacters.add(DIGIT_SIX);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitSixSimilarCharacters(){
+    public static List<ICharacter<Integer>> generateListDigitSixSimilarCharacters() {
         List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_EIGHT);
         similarCharacters.add(DIGIT_FIVE);
         return similarCharacters;
+    }
+
+    public static List<ICharacter<Integer>> generateListDigitFromIntegerArray(Integer[] integers) {
+        List<ICharacter<Integer>> characters =
+                Arrays.stream(integers).map(integer -> {
+                    if (integer.equals(UNDEFINED_CHARACTER_VALUE)) {
+                        return UNDEFINED_CHARACTER;
+                    }
+                    return new Digit(integer);
+                }).collect(Collectors.toList());
+        return characters;
     }
 }

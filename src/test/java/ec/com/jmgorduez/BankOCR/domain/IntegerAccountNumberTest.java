@@ -18,8 +18,8 @@ class IntegerAccountNumberTest {
 
     @BeforeEach
     void setUp() {
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
-                CHARACTERS_ACCOUNT_NUMBER_111111111);
+        integerAccountNumberUnderTest
+                = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_111111111);
     }
 
     @Test
@@ -44,23 +44,14 @@ class IntegerAccountNumberTest {
     void calculateCheckSum() {
         assertThat(integerAccountNumberUnderTest.calculateCheckSum())
                 .isEqualTo(CHECK_SUM_111111111);
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
-                CHARACTERS_ACCOUNT_NUMBER_123456789);
+        integerAccountNumberUnderTest
+                = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
         assertThat(integerAccountNumberUnderTest.calculateCheckSum())
                 .isEqualTo(CHECK_SUM_123456789);
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_345882865,
-                CHARACTERS_ACCOUNT_NUMBER_345882865);
+        integerAccountNumberUnderTest
+                = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_345882865);
         assertThat(integerAccountNumberUnderTest.calculateCheckSum())
                 .isEqualTo(CHECK_SUM_345882865);
-    }
-
-    @Test
-    @DisplayName("It should return the characters of a account number.")
-    void getCharacters() {
-        assertThat(integerAccountNumberUnderTest.getCharacters())
-                .isEqualTo(CHARACTERS_ACCOUNT_NUMBER_111111111);
-        assertThat(integerAccountNumberUnderTest.getCharacters())
-                .isNotEqualTo(CHARACTERS_ACCOUNT_NUMBER_000000000);
     }
 
     @Test
@@ -68,12 +59,12 @@ class IntegerAccountNumberTest {
     void isRightAccountNumber() {
         assertThat(integerAccountNumberUnderTest.isRightAccountNumber())
                 .isFalse();
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
-                CHARACTERS_ACCOUNT_NUMBER_123456789);
+        integerAccountNumberUnderTest
+                = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
         assertThat(integerAccountNumberUnderTest.isRightAccountNumber())
                 .isTrue();
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_000000000,
-                CHARACTERS_ACCOUNT_NUMBER_000000000);
+        integerAccountNumberUnderTest
+                = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_000000000);
         assertThat(integerAccountNumberUnderTest.isRightAccountNumber())
                 .isTrue();
     }
@@ -83,30 +74,28 @@ class IntegerAccountNumberTest {
     void isIllegibleAccountNumber() {
         assertThat(integerAccountNumberUnderTest.isIllegibleAccountNumber())
                 .isFalse();
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
-                CHARACTERS_ACCOUNT_NUMBER_49006771_);
+        integerAccountNumberUnderTest
+                = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
         assertThat(integerAccountNumberUnderTest.isIllegibleAccountNumber())
                 .isTrue();
     }
 
     @Test
     @DisplayName("It should classify a account number in ILL o ERR.")
-    void getAccountNumberClassification(){
+    void getAccountNumberClassification() {
         assertThat(integerAccountNumberUnderTest.getAccountNumberClassification())
                 .isEqualTo(ERR);
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
-                CHARACTERS_ACCOUNT_NUMBER_49006771_);
+        integerAccountNumberUnderTest = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
         assertThat(integerAccountNumberUnderTest.getAccountNumberClassification())
                 .isEqualTo(ILL);
-        integerAccountNumberUnderTest = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
-                CHARACTERS_ACCOUNT_NUMBER_123456789);
+        integerAccountNumberUnderTest = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
         assertThat(integerAccountNumberUnderTest.getAccountNumberClassification())
                 .isEqualTo(RIG);
     }
 
     @Test
     @DisplayName("It should return a new account number repaired")
-    void repairAccountNumber(){
+    void repairAccountNumber() {
         assertThatThrownBy(() -> {
             integerAccountNumberUnderTest =
                     (IntegerAccountNumber) ACCOUNT_NUMBER_123456789;

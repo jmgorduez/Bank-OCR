@@ -1,8 +1,13 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.domain.IntegerAccountNumber.IntegerAccountNumberClassification.*;
@@ -10,28 +15,30 @@ import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 public class IntegerAccountNumber implements IAccountNumber {
 
-    public enum IntegerAccountNumberClassification{
+    public enum IntegerAccountNumberClassification {
         RIG(EMPTY_STRING),
         ERR(STRING_ERR),
         ILL(STRING_ILL);
 
         private final String value;
 
-        private IntegerAccountNumberClassification(String value){
+        private IntegerAccountNumberClassification(String value) {
             this.value = value;
         }
 
-        public String getValue(){
+        public String getValue() {
             return value;
         }
     }
 
     private String value;
-    private Integer[] characters;
+    private List<ICharacter<Integer>> digits;
 
-    public IntegerAccountNumber(String value, Integer[] characters) {
-        this.value = value;
-        this.characters = characters;
+    public IntegerAccountNumber(List<ICharacter<Integer>> digits) {
+        this.value = digits.stream().map(digit -> {
+            return digit.getStringValue();
+        }).collect(Collectors.joining());
+        this.digits = digits;
     }
 
     @Override
@@ -41,18 +48,13 @@ public class IntegerAccountNumber implements IAccountNumber {
 
     @Override
     public Integer calculateCheckSum() {
-        Integer checkSum = Stream.iterate(ONE, index -> index + ONE).limit(characters.length)
+        Integer checkSum = Stream.iterate(ONE, index -> index + ONE).limit(digits.size())
                 .mapToInt(index -> {
-                    Integer digit = characters[characters.length - index];
+                    Integer digit = digits.get(digits.size() - index).getValue();
                     return index * digit;
                 })
                 .sum();
         return checkSum;
-    }
-
-    @Override
-    public Integer[] getCharacters() {
-        return this.characters;
     }
 
     @Override
@@ -62,18 +64,18 @@ public class IntegerAccountNumber implements IAccountNumber {
 
     @Override
     public Boolean isIllegibleAccountNumber() {
-        Integer quantityOfIllegibleCharactes = Arrays.stream(characters).mapToInt(integer -> {
-            return integer.equals(UNDEFINED_CHARACTER_VALUE) ? ONE : ZERO;
+        Integer quantityOfIllegibleCharactes = digits.stream().mapToInt(digit -> {
+            return digit.getValue().equals(UNDEFINED_CHARACTER_VALUE) ? ONE : ZERO;
         }).sum();
         return quantityOfIllegibleCharactes > 0;
     }
 
     @Override
     public IntegerAccountNumberClassification getAccountNumberClassification() {
-        if (isIllegibleAccountNumber()){
+        if (isIllegibleAccountNumber()) {
             return ILL;
         }
-        if(!isRightAccountNumber()){
+        if (!isRightAccountNumber()) {
             return ERR;
         }
         return RIG;
@@ -81,10 +83,37 @@ public class IntegerAccountNumber implements IAccountNumber {
 
     @Override
     public IAccountNumber repairAccountNumber() {
-        if(isRightAccountNumber()){
+        if (isRightAccountNumber()) {
             throw new UnsupportedOperationException();
         }
-        return null;
+        return repairAuxiliary(new IntegerAccountNumber(digits), ZERO);
+    }
+
+    private IntegerAccountNumber repairAuxiliary(IntegerAccountNumber accountNumber, final Integer index) {
+        if (accountNumber.isRightAccountNumber()) {
+            return accountNumber;
+        }
+        if (index == accountNumber.digits.size()) {
+            throw new IllegalArgumentException();
+        }
+        List<ICharacter<Integer>> similarCharacters
+                = digits.get(index).getSimilarCharacters();
+        List<IntegerAccountNumber> repairedAccountNumbers =
+                similarCharacters.stream().map(similarCharacter -> {
+                    List<ICharacter<Integer>> digits = new ArrayList<>(accountNumber.digits);
+                    digits.set(index, similarCharacter);
+                    try {
+                        Integer newIndex = index + ONE;
+                        return repairAuxiliary(new IntegerAccountNumber(digits), newIndex);
+                    }catch (IllegalArgumentException error){
+                        return null;
+                    }
+                }).filter(accountNumberRepaired -> accountNumberRepaired != null)
+                .collect(Collectors.toList());
+        if(repairedAccountNumbers.isEmpty()){
+            throw new IllegalArgumentException();
+        }
+        return repairedAccountNumbers.get(ZERO);
     }
 
     @Override
@@ -96,7 +125,6 @@ public class IntegerAccountNumber implements IAccountNumber {
             return false;
         }
         return ((IntegerAccountNumber) other).value.equals(this.value)
-                && Arrays.equals(((IntegerAccountNumber) other).getCharacters(),
-                this.getCharacters());
+                && ((IntegerAccountNumber) other).digits.equals(this.digits);
     }
 }
