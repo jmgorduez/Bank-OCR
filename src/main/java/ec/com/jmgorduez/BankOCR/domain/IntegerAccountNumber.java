@@ -80,6 +80,11 @@ public class IntegerAccountNumber implements IAccountNumber {
     }
 
     @Override
+    public IAccountNumber repairAccountNumber() {
+        return null;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;

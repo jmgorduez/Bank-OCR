@@ -49,6 +49,9 @@ public class DataTestGenerator {
     public static final IAccountNumber ACCOUNT_NUMBER_111111111
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_111111111,
             CHARACTERS_ACCOUNT_NUMBER_111111111);
+    public static final IAccountNumber ACCOUNT_NUMBER_123456789
+            = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_123456789,
+            CHARACTERS_ACCOUNT_NUMBER_123456789);
     public static final IAccountNumber ACCOUNT_NUMBER_49006771_
             = new IntegerAccountNumber(STRING_ACCOUNT_NUMBER_49006771_,
             CHARACTERS_ACCOUNT_NUMBER_49006771_);

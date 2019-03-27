@@ -10,6 +10,7 @@ import static ec.com.jmgorduez.BankOCR.domain.IntegerAccountNumber.IntegerAccoun
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_ERR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class IntegerAccountNumberTest {
@@ -102,5 +103,15 @@ class IntegerAccountNumberTest {
                 CHARACTERS_ACCOUNT_NUMBER_123456789);
         assertThat(integerAccountNumberUnderTest.getAccountNumberClassification())
                 .isEqualTo(RIG);
+    }
+
+    @Test
+    @DisplayName("It should return a new account number repaired")
+    void repairAccountNumber(){
+        assertThatThrownBy(() -> {
+            integerAccountNumberUnderTest =
+                    (IntegerAccountNumber) ACCOUNT_NUMBER_123456789;
+            integerAccountNumberUnderTest.repairAccountNumber();
+        }).isInstanceOf(UnsupportedOperationException.class);
     }
 }
