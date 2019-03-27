@@ -81,6 +81,9 @@ public class IntegerAccountNumber implements IAccountNumber {
 
     @Override
     public IAccountNumber repairAccountNumber() {
+        if(isRightAccountNumber()){
+            throw new UnsupportedOperationException();
+        }
         return null;
     }
 
