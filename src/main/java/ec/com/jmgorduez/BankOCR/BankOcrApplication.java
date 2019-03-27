@@ -2,10 +2,10 @@ package ec.com.jmgorduez.BankOCR;
 
 import ec.com.jmgorduez.BankOCR.domain.*;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.*;
-import ec.com.jmgorduez.BankOCR.domain.readers.IntegerAccountNumberReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.AccountNumberReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.LineReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitReader;
-import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitStringReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.MultilineStringReader;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -19,13 +19,13 @@ public class BankOcrApplication {
     private static final String FILE_PATH_NAME = FILE_PATH + "input.txt";
 
     private static IMultilineStringReader multilineStringReader =
-            new MultilineDigitStringReader(STRING_LENGTH);
+            new MultilineStringReader(STRING_LENGTH);
     private static ILineReader<DigitToken.TokenType> lineReader
             = new LineReader();
     private static IMultilineCharacterReader<Integer, DigitToken.TokenType> multilineCharacterReader =
             new MultilineDigitReader();
     private static IAccountNumberReader<DigitToken.TokenType, Integer> accountNumberReader =
-            new IntegerAccountNumberReader();
+            new AccountNumberReader();
 
     public static void main(String[] args) {
         try {
@@ -40,7 +40,7 @@ public class BankOcrApplication {
                 StringBuilder stringBuilder
                         = new StringBuilder(accountNumber.getValue());
                 stringBuilder.append(BLANK_SPACE_STRING)
-                        .append(((IntegerAccountNumber.IntegerAccountNumberClassification)
+                        .append(((AccountNumber.IntegerAccountNumberClassification)
                                 accountNumber.getAccountNumberClassification()).getValue());
                 System.out.println(stringBuilder.toString());
             } while (true);

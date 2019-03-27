@@ -1,14 +1,12 @@
 package ec.com.jmgorduez.BankOCR.dataGenerator;
 
 import ec.com.jmgorduez.BankOCR.domain.*;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +17,7 @@ import static org.mockito.Mockito.mock;
 
 public class DataTestGenerator {
 
-    public static final UndefinedCharacter UNDEFINED_CHARACTER = new UndefinedCharacter(WRONG_BINARY_MATRIX);
+    public static final UndefinedDigit UNDEFINED_CHARACTER = new UndefinedDigit(WRONG_BINARY_MATRIX);
 
     public static final String NULL_STRING = null;
 
@@ -41,22 +39,23 @@ public class DataTestGenerator {
     public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_123456789
             = generateListDigitFromIntegerArray(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
     public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_49006771_
-            = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1});
+            = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1},
+            generateUndefinedCharacterSimilarDigitFour());
     public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_490067714
             = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, 4});
     public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_345882865
             = generateListDigitFromIntegerArray(new Integer[]{3, 4, 5, 8, 8, 2, 8, 6, 5});
 
-    public static final IAccountNumber ACCOUNT_NUMBER_000000000
-            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_000000000);
-    public static final IAccountNumber ACCOUNT_NUMBER_111111111
-            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_111111111);
-    public static final IAccountNumber ACCOUNT_NUMBER_123456789
-            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
-    public static final IAccountNumber ACCOUNT_NUMBER_49006771_
-            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
-    public static final IAccountNumber ACCOUNT_NUMBER_490067714
-            = new IntegerAccountNumber(CHARACTERS_ACCOUNT_NUMBER_490067714);
+    public static final AccountNumber ACCOUNT_NUMBER_000000000
+            = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_000000000);
+    public static final AccountNumber ACCOUNT_NUMBER_111111111
+            = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_111111111);
+    public static final AccountNumber ACCOUNT_NUMBER_123456789
+            = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
+    public static final AccountNumber ACCOUNT_NUMBER_49006771_
+            = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
+    public static final AccountNumber ACCOUNT_NUMBER_490067714
+            = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_490067714);
 
     public static final Integer CHECK_SUM_111111111 = 45;
     public static final Integer CHECK_SUM_123456789 = 165;
@@ -442,14 +441,31 @@ public class DataTestGenerator {
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitFromIntegerArray(Integer[] integers) {
+    public static List<ICharacter<Integer>> generateListUndefinedCharacterSimilarDigitFourSimilarCharacters() {
+        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+        similarCharacters.add(DIGIT_FOUR);
+        similarCharacters.add(DIGIT_ONE);
+        return similarCharacters;
+    }
+
+    public static List<ICharacter<Integer>> generateListDigitFromIntegerArray(Integer[] integers,
+                                                                              ICharacter<Integer>... undefinedCharacter) {
         List<ICharacter<Integer>> characters =
                 Arrays.stream(integers).map(integer -> {
-                    if (integer.equals(UNDEFINED_CHARACTER_VALUE)) {
-                        return UNDEFINED_CHARACTER;
+                    if (integer.equals(UNDEFINED_DIGIT_VALUE)) {
+                        return undefinedCharacter[0];
                     }
                     return new Digit(integer);
                 }).collect(Collectors.toList());
         return characters;
+    }
+
+    public static ICharacter<Integer> generateUndefinedCharacterSimilarDigitFour() {
+        Integer[][] binaryMatrixDigitSimilarZero = new Integer[][]{
+                new Integer[]{ZERO, ZERO, ZERO},
+                new Integer[]{ZERO, ONE, ONE},
+                new Integer[]{ZERO, ZERO, ONE}
+        };
+        return new UndefinedDigit(binaryMatrixDigitSimilarZero);
     }
 }

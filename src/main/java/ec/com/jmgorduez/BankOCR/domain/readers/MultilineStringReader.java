@@ -17,13 +17,13 @@ import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
-public class MultilineDigitStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum> implements IMultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE> {
+public class MultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum> implements IMultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE> {
 
     private static final int CHARACTER_WIDTH = 3;
     private static final int CHARACTER_HEIGHT = 3;
     private final int stringLength;
 
-    public MultilineDigitStringReader(int stringLength) {
+    public MultilineStringReader(int stringLength) {
         this.stringLength = stringLength;
     }
 

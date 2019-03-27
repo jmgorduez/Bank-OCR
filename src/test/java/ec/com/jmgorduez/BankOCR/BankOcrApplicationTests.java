@@ -2,10 +2,10 @@ package ec.com.jmgorduez.BankOCR;
 
 import ec.com.jmgorduez.BankOCR.domain.*;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.*;
-import ec.com.jmgorduez.BankOCR.domain.readers.IntegerAccountNumberReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.AccountNumberReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.LineReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitReader;
-import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitStringReader;
+import ec.com.jmgorduez.BankOCR.domain.readers.MultilineStringReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,10 +30,10 @@ public class BankOcrApplicationTests {
 
     @BeforeEach
     void setUp() {
-        multilineStringReader = new MultilineDigitStringReader(STRING_LENGTH);
+        multilineStringReader = new MultilineStringReader(STRING_LENGTH);
         lineReader = new LineReader();
         multilineCharacterReader = new MultilineDigitReader();
-        accountNumberReader = new IntegerAccountNumberReader();
+        accountNumberReader = new AccountNumberReader();
     }
 
     @Test

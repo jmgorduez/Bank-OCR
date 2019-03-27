@@ -1,7 +1,5 @@
 package ec.com.jmgorduez.BankOCR.utils;
 
-import ec.com.jmgorduez.BankOCR.domain.UndefinedCharacter;
-
 public class Constants {
 
     //public static final String FILE_PATH = "C:\\Users\\JuanMa\\projects\\java\\Bank-OCR\\inputFiles\\";
@@ -100,8 +98,8 @@ public class Constants {
 
     public static final int STRING_LENGTH = 9;
 
-    public static final Integer UNDEFINED_CHARACTER_VALUE = -1;
-    public static final String UNDEFINED_CHARACTER_STRING_VALUE = "?";
+    public static final Integer UNDEFINED_DIGIT_VALUE = -1;
+    public static final String UNDEFINED_DIGIT_STRING_VALUE = "?";
 
     public static final String STRING_ILL = "ILL";
     public static final String STRING_ERR = "ERR";

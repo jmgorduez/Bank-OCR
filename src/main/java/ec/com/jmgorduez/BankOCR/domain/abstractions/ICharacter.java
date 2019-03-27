@@ -6,5 +6,5 @@ public interface ICharacter<T> {
     T getValue();
     int getBinaryCode();
     String getStringValue();
-    List<ICharacter<T>> getSimilarCharacters();
+    List<ICharacter<T>> getSimilarCharacters(IMultilineCharacterReader multilineCharacterReader);
 }

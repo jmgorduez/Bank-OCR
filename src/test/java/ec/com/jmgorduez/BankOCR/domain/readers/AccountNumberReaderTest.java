@@ -2,7 +2,6 @@ package ec.com.jmgorduez.BankOCR.domain.readers;
 
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineStringReader;
-import ec.com.jmgorduez.BankOCR.domain.readers.IntegerAccountNumberReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,9 +17,9 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-class IntegerAccountNumberReaderTest {
+class AccountNumberReaderTest {
 
-    private IntegerAccountNumberReader integerAccountNumberReaderUnderTest;
+    private AccountNumberReader accountNumberReaderUnderTest;
     @Mock
     private IMultilineStringReader<Integer, DigitToken.TokenType> multilineString111111111ReaderMock;
     @Mock
@@ -31,7 +30,7 @@ class IntegerAccountNumberReaderTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        integerAccountNumberReaderUnderTest = new IntegerAccountNumberReader();
+        accountNumberReaderUnderTest = new AccountNumberReader();
         try {
             when(multilineString111111111ReaderMock.readMultilineString(any(), any(), any()))
                     .thenReturn(generateListSameDigits(ONE));
@@ -48,15 +47,15 @@ class IntegerAccountNumberReaderTest {
     @DisplayName("It should readMultilineString a account number from a characters list.")
     void readAccountNumber() {
         try {
-            assertThat(integerAccountNumberReaderUnderTest
+            assertThat(accountNumberReaderUnderTest
                     .readAccountNumber(any(), any(), any(),
                             multilineString111111111ReaderMock))
                     .isEqualTo(ACCOUNT_NUMBER_111111111);
-            assertThat(integerAccountNumberReaderUnderTest
+            assertThat(accountNumberReaderUnderTest
                     .readAccountNumber(any(), any(), any(),
                             multilineString000000000ReaderMock))
                     .isEqualTo(ACCOUNT_NUMBER_000000000);
-            assertThat(integerAccountNumberReaderUnderTest
+            assertThat(accountNumberReaderUnderTest
                     .readAccountNumber(any(), any(), any(),
                             multilineString49006771_ReaderMock))
                     .isEqualTo(ACCOUNT_NUMBER_49006771_);

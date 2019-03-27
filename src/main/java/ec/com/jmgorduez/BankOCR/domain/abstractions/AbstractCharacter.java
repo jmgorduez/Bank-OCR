@@ -1,5 +1,6 @@
 package ec.com.jmgorduez.BankOCR.domain.abstractions;
 
+import ec.com.jmgorduez.BankOCR.domain.UndefinedDigit;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 
 import java.util.ArrayList;
@@ -42,18 +43,18 @@ public abstract class AbstractCharacter<CHARACTER_TYPE> implements ICharacter<CH
     }
 
     @Override
-    public List<ICharacter<CHARACTER_TYPE>> getSimilarCharacters() {
+    public List<ICharacter<CHARACTER_TYPE>> getSimilarCharacters(IMultilineCharacterReader multilineCharacterReader) {
         List<ICharacter<CHARACTER_TYPE>> similarCharacters = new ArrayList<>();
         for (int i = 0; i < binaryMatrix.length; i++) {
             for (int j = 0; j < binaryMatrix[i].length; j++) {
                 Integer[][] binaryMatrixCopy = copyBinaryMatrix(binaryMatrix);
                 binaryMatrixCopy[i][j] = binaryMatrixCopy[i][j].equals(ZERO) ? ONE : ZERO;
-                try {
-                    ICharacter<CHARACTER_TYPE> character = getInstance(binaryMatrixCopy);
+                    ICharacter<CHARACTER_TYPE> character
+                            = multilineCharacterReader.readCharacter(binaryMatrixCopy);
+                    if(character instanceof UndefinedDigit){
+                        continue;
+                    }
                     similarCharacters.add(character);
-                } catch (IllegalArgumentException error) {
-                    continue;
-                }
             }
         }
         return similarCharacters;
@@ -66,7 +67,4 @@ public abstract class AbstractCharacter<CHARACTER_TYPE> implements ICharacter<CH
                 }).collect(Collectors.toList());
         return binaryMatrixCopy.toArray(new Integer[][]{});
     }
-
-    protected abstract ICharacter<CHARACTER_TYPE> getInstance(Integer[][] binaryMatrix)
-            throws IllegalArgumentException;
 }

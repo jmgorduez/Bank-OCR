@@ -6,5 +6,5 @@ public interface IAccountNumber {
     Boolean isRightAccountNumber();
     Boolean isIllegibleAccountNumber();
     Enum getAccountNumberClassification();
-    IAccountNumber repairAccountNumber();
+    IAccountNumber repairAccountNumber(IMultilineCharacterReader multilineCharacterReader);
 }

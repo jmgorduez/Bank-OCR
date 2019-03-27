@@ -10,7 +10,6 @@ import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 public class Digit extends AbstractCharacter<Integer> {
 
     private static final HashMap<Integer, Integer[][]> binaryMatricesForDigits = generateBinaryMatricesForDigits();
-    private static final HashMap<Integer, Integer> binaryCodesForDigits = generateBinaryCodesForDigits();
 
     public Digit(Integer value) {
         super(value, binaryMatricesForDigits.get(value));
@@ -48,33 +47,6 @@ public class Digit extends AbstractCharacter<Integer> {
         return binaryMatrixMap;
     }
 
-    static HashMap<Integer, Integer> generateBinaryCodesForDigits() {
-        HashMap<Integer, Integer> binaryCodesForDigits = new HashMap<>();
-        for (Digit digit = new Digit(ZERO); digit.value <= NINE; ) {
-            binaryCodesForDigits.put(digit.value, digit.getBinaryCode());
-            try {
-                digit = digit.successor();
-            } catch (UnsupportedOperationException error) {
-                break;
-            }
-        }
-        return binaryCodesForDigits;
-    }
-
-    public static Digit binaryCodeToDigit(Integer binaryCode)
-            throws IllegalArgumentException {
-        List<Digit> digitFound = new ArrayList<>();
-        binaryCodesForDigits.forEach((digit, binCode) -> {
-            if (binaryCode.equals(binCode)) {
-                digitFound.add(new Digit(digit));
-            }
-        });
-        if (digitFound.isEmpty()){
-            throw new IllegalArgumentException();
-        }
-        return digitFound.get(0);
-    }
-
     public Digit successor() throws UnsupportedOperationException {
         if (value == NINE) {
             throw new UnsupportedOperationException();
@@ -86,11 +58,5 @@ public class Digit extends AbstractCharacter<Integer> {
     @Override
     public String getStringValue() {
         return value.toString();
-    }
-
-    @Override
-    protected ICharacter<Integer> getInstance(Integer[][] binaryMatrix) throws IllegalArgumentException {
-        Integer binaryCode = binaryMatrixToBinaryCode(binaryMatrix);
-        return binaryCodeToDigit(binaryCode);
     }
 }

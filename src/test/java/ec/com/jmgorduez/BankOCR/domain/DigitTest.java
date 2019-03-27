@@ -1,6 +1,7 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator;
+import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitReader;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -133,60 +134,6 @@ class DigitTest {
     }
 
     @Test
-    @DisplayName("It should instantiate a digit from its binary code.")
-    void binaryCodeToDigit() {
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_ONE))
-                .isEqualTo(DIGIT_ONE);
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_TWO))
-                .isEqualTo(DIGIT_TWO);
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_THREE))
-                .isEqualTo(DIGIT_THREE);
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_FOUR))
-                .isEqualTo(DIGIT_FOUR);
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_FIVE))
-                .isEqualTo(DIGIT_FIVE);
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_SIX))
-                .isEqualTo(DIGIT_SIX);
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_SEVEN))
-                .isEqualTo(DIGIT_SEVEN);
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_EIGHT))
-                .isEqualTo(DIGIT_EIGHT);
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_NINE))
-                .isEqualTo(DIGIT_NINE);
-        assertThat(digitUnderTest.binaryCodeToDigit(BINARY_CODE_ZERO))
-                .isEqualTo(DIGIT_ZERO);
-
-        assertThatThrownBy(() -> {
-            digitUnderTest.binaryCodeToDigit(WRONG_BINARY_CODE);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("It should generate a binary code for each digit")
-    void generateBinaryCodesForDigits() {
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(ONE))
-                .isEqualTo(BINARY_CODE_ONE);
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(TWO))
-                .isEqualTo(BINARY_CODE_TWO);
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(THREE))
-                .isEqualTo(BINARY_CODE_THREE);
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(FOUR))
-                .isEqualTo(BINARY_CODE_FOUR);
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(FIVE))
-                .isEqualTo(BINARY_CODE_FIVE);
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(SIX))
-                .isEqualTo(BINARY_CODE_SIX);
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(SEVEN))
-                .isEqualTo(BINARY_CODE_SEVEN);
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(EIGHT))
-                .isEqualTo(BINARY_CODE_EIGHT);
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(NINE))
-                .isEqualTo(BINARY_CODE_NINE);
-        assertThat(digitUnderTest.generateBinaryCodesForDigits().get(ZERO))
-                .isEqualTo(BINARY_CODE_ZERO);
-    }
-
-    @Test
     @DisplayName("It should calculate the digit successor.")
     void successor() {
         digitUnderTest = DIGIT_ZERO;
@@ -211,31 +158,31 @@ class DigitTest {
     @Test
     @DisplayName("It should return the list of similar chars.")
     void getSimilarCharacters() {
-        assertThat(digitUnderTest.getSimilarCharacters())
+        assertThat(digitUnderTest.getSimilarCharacters(new MultilineDigitReader()))
                 .isEqualTo(generateListDigitOneSimilarCharacters());
         digitUnderTest = DIGIT_SEVEN;
-        assertThat(digitUnderTest.getSimilarCharacters())
+        assertThat(digitUnderTest.getSimilarCharacters(new MultilineDigitReader()))
                 .isEqualTo(generateListDigitSevenSimilarCharacters());
         digitUnderTest = DIGIT_FIVE;
-        assertThat(digitUnderTest.getSimilarCharacters())
+        assertThat(digitUnderTest.getSimilarCharacters(new MultilineDigitReader()))
                 .isEqualTo(generateListDigitFiveSimilarCharacters());
         digitUnderTest = DIGIT_SIX;
-        assertThat(digitUnderTest.getSimilarCharacters())
+        assertThat(digitUnderTest.getSimilarCharacters(new MultilineDigitReader()))
                 .isEqualTo(generateListDigitSixSimilarCharacters());
         digitUnderTest = DIGIT_EIGHT;
-        assertThat(digitUnderTest.getSimilarCharacters())
+        assertThat(digitUnderTest.getSimilarCharacters(new MultilineDigitReader()))
                 .isEqualTo(generateListDigitEightSimilarCharacters());
         digitUnderTest = DIGIT_NINE;
-        assertThat(digitUnderTest.getSimilarCharacters())
+        assertThat(digitUnderTest.getSimilarCharacters(new MultilineDigitReader()))
                 .isEqualTo(generateListDigitNineSimilarCharacters());
         digitUnderTest = DIGIT_ZERO;
-        assertThat(digitUnderTest.getSimilarCharacters())
+        assertThat(digitUnderTest.getSimilarCharacters(new MultilineDigitReader()))
                 .isEqualTo(generateListDigitZeroSimilarCharacters());
     }
 
     @Test
     @DisplayName("It should return a copy of a binary matrix.")
-    void copyBinaryMatrix(){
+    void copyBinaryMatrix() {
         assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_ONE))
                 .isEqualTo(BINARY_MATRIX_ONE);
         assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_TWO))
@@ -256,33 +203,5 @@ class DigitTest {
                 .isEqualTo(BINARY_MATRIX_NINE);
         assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_ZERO))
                 .isEqualTo(BINARY_MATRIX_ZERO);
-    }
-
-    @Test
-    @DisplayName("It should return a digit instance from a binary matrix.")
-    void getInstance() {
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_ONE))
-                .isEqualTo(DIGIT_ONE);
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_TWO))
-                .isEqualTo(DIGIT_TWO);
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_THREE))
-                .isEqualTo(DIGIT_THREE);
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_FOUR))
-                .isEqualTo(DIGIT_FOUR);
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_FIVE))
-                .isEqualTo(DIGIT_FIVE);
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_SIX))
-                .isEqualTo(DIGIT_SIX);
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_SEVEN))
-                .isEqualTo(DIGIT_SEVEN);
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_EIGHT))
-                .isEqualTo(DIGIT_EIGHT);
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_NINE))
-                .isEqualTo(DIGIT_NINE);
-        assertThat(digitUnderTest.getInstance(BINARY_MATRIX_ZERO))
-                .isEqualTo(DIGIT_ZERO);
-        assertThatThrownBy(() -> {
-            assertThat(digitUnderTest.getInstance(WRONG_BINARY_MATRIX));
-        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
