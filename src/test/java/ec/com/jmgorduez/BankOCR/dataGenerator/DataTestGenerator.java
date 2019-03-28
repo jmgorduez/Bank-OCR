@@ -56,6 +56,8 @@ public class DataTestGenerator {
             = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
     public static final AccountNumber ACCOUNT_NUMBER_490067714
             = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_490067714);
+    public static final AccountNumber ACCOUNT_NUMBER_345882865
+            = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_345882865);
 
     public static final Integer CHECK_SUM_111111111 = 45;
     public static final Integer CHECK_SUM_123456789 = 165;

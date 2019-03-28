@@ -20,8 +20,7 @@ class AccountNumberTest {
 
     @BeforeEach
     void setUp() {
-        accountNumberUnderTest
-                = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_111111111);
+        accountNumberUnderTest = ACCOUNT_NUMBER_111111111;
     }
 
     @Test
@@ -46,12 +45,10 @@ class AccountNumberTest {
     void calculateCheckSum() {
         assertThat(accountNumberUnderTest.calculateCheckSum())
                 .isEqualTo(CHECK_SUM_111111111);
-        accountNumberUnderTest
-                = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
+        accountNumberUnderTest = ACCOUNT_NUMBER_123456789;
         assertThat(accountNumberUnderTest.calculateCheckSum())
                 .isEqualTo(CHECK_SUM_123456789);
-        accountNumberUnderTest
-                = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_345882865);
+        accountNumberUnderTest = ACCOUNT_NUMBER_345882865;
         assertThat(accountNumberUnderTest.calculateCheckSum())
                 .isEqualTo(CHECK_SUM_345882865);
     }
@@ -59,20 +56,20 @@ class AccountNumberTest {
     @Test
     @DisplayName("It should return true if is a right account number.")
     void isRightAccountNumber() {
-        /*assertThat(accountNumberUnderTest.isRightAccountNumber())
+        assertThat(accountNumberUnderTest.isRightAccountNumber())
                 .isFalse();
-        accountNumberUnderTest
-                = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
+        accountNumberUnderTest = ACCOUNT_NUMBER_123456789;
         assertThat(accountNumberUnderTest.isRightAccountNumber())
                 .isTrue();
-        accountNumberUnderTest
-                = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_000000000);
+        accountNumberUnderTest = ACCOUNT_NUMBER_000000000;
         assertThat(accountNumberUnderTest.isRightAccountNumber())
-                .isTrue();*/
-        accountNumberUnderTest
-                = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
+                .isTrue();
+        accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
         assertThat(accountNumberUnderTest.isRightAccountNumber())
                 .isFalse();
+        accountNumberUnderTest = ACCOUNT_NUMBER_490067714;
+        assertThat(accountNumberUnderTest.isRightAccountNumber())
+                .isTrue();
     }
 
     @Test
@@ -80,8 +77,7 @@ class AccountNumberTest {
     void isIllegibleAccountNumber() {
         assertThat(accountNumberUnderTest.isIllegibleAccountNumber())
                 .isFalse();
-        accountNumberUnderTest
-                = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
+        accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
         assertThat(accountNumberUnderTest.isIllegibleAccountNumber())
                 .isTrue();
     }
@@ -91,10 +87,10 @@ class AccountNumberTest {
     void getAccountNumberClassification() {
         assertThat(accountNumberUnderTest.getAccountNumberClassification())
                 .isEqualTo(ERR);
-        accountNumberUnderTest = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
+        accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
         assertThat(accountNumberUnderTest.getAccountNumberClassification())
                 .isEqualTo(ILL);
-        accountNumberUnderTest = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
+        accountNumberUnderTest = ACCOUNT_NUMBER_123456789;
         assertThat(accountNumberUnderTest.getAccountNumberClassification())
                 .isEqualTo(RIG);
     }
