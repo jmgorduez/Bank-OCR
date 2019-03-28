@@ -6,7 +6,6 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineCharacterReader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,12 +32,11 @@ public class AccountNumber implements IAccountNumber {
     }
 
     private String value;
-    private List<ICharacter<Integer>> digits;
+    private List<ICharacter> digits;
 
-    public AccountNumber(List<ICharacter<Integer>> digits) {
-        this.value = digits.stream().map(digit -> {
-            return digit.getStringValue();
-        }).collect(Collectors.joining());
+    public AccountNumber(List<ICharacter> digits) {
+        this.value = digits.stream().map(digit -> digit.getStringValue())
+                .collect(Collectors.joining());
         this.digits = digits;
     }
 
@@ -49,18 +47,19 @@ public class AccountNumber implements IAccountNumber {
 
     @Override
     public Integer calculateCheckSum() {
-        Integer checkSum = Stream.iterate(ONE, index -> index + ONE).limit(digits.size())
-                .mapToInt(index -> {
-                    Integer digit = digits.get(digits.size() - index).getValue();
-                    return index * digit;
-                })
+        return Stream.iterate(ONE, index -> index + ONE).limit(digits.size())
+                .mapToInt(index -> getDigit(index).calculateCheckSumValue(index))
                 .sum();
-        return checkSum;
     }
 
     @Override
-    public Boolean isRightAccountNumber() {
-        if (isIllegibleAccountNumber()) {
+    public ICharacter getDigit(Integer index) {
+        return digits.get(digits.size() - index);
+    }
+
+    @Override
+    public Boolean isRightAccountNumber(IMultilineCharacterReader multilineCharacterReader) {
+        if (isIllegibleAccountNumber(multilineCharacterReader)) {
             return false;
         }
         Integer restOfDivision = calculateCheckSum() % ELEVEN;
@@ -68,19 +67,19 @@ public class AccountNumber implements IAccountNumber {
     }
 
     @Override
-    public Boolean isIllegibleAccountNumber() {
-        Integer quantityOfIllegibleCharactes = digits.stream().mapToInt(digit -> {
-            return digit.getValue().equals(UNDEFINED_DIGIT_VALUE) ? ONE : ZERO;
-        }).sum();
+    public Boolean isIllegibleAccountNumber(IMultilineCharacterReader multilineCharacterReader) {
+        Integer quantityOfIllegibleCharactes = digits.stream()
+                .mapToInt(digit -> multilineCharacterReader.isUndefinedDigit(digit) ? ONE : ZERO)
+                .sum();
         return quantityOfIllegibleCharactes > 0;
     }
 
     @Override
-    public IntegerAccountNumberClassification getAccountNumberClassification() {
-        if (isIllegibleAccountNumber()) {
+    public IntegerAccountNumberClassification getAccountNumberClassification(IMultilineCharacterReader multilineCharacterReader) {
+        if (isIllegibleAccountNumber(multilineCharacterReader)) {
             return ILL;
         }
-        if (!isRightAccountNumber()) {
+        if (!isRightAccountNumber(multilineCharacterReader)) {
             return ERR;
         }
         return RIG;
@@ -88,57 +87,57 @@ public class AccountNumber implements IAccountNumber {
 
     @Override
     public IAccountNumber repairAccountNumber(IMultilineCharacterReader multilineCharacterReader) {
-        if (isRightAccountNumber()) {
+        if (isRightAccountNumber(multilineCharacterReader)) {
             throw new UnsupportedOperationException();
         }
         List<AccountNumber> numbersResulting
-                = calculatePosibleRightNumbers(new AccountNumber(digits), ZERO, multilineCharacterReader);
+                = calculatePosibleRightNumbers(ONE, multilineCharacterReader);
         Optional<AccountNumber> result = numbersResulting.stream()
-                .reduce((accountNumber1, accountNumber2) -> {
-                    return howManyDigitsAreEquals(accountNumber1) > howManyDigitsAreEquals(accountNumber2)
-                            ? accountNumber1 : accountNumber2;
-                });
+                .reduce((accountNumber1, accountNumber2) ->
+                        getMoreSimilarAccountNumber(accountNumber1, accountNumber2));
         return result.map(accountNumber -> accountNumber)
                 .orElseThrow(UnsupportedOperationException::new);
     }
 
-    List<AccountNumber> calculatePosibleRightNumbers(AccountNumber accountNumber,
-                                                     Integer index,
-                                                     IMultilineCharacterReader multilineCharacterReader) {
+    AccountNumber getMoreSimilarAccountNumber(AccountNumber accountNumber1, AccountNumber accountNumber2) {
+        return this.howManyDigitsAreEquals(accountNumber1) > this.howManyDigitsAreEquals(accountNumber2)
+                ? accountNumber1 : accountNumber2;
+    }
+
+    List<AccountNumber> calculatePosibleRightNumbers(
+            Integer index,
+            IMultilineCharacterReader multilineCharacterReader) {
         List<AccountNumber> numbersResulting = new ArrayList<>();
-        if (accountNumber.isRightAccountNumber()) {
-            numbersResulting.add(accountNumber);
+        if (isRightAccountNumber(multilineCharacterReader)) {
+            numbersResulting.add(this);
             return numbersResulting;
         }
-        if (index == accountNumber.digits.size()) {
+        if (index > digits.size()) {
             return new ArrayList<>();
         }
         Integer newIndex = index + ONE;
-        digits.get(index).getSimilarCharacters(multilineCharacterReader).stream()
-                .forEach(similarCharacter -> {
+        getDigit(index).getSimilarCharacters(multilineCharacterReader).stream()
+                .map(similarCharacter -> copyAccountNumberChargingCharacterAt(index, similarCharacter))
+                .forEach(newAccountNumber -> {
                     numbersResulting.addAll(
-                            calculatePosibleRightNumbers(
-                                    copyAccountNumberChangingACharacter(accountNumber, index, similarCharacter),
-                                    newIndex,
-                                    multilineCharacterReader));
+                            newAccountNumber
+                                    .calculatePosibleRightNumbers(newIndex, multilineCharacterReader));
                 });
         numbersResulting.addAll(
-                calculatePosibleRightNumbers(accountNumber, newIndex, multilineCharacterReader));
+                calculatePosibleRightNumbers(newIndex, multilineCharacterReader));
         return numbersResulting;
     }
 
-    AccountNumber copyAccountNumberChangingACharacter(AccountNumber accountNumber,
-                                                      Integer index,
-                                                      ICharacter<Integer> character) {
-        List<ICharacter<Integer>> digits = new ArrayList<>(accountNumber.digits);
-        digits.set(index, character);
+    AccountNumber copyAccountNumberChargingCharacterAt(Integer index, ICharacter character) {
+        List<ICharacter> digits = new ArrayList<>(this.digits);
+        digits.set(digits.size() - index, character);
         return new AccountNumber(digits);
     }
 
     Integer howManyDigitsAreEquals(AccountNumber accountNumber) {
-        return Stream.iterate(ZERO, index -> index + ONE).limit(digits.size())
+        return Stream.iterate(ONE, index -> index + ONE).limit(digits.size())
                 .mapToInt(index -> {
-                    return this.digits.get(index).equals(accountNumber.digits.get(index)) ? ONE : ZERO;
+                    return getDigit(index).equals(accountNumber.getDigit(index)) ? ONE : ZERO;
                 }).sum();
     }
 

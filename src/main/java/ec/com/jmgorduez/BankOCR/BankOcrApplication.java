@@ -22,9 +22,9 @@ public class BankOcrApplication {
             new MultilineStringReader(STRING_LENGTH);
     private static ILineReader<DigitToken.TokenType> lineReader
             = new LineReader();
-    private static IMultilineCharacterReader<Integer, DigitToken.TokenType> multilineCharacterReader =
+    private static IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader =
             new MultilineDigitReader();
-    private static IAccountNumberReader<DigitToken.TokenType, Integer> accountNumberReader =
+    private static IAccountNumberReader<DigitToken.TokenType> accountNumberReader =
             new AccountNumberReader();
 
     public static void main(String[] args) {
@@ -41,7 +41,7 @@ public class BankOcrApplication {
                         = new StringBuilder(accountNumber.getValue());
                 stringBuilder.append(BLANK_SPACE_STRING)
                         .append(((AccountNumber.IntegerAccountNumberClassification)
-                                accountNumber.getAccountNumberClassification()).getValue());
+                                accountNumber.getAccountNumberClassification(multilineCharacterReader)).getValue());
                 System.out.println(stringBuilder.toString());
             } while (true);
         } catch (FileNotFoundException e) {

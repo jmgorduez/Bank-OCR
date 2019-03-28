@@ -17,12 +17,12 @@ import static ec.com.jmgorduez.BankOCR.domain.Digit.binaryMatrixToBinaryCode;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 
-public class MultilineDigitReader implements IMultilineCharacterReader<Integer, DigitToken.TokenType> {
+public class MultilineDigitReader implements IMultilineCharacterReader< DigitToken.TokenType> {
 
     private static final HashMap<Integer, Integer> binaryCodesForDigits = generateBinaryCodesForDigits();
 
     @Override
-    public ICharacter<Integer> readCharacter(IMultilineString<IToken<DigitToken.TokenType>> digitTokenMatrix) {
+    public ICharacter readCharacter(IMultilineString<IToken<DigitToken.TokenType>> digitTokenMatrix) {
 
         Integer[][] binaryMatrix = digitTokenMatrixToBinaryMatrix(digitTokenMatrix);
         Integer binaryCode = binaryMatrixToBinaryCode(binaryMatrix);
@@ -34,7 +34,7 @@ public class MultilineDigitReader implements IMultilineCharacterReader<Integer, 
     }
 
     @Override
-    public ICharacter<Integer> readCharacter(Integer[][] binaryMatrix) {
+    public ICharacter readCharacter(Integer[][] binaryMatrix) {
         Integer binaryCode = binaryMatrixToBinaryCode(binaryMatrix);
         try {
             return binaryCodeToDigit(binaryCode);
@@ -56,7 +56,7 @@ public class MultilineDigitReader implements IMultilineCharacterReader<Integer, 
         return binaryMatrix.toArray(new Integer[][]{});
     }
 
-    public static Digit binaryCodeToDigit(Integer binaryCode)
+    static Digit binaryCodeToDigit(Integer binaryCode)
             throws IllegalArgumentException {
         List<Digit> digitFound = new ArrayList<>();
         binaryCodesForDigits.forEach((digit, binCode) -> {
@@ -72,8 +72,8 @@ public class MultilineDigitReader implements IMultilineCharacterReader<Integer, 
 
     static HashMap<Integer, Integer> generateBinaryCodesForDigits() {
         HashMap<Integer, Integer> binaryCodesForDigits = new HashMap<>();
-        for (Digit digit = new Digit(ZERO); digit.getValue() <= NINE; ) {
-            binaryCodesForDigits.put(digit.getValue(), digit.getBinaryCode());
+        for (Digit digit = new Digit(ZERO); digit.getIntegerValue() <= NINE; ) {
+            binaryCodesForDigits.put(digit.getIntegerValue(), digit.getBinaryCode());
             try {
                 digit = digit.successor();
             } catch (UnsupportedOperationException error) {
@@ -81,5 +81,10 @@ public class MultilineDigitReader implements IMultilineCharacterReader<Integer, 
             }
         }
         return binaryCodesForDigits;
+    }
+
+    @Override
+    public boolean isUndefinedDigit(ICharacter digit) {
+        return digit instanceof UndefinedDigit;
     }
 }

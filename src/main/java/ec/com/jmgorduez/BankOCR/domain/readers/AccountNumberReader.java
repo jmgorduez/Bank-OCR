@@ -8,15 +8,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
-public class AccountNumberReader implements IAccountNumberReader<DigitToken.TokenType, Integer> {
+public class AccountNumberReader implements IAccountNumberReader<DigitToken.TokenType> {
 
     @Override
     public IAccountNumber readAccountNumber(BufferedReader bufferedReader,
-                                            ILineReader<DigitToken.TokenType> lineReader,
-                                            IMultilineCharacterReader<Integer, DigitToken.TokenType> charaterReader,
-                                            IMultilineStringReader<Integer, DigitToken.TokenType> multilineStringReader) throws IOException {
-        List<ICharacter<Integer>> characters =
-                multilineStringReader.readMultilineString(bufferedReader, lineReader, charaterReader);
+                                            ILineReader<DigitToken.TokenType> readLine,
+                                            IMultilineCharacterReader< DigitToken.TokenType> charaterReader,
+                                            IMultilineStringReader< DigitToken.TokenType> multilineStringReader) throws IOException {
+        List<ICharacter> characters =
+                multilineStringReader.readMultilineString(bufferedReader, readLine, charaterReader);
         return new AccountNumber(characters);
     }
 }

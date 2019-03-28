@@ -24,7 +24,7 @@ class UndefinedDigitTest {
     @Test
     @DisplayName("It should return the value ?.")
     void getValue() {
-        assertThat(undefinedDigitUnderTest.getValue())
+        assertThat(undefinedDigitUnderTest.getIntegerValue())
                 .isEqualTo(UNDEFINED_DIGIT_VALUE);
     }
 

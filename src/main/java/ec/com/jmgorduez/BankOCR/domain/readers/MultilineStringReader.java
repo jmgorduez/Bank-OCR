@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
-public class MultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum> implements IMultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE> {
+public class MultilineStringReader< TOKEN_TYPE extends Enum> implements IMultilineStringReader< TOKEN_TYPE> {
 
     private static final int CHARACTER_WIDTH = 3;
     private static final int CHARACTER_HEIGHT = 3;
@@ -28,9 +28,9 @@ public class MultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum> impl
     }
 
     @Override
-    public List<ICharacter<CHARACTER_TYPE>> readMultilineString(BufferedReader bufferedReader,
+    public List<ICharacter> readMultilineString(BufferedReader bufferedReader,
                                                                 ILineReader<TOKEN_TYPE> lineReader,
-                                                                IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader)
+                                                                IMultilineCharacterReader<TOKEN_TYPE> characterReader)
             throws IOException {
         IMultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(CHARACTER_WIDTH);
         int lineCounter = 0;
@@ -46,9 +46,9 @@ public class MultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum> impl
         return this.generateCharactersString(multilineString, characterReader);
     }
 
-    List<ICharacter<CHARACTER_TYPE>> generateCharactersString(IMultilineString<IToken<TOKEN_TYPE>> multilineString,
-                                                              IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> characterReader) {
-        List<ICharacter<CHARACTER_TYPE>> charactersString =
+    List<ICharacter> generateCharactersString(IMultilineString<IToken<TOKEN_TYPE>> multilineString,
+                                                              IMultilineCharacterReader<TOKEN_TYPE> characterReader) {
+        List<ICharacter> charactersString =
                 Stream.iterate(ZERO, index -> index + ONE).limit(stringLength)
                         .map(index -> {
                             IMultilineString<IToken<TOKEN_TYPE>> multilineCharacter

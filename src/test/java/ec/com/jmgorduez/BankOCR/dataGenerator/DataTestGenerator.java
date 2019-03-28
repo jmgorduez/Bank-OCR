@@ -32,18 +32,18 @@ public class DataTestGenerator {
     public static final String STRING_ACCOUNT_NUMBER_49006771_ = "49006771?";
     public static final String STRING_ACCOUNT_NUMBER_490067714 = "490067714";
 
-    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_000000000
+    public static final List<ICharacter> CHARACTERS_ACCOUNT_NUMBER_000000000
             = generateListDigitFromIntegerArray(new Integer[]{0, 0, 0, 0, 0, 0, 0, 0, 0});
-    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_111111111
+    public static final List<ICharacter> CHARACTERS_ACCOUNT_NUMBER_111111111
             = generateListDigitFromIntegerArray(new Integer[]{1, 1, 1, 1, 1, 1, 1, 1, 1});
-    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_123456789
+    public static final List<ICharacter> CHARACTERS_ACCOUNT_NUMBER_123456789
             = generateListDigitFromIntegerArray(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
-    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_49006771_
+    public static final List<ICharacter> CHARACTERS_ACCOUNT_NUMBER_49006771_
             = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1},
             generateUndefinedCharacterSimilarDigitFour());
-    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_490067719
+    public static final List<ICharacter> CHARACTERS_ACCOUNT_NUMBER_490067719
             = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, 9});
-    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_345882865
+    public static final List<ICharacter> CHARACTERS_ACCOUNT_NUMBER_345882865
             = generateListDigitFromIntegerArray(new Integer[]{3, 4, 5, 8, 8, 2, 8, 6, 5});
 
     public static final AccountNumber ACCOUNT_NUMBER_000000000
@@ -342,7 +342,7 @@ public class DataTestGenerator {
         return multilineString;
     }
 
-    public static List<ICharacter<Integer>> generateListSameDigits(Integer integerDigit) {
+    public static List<ICharacter> generateListSameDigits(Integer integerDigit) {
         Stream<Digit> stream = Stream.generate(
                 () -> new Digit(new Integer(integerDigit))).limit(NINE);
         return stream.collect(Collectors.toList());
@@ -395,63 +395,63 @@ public class DataTestGenerator {
         return character;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitOneSimilarCharacters() {
-        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+    public static List<ICharacter> generateListDigitOneSimilarCharacters() {
+        List<ICharacter> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_SEVEN);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitSevenSimilarCharacters() {
-        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+    public static List<ICharacter> generateListDigitSevenSimilarCharacters() {
+        List<ICharacter> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_ONE);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitEightSimilarCharacters() {
-        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+    public static List<ICharacter> generateListDigitEightSimilarCharacters() {
+        List<ICharacter> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_ZERO);
         similarCharacters.add(DIGIT_SIX);
         similarCharacters.add(DIGIT_NINE);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitNineSimilarCharacters() {
-        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+    public static List<ICharacter> generateListDigitNineSimilarCharacters() {
+        List<ICharacter> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_THREE);
         similarCharacters.add(DIGIT_FIVE);
         similarCharacters.add(DIGIT_EIGHT);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitZeroSimilarCharacters() {
-        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+    public static List<ICharacter> generateListDigitZeroSimilarCharacters() {
+        List<ICharacter> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_EIGHT);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitFiveSimilarCharacters() {
-        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+    public static List<ICharacter> generateListDigitFiveSimilarCharacters() {
+        List<ICharacter> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_NINE);
         similarCharacters.add(DIGIT_SIX);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitSixSimilarCharacters() {
-        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+    public static List<ICharacter> generateListDigitSixSimilarCharacters() {
+        List<ICharacter> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_EIGHT);
         similarCharacters.add(DIGIT_FIVE);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListUndefinedCharacterSimilarDigitNineSimilarCharacters() {
-        List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
+    public static List<ICharacter> generateListUndefinedCharacterSimilarDigitNineSimilarCharacters() {
+        List<ICharacter> similarCharacters = new ArrayList<>();
         similarCharacters.add(DIGIT_NINE);
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListDigitFromIntegerArray(Integer[] integers,
-                                                                              ICharacter<Integer>... undefinedCharacter) {
-        List<ICharacter<Integer>> characters =
+    public static List<ICharacter> generateListDigitFromIntegerArray(Integer[] integers,
+                                                                              ICharacter... undefinedCharacter) {
+        List<ICharacter> characters =
                 Arrays.stream(integers).map(integer -> {
                     if (integer.equals(UNDEFINED_DIGIT_VALUE)) {
                         return undefinedCharacter[0];
@@ -461,7 +461,7 @@ public class DataTestGenerator {
         return characters;
     }
 
-    public static ICharacter<Integer> generateUndefinedCharacterSimilarDigitFour() {
+    public static ICharacter generateUndefinedCharacterSimilarDigitFour() {
         Integer[][] binaryMatrixDigitSimilarZero = new Integer[][]{
                 new Integer[]{ZERO, ONE, ZERO},
                 new Integer[]{ZERO, ONE, ONE},

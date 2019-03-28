@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
-public interface IMultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE extends Enum> {
-    List<ICharacter<CHARACTER_TYPE>> readMultilineString(BufferedReader bufferedReader,
+public interface IMultilineStringReader<TOKEN_TYPE extends Enum> {
+    List<ICharacter> readMultilineString(BufferedReader bufferedReader,
                                                          ILineReader<TOKEN_TYPE> lineReader,
-                                                         IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> charaterReader)
+                                                         IMultilineCharacterReader< TOKEN_TYPE> charaterReader)
             throws IOException;
 }

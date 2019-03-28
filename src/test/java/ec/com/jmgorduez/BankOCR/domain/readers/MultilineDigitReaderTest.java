@@ -97,4 +97,13 @@ class MultilineDigitReaderTest {
         assertThat(multilineDigitReaderUnderTest.readCharacter(WRONG_BINARY_MATRIX))
                 .isInstanceOf(UndefinedDigit.class);
     }
+
+    @Test
+    @DisplayName("It should return if a digit is an undefined character.")
+    void isUndefinedDigit() {
+        assertThat(multilineDigitReaderUnderTest.isUndefinedDigit(DIGIT_ONE))
+                .isFalse();
+        assertThat(multilineDigitReaderUnderTest.isUndefinedDigit(UNDEFINED_CHARACTER))
+                .isTrue();
+    }
 }

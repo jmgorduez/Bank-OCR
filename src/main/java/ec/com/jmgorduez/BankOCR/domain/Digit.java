@@ -7,7 +7,7 @@ import java.util.*;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
-public class Digit extends AbstractCharacter<Integer> {
+public class Digit extends AbstractCharacter {
 
     private static final HashMap<Integer, Integer[][]> binaryMatricesForDigits = generateBinaryMatricesForDigits();
 
@@ -59,4 +59,5 @@ public class Digit extends AbstractCharacter<Integer> {
     public String getStringValue() {
         return value.toString();
     }
+
 }

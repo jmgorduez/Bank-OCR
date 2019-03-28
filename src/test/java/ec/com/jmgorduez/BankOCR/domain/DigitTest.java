@@ -1,6 +1,5 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
-import ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator;
 import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitReader;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +10,6 @@ import java.util.Objects;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.WRONG_BINARY_MATRIX;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -29,7 +27,7 @@ class DigitTest {
     @DisplayName("It should return the Integer that represent the digit value")
     void getValue() {
         digitUnderTest = DIGIT_ONE;
-        assertThat(digitUnderTest.getValue()).isEqualTo(ONE);
+        assertThat(digitUnderTest.getIntegerValue()).isEqualTo(ONE);
     }
 
     @Test
@@ -203,5 +201,16 @@ class DigitTest {
                 .isEqualTo(BINARY_MATRIX_NINE);
         assertThat(digitUnderTest.copyBinaryMatrix(BINARY_MATRIX_ZERO))
                 .isEqualTo(BINARY_MATRIX_ZERO);
+    }
+
+    @Test
+    @DisplayName("it should calculate the digit check sum value from the digit index.")
+    void calculateCheckSumValue(){
+        Integer digitCheckSumValue = digitUnderTest.getIntegerValue()*ONE;
+        assertThat(digitUnderTest.calculateCheckSumValue(ONE))
+                .isEqualTo(digitCheckSumValue);
+        digitCheckSumValue = digitUnderTest.getIntegerValue()*NINE;
+        assertThat(digitUnderTest.calculateCheckSumValue(NINE))
+                .isEqualTo(digitCheckSumValue);
     }
 }

@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
-public interface IAccountNumberReader<TOKEN_TYPE extends Enum, CHARACTER_TYPE> {
+public interface IAccountNumberReader<TOKEN_TYPE extends Enum> {
     IAccountNumber readAccountNumber(BufferedReader bufferedReader,
-                                     ILineReader<TOKEN_TYPE> lineReader,
-                                     IMultilineCharacterReader<CHARACTER_TYPE, TOKEN_TYPE> charaterReader,
-                                     IMultilineStringReader<CHARACTER_TYPE, TOKEN_TYPE> multilineStringReader)
+                                     ILineReader<TOKEN_TYPE> readLine,
+                                     IMultilineCharacterReader< TOKEN_TYPE> charaterReader,
+                                     IMultilineStringReader<TOKEN_TYPE> multilineStringReader)
             throws IOException;
 }

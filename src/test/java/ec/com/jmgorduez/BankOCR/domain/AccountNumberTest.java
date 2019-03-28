@@ -11,6 +11,7 @@ import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.domain.AccountNumber.IntegerAccountNumberClassification.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.mockito.ArgumentMatchers.any;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 class AccountNumberTest {
@@ -55,45 +56,45 @@ class AccountNumberTest {
     @Test
     @DisplayName("It should return true if is a right account number.")
     void isRightAccountNumber() {
-        assertThat(accountNumberUnderTest.isRightAccountNumber())
+        assertThat(accountNumberUnderTest.isRightAccountNumber(new MultilineDigitReader()))
                 .isFalse();
         accountNumberUnderTest = ACCOUNT_NUMBER_123456789;
-        assertThat(accountNumberUnderTest.isRightAccountNumber())
+        assertThat(accountNumberUnderTest.isRightAccountNumber(new MultilineDigitReader()))
                 .isTrue();
         accountNumberUnderTest = ACCOUNT_NUMBER_000000000;
-        assertThat(accountNumberUnderTest.isRightAccountNumber())
+        assertThat(accountNumberUnderTest.isRightAccountNumber(new MultilineDigitReader()))
                 .isTrue();
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
-        assertThat(accountNumberUnderTest.isRightAccountNumber())
+        assertThat(accountNumberUnderTest.isRightAccountNumber(new MultilineDigitReader()))
                 .isFalse();
         accountNumberUnderTest = ACCOUNT_NUMBER_490067719;
-        assertThat(accountNumberUnderTest.isRightAccountNumber())
+        assertThat(accountNumberUnderTest.isRightAccountNumber(new MultilineDigitReader()))
                 .isTrue();
         accountNumberUnderTest = ACCOUNT_NUMBER_111111111;
-        assertThat(accountNumberUnderTest.isRightAccountNumber())
+        assertThat(accountNumberUnderTest.isRightAccountNumber(new MultilineDigitReader()))
                 .isFalse();
     }
 
     @Test
     @DisplayName("It should return true if is an illegible account number.")
     void isIllegibleAccountNumber() {
-        assertThat(accountNumberUnderTest.isIllegibleAccountNumber())
+        assertThat(accountNumberUnderTest.isIllegibleAccountNumber(new MultilineDigitReader()))
                 .isFalse();
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
-        assertThat(accountNumberUnderTest.isIllegibleAccountNumber())
+        assertThat(accountNumberUnderTest.isIllegibleAccountNumber(new MultilineDigitReader()))
                 .isTrue();
     }
 
     @Test
     @DisplayName("It should classify a account number in ILL o ERR.")
     void getAccountNumberClassification() {
-        assertThat(accountNumberUnderTest.getAccountNumberClassification())
+        assertThat(accountNumberUnderTest.getAccountNumberClassification(new MultilineDigitReader()))
                 .isEqualTo(ERR);
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
-        assertThat(accountNumberUnderTest.getAccountNumberClassification())
+        assertThat(accountNumberUnderTest.getAccountNumberClassification(new MultilineDigitReader()))
                 .isEqualTo(ILL);
         accountNumberUnderTest = ACCOUNT_NUMBER_123456789;
-        assertThat(accountNumberUnderTest.getAccountNumberClassification())
+        assertThat(accountNumberUnderTest.getAccountNumberClassification(new MultilineDigitReader()))
                 .isEqualTo(RIG);
     }
 
@@ -130,14 +131,14 @@ class AccountNumberTest {
         List<AccountNumber> expected = new ArrayList<>();
         expected.add(ACCOUNT_NUMBER_123456789);
         assertThat(accountNumberUnderTest
-                .calculatePosibleRightNumbers(accountNumberUnderTest,
-                        ZERO,
+                .calculatePosibleRightNumbers(
+                        ONE,
                         new MultilineDigitReader()))
                 .isEqualTo(expected);
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
         List<AccountNumber> actual = accountNumberUnderTest
-                .calculatePosibleRightNumbers(accountNumberUnderTest,
-                        ZERO,
+                .calculatePosibleRightNumbers(
+                        ONE,
                         new MultilineDigitReader());
         assertThat(actual.contains(ACCOUNT_NUMBER_490067719))
                 .isTrue();
@@ -145,10 +146,30 @@ class AccountNumberTest {
 
     @Test
     @DisplayName("It should return a copy of account number changing a character.")
-    void copyAccountNumberChangingACharacter() {
+    void copyAccountNumberChargingCharacterAt() {
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
         assertThat(accountNumberUnderTest
-                .copyAccountNumberChangingACharacter(accountNumberUnderTest, EIGHT, DIGIT_NINE))
+                .copyAccountNumberChargingCharacterAt(ONE, DIGIT_NINE))
                 .isEqualTo(ACCOUNT_NUMBER_490067719);
+    }
+
+    @Test
+    @DisplayName("It should return the digit in a index.")
+    void getDigit() {
+        assertThat(accountNumberUnderTest.getDigit(ONE))
+                .isEqualTo(DIGIT_ONE);
+        accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
+        assertThat(accountNumberUnderTest.getDigit(NINE))
+                .isEqualTo(DIGIT_FOUR);
+        assertThat(accountNumberUnderTest.getDigit(ONE))
+                .isEqualTo(generateUndefinedCharacterSimilarDigitFour());
+    }
+
+    @Test
+    @DisplayName("It should return the more similar account number to this one.")
+    void getMoreSimilarAccountNumber(){
+        assertThat(accountNumberUnderTest
+                .getMoreSimilarAccountNumber(ACCOUNT_NUMBER_123456789, ACCOUNT_NUMBER_000000000))
+                .isEqualTo(ACCOUNT_NUMBER_123456789);
     }
 }

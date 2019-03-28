@@ -14,18 +14,18 @@ import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;
 import static ec.com.jmgorduez.BankOCR.utils.MathOperations.bitsArrayToNumberBaseTen;
 import static ec.com.jmgorduez.BankOCR.utils.MathOperations.digitsArrayToNumberBaseTen;
 
-public abstract class AbstractCharacter<CHARACTER_TYPE> implements ICharacter<CHARACTER_TYPE> {
+public abstract class AbstractCharacter implements ICharacter {
 
-    protected CHARACTER_TYPE value;
+    protected Integer value;
     protected Integer[][] binaryMatrix;
 
-    public AbstractCharacter(CHARACTER_TYPE value, Integer[][] binaryMatrix) {
+    public AbstractCharacter(Integer value, Integer[][] binaryMatrix) {
         this.value = value;
         this.binaryMatrix = binaryMatrix;
     }
 
     @Override
-    public CHARACTER_TYPE getValue() {
+    public Integer getIntegerValue() {
         return this.value;
     }
 
@@ -43,15 +43,15 @@ public abstract class AbstractCharacter<CHARACTER_TYPE> implements ICharacter<CH
     }
 
     @Override
-    public List<ICharacter<CHARACTER_TYPE>> getSimilarCharacters(IMultilineCharacterReader multilineCharacterReader) {
-        List<ICharacter<CHARACTER_TYPE>> similarCharacters = new ArrayList<>();
+    public List<ICharacter> getSimilarCharacters(IMultilineCharacterReader multilineCharacterReader) {
+        List<ICharacter> similarCharacters = new ArrayList<>();
         for (int i = 0; i < binaryMatrix.length; i++) {
             for (int j = 0; j < binaryMatrix[i].length; j++) {
                 Integer[][] binaryMatrixCopy = copyBinaryMatrix(binaryMatrix);
                 binaryMatrixCopy[i][j] = binaryMatrixCopy[i][j].equals(ZERO) ? ONE : ZERO;
-                    ICharacter<CHARACTER_TYPE> character
+                    ICharacter character
                             = multilineCharacterReader.readCharacter(binaryMatrixCopy);
-                    if(character instanceof UndefinedDigit){
+                    if(multilineCharacterReader.isUndefinedDigit(character)){
                         continue;
                     }
                     similarCharacters.add(character);
@@ -66,5 +66,10 @@ public abstract class AbstractCharacter<CHARACTER_TYPE> implements ICharacter<CH
                     return Arrays.copyOf(row, row.length);
                 }).collect(Collectors.toList());
         return binaryMatrixCopy.toArray(new Integer[][]{});
+    }
+
+    @Override
+    public Integer calculateCheckSumValue(Integer characterIndex) {
+        return characterIndex*value;
     }
 }

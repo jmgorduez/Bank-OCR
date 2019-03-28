@@ -25,8 +25,8 @@ public class BankOcrApplicationTests {
     private static final String FILE_PATH_49006771_ = FILE_PATH + "input49006771_.txt";
     private IMultilineStringReader multilineStringReader;
     private ILineReader<DigitToken.TokenType> lineReader;
-    private IMultilineCharacterReader<Integer, DigitToken.TokenType> multilineCharacterReader;
-    private IAccountNumberReader<DigitToken.TokenType, Integer> accountNumberReader;
+    private IMultilineCharacterReader< DigitToken.TokenType> multilineCharacterReader;
+    private IAccountNumberReader<DigitToken.TokenType> accountNumberReader;
 
     @BeforeEach
     void setUp() {

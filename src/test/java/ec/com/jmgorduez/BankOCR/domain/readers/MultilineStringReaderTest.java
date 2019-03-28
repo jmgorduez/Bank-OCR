@@ -26,9 +26,9 @@ import static org.mockito.Mockito.*;
 
 class MultilineStringReaderTest {
 
-    private MultilineStringReader<Integer, DigitToken.TokenType> multilineStringReaderUnderTest;
+    private MultilineStringReader< DigitToken.TokenType> multilineStringReaderUnderTest;
     @Mock
-    private IMultilineCharacterReader<Integer, DigitToken.TokenType> characterReaderMock;
+    private IMultilineCharacterReader< DigitToken.TokenType> characterReaderMock;
     @Mock
     private ILineReader<DigitToken.TokenType> lineReaderMock;
     @Mock
