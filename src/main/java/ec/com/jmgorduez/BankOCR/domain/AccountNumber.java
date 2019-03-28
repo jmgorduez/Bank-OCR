@@ -63,7 +63,8 @@ public class AccountNumber implements IAccountNumber {
         if (isIllegibleAccountNumber()) {
             return false;
         }
-        return calculateCheckSum() % ELEVEN == ZERO;
+        Integer restOfDivision = calculateCheckSum() % ELEVEN;
+        return restOfDivision.equals(ZERO);
     }
 
     @Override
@@ -92,10 +93,11 @@ public class AccountNumber implements IAccountNumber {
         }
         List<AccountNumber> numbersResulting
                 = calculatePosibleRightNumbers(new AccountNumber(digits), ZERO, multilineCharacterReader);
-        Optional<AccountNumber> result = numbersResulting.stream().reduce((accountNumber1, accountNumber2) -> {
-            return this.howManyDigitsAreEquals(accountNumber1) > this.howManyDigitsAreEquals(accountNumber2)
-                    ? accountNumber1 : accountNumber2;
-        });
+        Optional<AccountNumber> result = numbersResulting.stream()
+                .reduce((accountNumber1, accountNumber2) -> {
+                    return howManyDigitsAreEquals(accountNumber1) > howManyDigitsAreEquals(accountNumber2)
+                            ? accountNumber1 : accountNumber2;
+                });
         try {
             return result.get();
         } catch (NoSuchElementException error) {
@@ -114,15 +116,15 @@ public class AccountNumber implements IAccountNumber {
         if (index == accountNumber.digits.size()) {
             return new ArrayList<>();
         }
-        List<ICharacter<Integer>> similarCharacters
-                = digits.get(index).getSimilarCharacters(multilineCharacterReader);
         Integer newIndex = index + ONE;
-        similarCharacters.stream().forEach(similarCharacter -> {
-            List<ICharacter<Integer>> digits = new ArrayList<>(accountNumber.digits);
-            digits.set(index, similarCharacter);
-            numbersResulting.addAll(
-                    calculatePosibleRightNumbers(new AccountNumber(digits), newIndex, multilineCharacterReader));
-        });
+        digits.get(index).getSimilarCharacters(multilineCharacterReader).stream()
+                .forEach(similarCharacter -> {
+                    numbersResulting.addAll(
+                            calculatePosibleRightNumbers(
+                                    copyAccountNumberChangingACharacter(accountNumber, index, similarCharacter),
+                                    newIndex,
+                                    multilineCharacterReader));
+                });
         numbersResulting.addAll(
                 calculatePosibleRightNumbers(accountNumber, newIndex, multilineCharacterReader));
         return numbersResulting;
@@ -130,8 +132,10 @@ public class AccountNumber implements IAccountNumber {
 
     AccountNumber copyAccountNumberChangingACharacter(AccountNumber accountNumber,
                                                       Integer index,
-                                                      ICharacter<Integer> character){
-        return null;
+                                                      ICharacter<Integer> character) {
+        List<ICharacter<Integer>> digits = new ArrayList<>(accountNumber.digits);
+        digits.set(index, character);
+        return new AccountNumber(digits);
     }
 
     Integer howManyDigitsAreEquals(AccountNumber accountNumber) {

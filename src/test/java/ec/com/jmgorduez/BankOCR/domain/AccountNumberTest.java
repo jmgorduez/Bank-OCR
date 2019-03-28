@@ -6,7 +6,6 @@ import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.domain.AccountNumber.IntegerAccountNumberClassification.*;
@@ -67,9 +66,12 @@ class AccountNumberTest {
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
         assertThat(accountNumberUnderTest.isRightAccountNumber())
                 .isFalse();
-        accountNumberUnderTest = ACCOUNT_NUMBER_490067714;
+        accountNumberUnderTest = ACCOUNT_NUMBER_490067719;
         assertThat(accountNumberUnderTest.isRightAccountNumber())
                 .isTrue();
+        accountNumberUnderTest = ACCOUNT_NUMBER_111111111;
+        assertThat(accountNumberUnderTest.isRightAccountNumber())
+                .isFalse();
     }
 
     @Test
@@ -105,7 +107,7 @@ class AccountNumberTest {
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
         IAccountNumber accountNumber = accountNumberUnderTest.repairAccountNumber(new MultilineDigitReader());
         assertThat(accountNumber)
-                .isEqualTo(ACCOUNT_NUMBER_490067714);
+                .isEqualTo(ACCOUNT_NUMBER_490067719);
     }
 
     @Test
@@ -137,7 +139,7 @@ class AccountNumberTest {
                 .calculatePosibleRightNumbers(accountNumberUnderTest,
                         ZERO,
                         new MultilineDigitReader());
-        assertThat(actual.contains(ACCOUNT_NUMBER_490067714))
+        assertThat(actual.contains(ACCOUNT_NUMBER_490067719))
                 .isTrue();
     }
 
@@ -146,7 +148,7 @@ class AccountNumberTest {
     void copyAccountNumberChangingACharacter() {
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
         assertThat(accountNumberUnderTest
-                .copyAccountNumberChangingACharacter(accountNumberUnderTest, EIGHT, DIGIT_FOUR))
-                .isEqualTo(ACCOUNT_NUMBER_490067714);
+                .copyAccountNumberChangingACharacter(accountNumberUnderTest, EIGHT, DIGIT_NINE))
+                .isEqualTo(ACCOUNT_NUMBER_490067719);
     }
 }

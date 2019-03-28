@@ -41,8 +41,8 @@ public class DataTestGenerator {
     public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_49006771_
             = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1},
             generateUndefinedCharacterSimilarDigitFour());
-    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_490067714
-            = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, 4});
+    public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_490067719
+            = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, 9});
     public static final List<ICharacter<Integer>> CHARACTERS_ACCOUNT_NUMBER_345882865
             = generateListDigitFromIntegerArray(new Integer[]{3, 4, 5, 8, 8, 2, 8, 6, 5});
 
@@ -54,8 +54,8 @@ public class DataTestGenerator {
             = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_123456789);
     public static final AccountNumber ACCOUNT_NUMBER_49006771_
             = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_49006771_);
-    public static final AccountNumber ACCOUNT_NUMBER_490067714
-            = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_490067714);
+    public static final AccountNumber ACCOUNT_NUMBER_490067719
+            = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_490067719);
     public static final AccountNumber ACCOUNT_NUMBER_345882865
             = new AccountNumber(CHARACTERS_ACCOUNT_NUMBER_345882865);
 
@@ -443,10 +443,9 @@ public class DataTestGenerator {
         return similarCharacters;
     }
 
-    public static List<ICharacter<Integer>> generateListUndefinedCharacterSimilarDigitFourSimilarCharacters() {
+    public static List<ICharacter<Integer>> generateListUndefinedCharacterSimilarDigitNineSimilarCharacters() {
         List<ICharacter<Integer>> similarCharacters = new ArrayList<>();
-        similarCharacters.add(DIGIT_FOUR);
-        similarCharacters.add(DIGIT_ONE);
+        similarCharacters.add(DIGIT_NINE);
         return similarCharacters;
     }
 
@@ -464,9 +463,9 @@ public class DataTestGenerator {
 
     public static ICharacter<Integer> generateUndefinedCharacterSimilarDigitFour() {
         Integer[][] binaryMatrixDigitSimilarZero = new Integer[][]{
-                new Integer[]{ZERO, ZERO, ZERO},
+                new Integer[]{ZERO, ONE, ZERO},
                 new Integer[]{ZERO, ONE, ONE},
-                new Integer[]{ZERO, ZERO, ONE}
+                new Integer[]{ZERO, ONE, ONE}
         };
         return new UndefinedDigit(binaryMatrixDigitSimilarZero);
     }
