@@ -127,12 +127,14 @@ class AccountNumberTest {
         accountNumberUnderTest = ACCOUNT_NUMBER_123456789;
         List<AccountNumber> expected = new ArrayList<>();
         expected.add(ACCOUNT_NUMBER_123456789);
-        assertThat(accountNumberUnderTest.calculatePosibleRightNumbers(accountNumberUnderTest,
+        assertThat(accountNumberUnderTest
+                .calculatePosibleRightNumbers(accountNumberUnderTest,
                 ZERO,
                 new MultilineDigitReader()))
                 .isEqualTo(expected);
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
-        List<AccountNumber> actual = accountNumberUnderTest.calculatePosibleRightNumbers(accountNumberUnderTest,
+        List<AccountNumber> actual = accountNumberUnderTest
+                .calculatePosibleRightNumbers(accountNumberUnderTest,
                 ZERO,
                 new MultilineDigitReader());
         assertThat(actual.contains(ACCOUNT_NUMBER_490067714))
