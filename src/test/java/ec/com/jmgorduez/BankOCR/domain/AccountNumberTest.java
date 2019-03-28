@@ -129,15 +129,24 @@ class AccountNumberTest {
         expected.add(ACCOUNT_NUMBER_123456789);
         assertThat(accountNumberUnderTest
                 .calculatePosibleRightNumbers(accountNumberUnderTest,
-                ZERO,
-                new MultilineDigitReader()))
+                        ZERO,
+                        new MultilineDigitReader()))
                 .isEqualTo(expected);
         accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
         List<AccountNumber> actual = accountNumberUnderTest
                 .calculatePosibleRightNumbers(accountNumberUnderTest,
-                ZERO,
-                new MultilineDigitReader());
+                        ZERO,
+                        new MultilineDigitReader());
         assertThat(actual.contains(ACCOUNT_NUMBER_490067714))
                 .isTrue();
+    }
+
+    @Test
+    @DisplayName("It should return a copy of account number changing a character.")
+    void copyAccountNumberChangingACharacter() {
+        accountNumberUnderTest = ACCOUNT_NUMBER_49006771_;
+        assertThat(accountNumberUnderTest
+                .copyAccountNumberChangingACharacter(accountNumberUnderTest, EIGHT, DIGIT_FOUR))
+                .isEqualTo(ACCOUNT_NUMBER_490067714);
     }
 }

@@ -128,6 +128,12 @@ public class AccountNumber implements IAccountNumber {
         return numbersResulting;
     }
 
+    AccountNumber copyAccountNumberChangingACharacter(AccountNumber accountNumber,
+                                                      Integer index,
+                                                      ICharacter<Integer> character){
+        return null;
+    }
+
     Integer howManyDigitsAreEquals(AccountNumber accountNumber) {
         return Stream.iterate(ZERO, index -> index + ONE).limit(digits.size())
                 .mapToInt(index -> {
