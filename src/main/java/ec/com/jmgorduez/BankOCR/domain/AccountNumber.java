@@ -98,11 +98,8 @@ public class AccountNumber implements IAccountNumber {
                     return howManyDigitsAreEquals(accountNumber1) > howManyDigitsAreEquals(accountNumber2)
                             ? accountNumber1 : accountNumber2;
                 });
-        try {
-            return result.get();
-        } catch (NoSuchElementException error) {
-            throw new UnsupportedOperationException();
-        }
+        return result.map(accountNumber -> accountNumber)
+                .orElseThrow(UnsupportedOperationException::new);
     }
 
     List<AccountNumber> calculatePosibleRightNumbers(AccountNumber accountNumber,
