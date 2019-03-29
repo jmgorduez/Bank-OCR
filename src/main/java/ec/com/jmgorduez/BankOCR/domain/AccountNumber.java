@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static ec.com.jmgorduez.BankOCR.domain.AccountNumber.IntegerAccountNumberClassification.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
-public class AccountNumber implements IAccountNumber {
+public class AccountNumber implements IAccountNumber<AccountNumber.IntegerAccountNumberClassification> {
 
     public enum IntegerAccountNumberClassification {
         RIG(EMPTY_STRING),
