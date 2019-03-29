@@ -32,20 +32,33 @@ public class BankOcrApplication {
 
     public static void main(String[] args) {
         try {
-            accountNumberFileProcessor.processFile(
-                    new BufferedReader(new FileReader(FILE_PATH_NAME)),
-                    lineReader,
-                    multilineStringReader,
-                    multilineCharacterReader,
-                    accountNumberReader,
-                    BankOcrApplication::writeOutput);
+            processFile();
+            writeSeparetor();
+            repairAccountNumbers();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (UnsupportedOperationException e) {
-            System.out.println("----------------THE END OF THE FILE-----------------");
         }
+    }
+
+    static void repairAccountNumbers() throws IOException {
+        accountNumberFileProcessor.repairAccountNumbers(multilineCharacterReader,
+                BankOcrApplication::writeOutput);
+    }
+
+    static void writeSeparetor() {
+        System.out.println("-------------------------------------------------------------");
+    }
+
+    static void processFile() throws IOException {
+        accountNumberFileProcessor.processFile(
+                new BufferedReader(new FileReader(FILE_PATH_NAME)),
+                lineReader,
+                multilineStringReader,
+                multilineCharacterReader,
+                accountNumberReader,
+                BankOcrApplication::writeOutput);
     }
 
     static void writeOutput(IAccountNumber<AccountNumber.IntegerAccountNumberClassification> accountNumber) {

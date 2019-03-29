@@ -14,4 +14,6 @@ public interface IAccountNumberFileProcessor {
                      IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
                      IAccountNumberReader<DigitToken.TokenType> accountNumberReader,
                      Consumer<IAccountNumber> writeOutput) throws IOException;
+    void repairAccountNumbers(IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
+                     Consumer<IAccountNumber> writeOutput) throws IOException;
 }

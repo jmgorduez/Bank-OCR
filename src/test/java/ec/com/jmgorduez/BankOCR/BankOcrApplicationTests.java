@@ -37,7 +37,7 @@ public class BankOcrApplicationTests {
     }
 
     @Test
-    @DisplayName("It should read 1111111111")
+    @DisplayName("It should read 1111111111.")
     void readAccountNumber111111111() {
         try {
             assertThat(readAccountNumber(FILE_PATH_111111111).getValue())
@@ -48,7 +48,7 @@ public class BankOcrApplicationTests {
     }
 
     @Test
-    @DisplayName("It should read 123456789")
+    @DisplayName("It should read 123456789.")
     void readAccountNumber123456789() {
         try {
             assertThat(readAccountNumber(FILE_PATH_123456789).getValue())
@@ -59,11 +59,23 @@ public class BankOcrApplicationTests {
     }
 
     @Test
-    @DisplayName("It should read 49006771?")
+    @DisplayName("It should read 49006771?.")
     void readAccountNumber49006771_() {
         try {
             assertThat(readAccountNumber(FILE_PATH_49006771_).getValue())
                     .isEqualTo(STRING_ACCOUNT_NUMBER_49006771_);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @DisplayName("It should repair 49006771? and return 490067719.")
+    void repairAccountNumber49006771_() {
+        try {
+            IAccountNumber accountNumber = readAccountNumber(FILE_PATH_49006771_);
+            assertThat(accountNumber.repairAccountNumber(multilineCharacterReader))
+                    .isEqualTo(ACCOUNT_NUMBER_490067719);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,7 +95,7 @@ public class BankOcrApplicationTests {
     }
 
     @Test
-    @DisplayName("It should verify check sum of 1111111111")
+    @DisplayName("It should verify check sum of 1111111111.")
     void verifyCheckSumAccountNumber111111111() {
         try {
             assertThat(readAccountNumber(FILE_PATH_111111111).calculateCheckSum())
@@ -94,7 +106,7 @@ public class BankOcrApplicationTests {
     }
 
     @Test
-    @DisplayName("It should verify check sum of 123456789")
+    @DisplayName("It should verify check sum of 123456789.")
     void verifyCheckSumAccountNumber123456789() {
         try {
             assertThat(readAccountNumber(FILE_PATH_123456789).calculateCheckSum())

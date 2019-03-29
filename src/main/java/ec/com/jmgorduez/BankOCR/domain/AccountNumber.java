@@ -86,7 +86,8 @@ public class AccountNumber implements IAccountNumber<AccountNumber.IntegerAccoun
     }
 
     @Override
-    public IAccountNumber repairAccountNumber(IMultilineCharacterReader multilineCharacterReader) {
+    public IAccountNumber repairAccountNumber(IMultilineCharacterReader multilineCharacterReader)
+            throws UnsupportedOperationException {
         if (isRightAccountNumber(multilineCharacterReader)) {
             throw new UnsupportedOperationException();
         }

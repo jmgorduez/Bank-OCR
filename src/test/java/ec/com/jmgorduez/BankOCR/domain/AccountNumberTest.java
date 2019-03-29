@@ -162,7 +162,7 @@ class AccountNumberTest {
         assertThat(accountNumberUnderTest.getDigit(NINE))
                 .isEqualTo(DIGIT_FOUR);
         assertThat(accountNumberUnderTest.getDigit(ONE))
-                .isEqualTo(generateUndefinedCharacterSimilarDigitFour());
+                .isEqualTo(generateUndefinedCharacterSimilarDigitNine());
     }
 
     @Test

@@ -40,7 +40,7 @@ public class DataTestGenerator {
             = generateListDigitFromIntegerArray(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
     public static final List<ICharacter> CHARACTERS_ACCOUNT_NUMBER_49006771_
             = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, -1},
-            generateUndefinedCharacterSimilarDigitFour());
+            generateUndefinedCharacterSimilarDigitNine());
     public static final List<ICharacter> CHARACTERS_ACCOUNT_NUMBER_490067719
             = generateListDigitFromIntegerArray(new Integer[]{4, 9, 0, 0, 6, 7, 7, 1, 9});
     public static final List<ICharacter> CHARACTERS_ACCOUNT_NUMBER_345882865
@@ -461,11 +461,11 @@ public class DataTestGenerator {
         return characters;
     }
 
-    public static ICharacter generateUndefinedCharacterSimilarDigitFour() {
+    public static ICharacter generateUndefinedCharacterSimilarDigitNine() {
         Integer[][] binaryMatrixDigitSimilarZero = new Integer[][]{
                 new Integer[]{ZERO, ONE, ZERO},
-                new Integer[]{ZERO, ONE, ONE},
-                new Integer[]{ZERO, ONE, ONE}
+                new Integer[]{ONE, ONE, ONE},
+                new Integer[]{ZERO, ONE, ZERO}
         };
         return new UndefinedDigit(binaryMatrixDigitSimilarZero);
     }

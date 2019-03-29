@@ -66,7 +66,7 @@ class UndefinedDigitTest {
     void getSimilarCharacters() {
         assertThat(undefinedDigitUnderTest.getSimilarCharacters(new MultilineDigitReader()))
                 .isEqualTo(new ArrayList<>());
-        undefinedDigitUnderTest = (UndefinedDigit) generateUndefinedCharacterSimilarDigitFour();
+        undefinedDigitUnderTest = (UndefinedDigit) generateUndefinedCharacterSimilarDigitNine();
         assertThat(undefinedDigitUnderTest.getSimilarCharacters(new MultilineDigitReader()))
                 .isEqualTo(generateListUndefinedCharacterSimilarDigitNineSimilarCharacters());
 
