@@ -12,18 +12,18 @@ import java.util.function.Supplier;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.BLANK_SPACE_STRING;
 
-public class AccountNumberFileProcessor implements IAccountNumberFileProcessor {
-
-    private List<IAccountNumber> accountNumbers = new ArrayList<>();
+public class AccountNumberFileProcessor implements IAccountNumberFileProcessor<AccountNumber.IntegerAccountNumberClassification> {
 
     @Override
-    public void processFile(BufferedReader bufferedReader,
+    public List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> processFile(BufferedReader bufferedReader,
                             ILineReader<DigitToken.TokenType> lineReader,
                             IMultilineStringReader multilineStringReader,
                             IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
                             IAccountNumberReader<DigitToken.TokenType> accountNumberReader,
                             Consumer<IAccountNumber> writeOutput)
             throws IOException {
+        List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbers
+                = new ArrayList<>();
         try {
             do {
                 IAccountNumber accountNumber = accountNumberReader
@@ -36,18 +36,24 @@ public class AccountNumberFileProcessor implements IAccountNumberFileProcessor {
             } while (true);
         } catch (UnsupportedOperationException e) {
         }
-
+        return accountNumbers;
     }
 
     @Override
-    public void repairAccountNumbers(IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
+    public List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> repairAccountNumbers(IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
                                      Consumer<IAccountNumber> writeOutput) throws IOException {
+        List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbers
+                = new ArrayList<>();
         accountNumbers.stream().forEach(accountNumber -> {
             try {
-                writeOutput.accept(accountNumber.repairAccountNumber(multilineCharacterReader));
+                IAccountNumber<AccountNumber.IntegerAccountNumberClassification> repairedAccountNumber
+                        = accountNumber.repairAccountNumber(multilineCharacterReader);
+                writeOutput.accept(repairedAccountNumber);
+                accountNumbers.add(repairedAccountNumber);
             }catch (UnsupportedOperationException error){
                 writeOutput.accept(accountNumber);
             }
         });
+        return accountNumbers;
     }
 }

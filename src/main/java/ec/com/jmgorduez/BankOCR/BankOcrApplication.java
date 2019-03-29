@@ -11,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.function.Supplier;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
@@ -33,7 +32,7 @@ public class BankOcrApplication {
     public static void main(String[] args) {
         try {
             processFile();
-            writeSeparetor();
+            writeSeparator();
             repairAccountNumbers();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -47,7 +46,7 @@ public class BankOcrApplication {
                 BankOcrApplication::writeOutput);
     }
 
-    static void writeSeparetor() {
+    static void writeSeparator() {
         System.out.println("-------------------------------------------------------------");
     }
 
