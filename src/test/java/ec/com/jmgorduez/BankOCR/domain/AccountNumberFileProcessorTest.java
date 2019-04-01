@@ -21,6 +21,7 @@ import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.accountNu
 import static ec.com.jmgorduez.BankOCR.utils.Constants.BLANK_SPACE_STRING;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -74,7 +75,5 @@ class AccountNumberFileProcessorTest {
                 .isFalse();
     }
 
-    void writeOutput(IAccountNumber<AccountNumber.IntegerAccountNumberClassification> accountNumber) {
-
-    }
+    void writeOutput(IAccountNumber<AccountNumber.IntegerAccountNumberClassification> accountNumber) { }
 }
