@@ -24,6 +24,7 @@ class AccountNumberTest {
     }
 
     @Test
+    @DisplayName("It should return the value of a account number.")
     void getValue() {
         assertThat(accountNumberUnderTest.getValue())
                 .isEqualTo(STRING_ACCOUNT_NUMBER_111111111);
