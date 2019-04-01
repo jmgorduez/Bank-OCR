@@ -11,7 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.function.Consumer;
+import java.util.List;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
@@ -27,14 +27,15 @@ public class BankOcrApplication {
             new MultilineDigitReader();
     private static IAccountNumberReader<DigitToken.TokenType> accountNumberReader =
             new AccountNumberReader();
-    private static IAccountNumberFileProcessor<AccountNumber.IntegerAccountNumberClassification> accountNumberFileProcessor =
+    private static IAccountNumberFileProcessor<DigitToken.TokenType, AccountNumber.IntegerAccountNumberClassification> accountNumberFileProcessor =
             new AccountNumberFileProcessor();
 
     public static void main(String[] args) {
         try {
-            processFile();
+            List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbersRead =
+                    processFile();
             writeSeparator();
-            repairAccountNumbers();
+            repairAccountNumbers(accountNumbersRead);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -42,8 +43,9 @@ public class BankOcrApplication {
         }
     }
 
-    static void repairAccountNumbers() throws IOException {
-        accountNumberFileProcessor.repairAccountNumbers(multilineCharacterReader,
+    static void repairAccountNumbers(List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbersToRepair) throws IOException {
+        accountNumberFileProcessor.repairAccountNumbers(accountNumbersToRepair,
+                multilineCharacterReader,
                 BankOcrApplication::writeOutput);
     }
 
@@ -51,8 +53,8 @@ public class BankOcrApplication {
         System.out.println("-------------------------------------------------------------");
     }
 
-    static void processFile() throws IOException {
-        accountNumberFileProcessor.processFile(
+    static List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> processFile() throws IOException {
+        return accountNumberFileProcessor.processFile(
                 new BufferedReader(new FileReader(FILE_PATH_NAME)),
                 lineReader,
                 multilineStringReader,

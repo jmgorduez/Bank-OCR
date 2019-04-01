@@ -1,9 +1,7 @@
 package ec.com.jmgorduez.BankOCR.dataGenerator;
 
 import ec.com.jmgorduez.BankOCR.domain.*;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -468,5 +466,20 @@ public class DataTestGenerator {
                 new Integer[]{ZERO, ONE, ZERO}
         };
         return new UndefinedDigit(binaryMatrixDigitSimilarZero);
+    }
+
+    public static final String FILE_PATH_111111111 = FILE_PATH + "input111111111.txt";
+    public static final String FILE_PATH_123456789 = FILE_PATH + "input123456789.txt";
+    public static final String FILE_PATH_49006771_ = FILE_PATH + "input49006771_.txt";
+    public static final String FILE_PATH_MAIN = FILE_PATH + "input.txt";
+    public static IMultilineStringReader multilineStringReader;
+    public static ILineReader<DigitToken.TokenType> lineReader;
+    public static IMultilineCharacterReader< DigitToken.TokenType> multilineCharacterReader;
+    public static IAccountNumberReader<DigitToken.TokenType> accountNumberReader;
+
+    public static List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> generateWrongAccountNumber49006771_(){
+        return Stream.generate(() -> {
+            return ACCOUNT_NUMBER_49006771_;
+        }).limit(ONE).collect(Collectors.toList());
     }
 }

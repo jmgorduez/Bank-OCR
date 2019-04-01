@@ -12,15 +12,15 @@ import java.util.function.Supplier;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.BLANK_SPACE_STRING;
 
-public class AccountNumberFileProcessor implements IAccountNumberFileProcessor<AccountNumber.IntegerAccountNumberClassification> {
+public class AccountNumberFileProcessor implements IAccountNumberFileProcessor<DigitToken.TokenType, AccountNumber.IntegerAccountNumberClassification> {
 
     @Override
     public List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> processFile(BufferedReader bufferedReader,
-                            ILineReader<DigitToken.TokenType> lineReader,
-                            IMultilineStringReader multilineStringReader,
-                            IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
-                            IAccountNumberReader<DigitToken.TokenType> accountNumberReader,
-                            Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput)
+                                                                                              ILineReader<DigitToken.TokenType> lineReader,
+                                                                                              IMultilineStringReader multilineStringReader,
+                                                                                              IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
+                                                                                              IAccountNumberReader<DigitToken.TokenType> accountNumberReader,
+                                                                                              Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput)
             throws IOException {
         List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbers
                 = new ArrayList<>();
@@ -40,17 +40,19 @@ public class AccountNumberFileProcessor implements IAccountNumberFileProcessor<A
     }
 
     @Override
-    public List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> repairAccountNumbers(IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
-                                     Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput) throws IOException {
+    public List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> repairAccountNumbers(
+            List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbersToRepair,
+            IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
+            Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput) {
         List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbers
                 = new ArrayList<>();
-        accountNumbers.stream().forEach(accountNumber -> {
+        accountNumbersToRepair.stream().forEach(accountNumber -> {
             try {
                 IAccountNumber<AccountNumber.IntegerAccountNumberClassification> repairedAccountNumber
                         = accountNumber.repairAccountNumber(multilineCharacterReader);
                 writeOutput.accept(repairedAccountNumber);
                 accountNumbers.add(repairedAccountNumber);
-            }catch (UnsupportedOperationException error){
+            } catch (UnsupportedOperationException error) {
                 writeOutput.accept(accountNumber);
             }
         });
