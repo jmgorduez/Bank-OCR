@@ -137,9 +137,8 @@ public class AccountNumber implements IAccountNumber<AccountNumber.IntegerAccoun
 
     Integer howManyDigitsAreEquals(AccountNumber accountNumber) {
         return Stream.iterate(ONE, index -> index + ONE).limit(digits.size())
-                .mapToInt(index -> {
-                    return getDigit(index).equals(accountNumber.getDigit(index)) ? ONE : ZERO;
-                }).sum();
+                .mapToInt(index -> getDigit(index).equals(accountNumber.getDigit(index))
+                        ? ONE : ZERO).sum();
     }
 
     @Override

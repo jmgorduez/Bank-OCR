@@ -25,9 +25,7 @@ public class LineReader implements ILineReader<DigitToken.TokenType> {
         List<IToken<DigitToken.TokenType>> lineOfTokens =
                 line.chars()
                         .mapToObj(characterString -> (char) characterString)
-                        .map(character -> {
-                            return new DigitToken(Character.toString(character));
-                        }).collect(Collectors.toList());
+                        .map(character -> new DigitToken(Character.toString(character))).collect(Collectors.toList());
         return lineOfTokens;
     }
 

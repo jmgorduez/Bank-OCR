@@ -11,13 +11,12 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static ec.com.jmgorduez.BankOCR.domain.Digit.binaryMatrixToBinaryCode;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
 
-public class MultilineDigitReader implements IMultilineCharacterReader< DigitToken.TokenType> {
+public class MultilineDigitReader implements IMultilineCharacterReader<DigitToken.TokenType> {
 
     private static final HashMap<Integer, Integer> binaryCodesForDigits = generateBinaryCodesForDigits();
 
@@ -44,16 +43,14 @@ public class MultilineDigitReader implements IMultilineCharacterReader< DigitTok
     }
 
     Integer[][] digitTokenMatrixToBinaryMatrix(IMultilineString<IToken<DigitToken.TokenType>> digitTokenMatrix) {
+        return digitTokenMatrix.rows().stream()
+                .map(line -> digitTokenArrayToBinaryArray(line))
+                .toArray(Integer[][]::new);
+    }
 
-        List<Integer[]> binaryMatrix = new ArrayList<>();
-        digitTokenMatrix.rows().stream().forEach(line -> {
-            List<Integer> binaryToken =
-                    line.stream().map(token -> {
-                        return token.isVisible() ? ONE : ZERO;
-                    }).collect(Collectors.toList());
-            binaryMatrix.add(binaryToken.toArray(new Integer[]{}));
-        });
-        return binaryMatrix.toArray(new Integer[][]{});
+    Integer[] digitTokenArrayToBinaryArray(List<IToken<DigitToken.TokenType>> line) {
+        return line.stream().map(token -> token.isVisible() ? ONE : ZERO)
+                .toArray(Integer[]::new);
     }
 
     static Digit binaryCodeToDigit(Integer binaryCode)

@@ -7,8 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.BLANK_SPACE_STRING;
 
@@ -44,18 +46,27 @@ public class AccountNumberFileProcessor implements IAccountNumberFileProcessor<D
             List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbersToRepair,
             IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
             Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput) {
-        List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbers
-                = new ArrayList<>();
-        accountNumbersToRepair.stream().forEach(accountNumber -> {
-            try {
-                IAccountNumber<AccountNumber.IntegerAccountNumberClassification> repairedAccountNumber
-                        = accountNumber.repairAccountNumber(multilineCharacterReader);
-                writeOutput.accept(repairedAccountNumber);
-                accountNumbers.add(repairedAccountNumber);
-            } catch (UnsupportedOperationException error) {
-                writeOutput.accept(accountNumber);
-            }
-        });
-        return accountNumbers;
+        return accountNumbersToRepair.stream()
+                .map(accountNumber ->
+                        repairAccountNumber(multilineCharacterReader,
+                                writeOutput,
+                                accountNumber))
+                .filter(accountNumber -> accountNumber.isPresent())
+                .map(accountNumber -> accountNumber.get())
+                .collect(Collectors.toList());
+    }
+
+    Optional<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> repairAccountNumber(IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
+                                                                                                   Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput,
+                                                                                                   IAccountNumber<AccountNumber.IntegerAccountNumberClassification> accountNumber) {
+        try {
+            IAccountNumber<AccountNumber.IntegerAccountNumberClassification> repairedAccountNumber
+                    = accountNumber.repairAccountNumber(multilineCharacterReader);
+            writeOutput.accept(repairedAccountNumber);
+            return Optional.of(repairedAccountNumber);
+        } catch (UnsupportedOperationException error) {
+            writeOutput.accept(accountNumber);
+            return Optional.empty();
+        }
     }
 }

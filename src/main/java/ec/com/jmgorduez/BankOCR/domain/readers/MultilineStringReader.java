@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
-public class MultilineStringReader< TOKEN_TYPE extends Enum> implements IMultilineStringReader< TOKEN_TYPE> {
+public class MultilineStringReader<TOKEN_TYPE extends Enum> implements IMultilineStringReader<TOKEN_TYPE> {
 
     private static final int CHARACTER_WIDTH = 3;
     private static final int CHARACTER_HEIGHT = 3;
@@ -29,8 +29,8 @@ public class MultilineStringReader< TOKEN_TYPE extends Enum> implements IMultili
 
     @Override
     public List<ICharacter> readMultilineString(BufferedReader bufferedReader,
-                                                                ILineReader<TOKEN_TYPE> lineReader,
-                                                                IMultilineCharacterReader<TOKEN_TYPE> characterReader)
+                                                ILineReader<TOKEN_TYPE> lineReader,
+                                                IMultilineCharacterReader<TOKEN_TYPE> characterReader)
             throws IOException {
         IMultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(CHARACTER_WIDTH);
         int lineCounter = 0;
@@ -47,14 +47,12 @@ public class MultilineStringReader< TOKEN_TYPE extends Enum> implements IMultili
     }
 
     List<ICharacter> generateCharactersString(IMultilineString<IToken<TOKEN_TYPE>> multilineString,
-                                                              IMultilineCharacterReader<TOKEN_TYPE> characterReader) {
+                                              IMultilineCharacterReader<TOKEN_TYPE> characterReader) {
         List<ICharacter> charactersString =
                 Stream.iterate(ZERO, index -> index + ONE).limit(stringLength)
-                        .map(index -> {
-                            IMultilineString<IToken<TOKEN_TYPE>> multilineCharacter
-                                    = multilineString.getCharacterSection(index);
-                            return characterReader.readCharacter(multilineCharacter);
-                        }).collect(Collectors.toList());
+                        .map(index -> characterReader.readCharacter(multilineString
+                                .getCharacterSection(index)))
+                        .collect(Collectors.toList());
         return charactersString;
     }
 }

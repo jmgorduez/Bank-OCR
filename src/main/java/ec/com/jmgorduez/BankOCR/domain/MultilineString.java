@@ -13,7 +13,7 @@ public class MultilineString<TOKEN extends IToken> implements IMultilineString<T
     private List<List<TOKEN>> multilineString;
     private Integer characterWidth;
 
-    public MultilineString(Integer characterWidth){
+    public MultilineString(Integer characterWidth) {
         multilineString = new ArrayList<>();
         this.characterWidth = characterWidth;
     }
@@ -31,12 +31,10 @@ public class MultilineString<TOKEN extends IToken> implements IMultilineString<T
     @Override
     public IMultilineString<TOKEN> getCharacterSection(Integer index) {
         IMultilineString<TOKEN> character = new MultilineString<>(MATRIX_WIDTH_3);
-        int indexFrom = index* characterWidth();
+        int indexFrom = index * characterWidth();
         int indexTo = indexFrom + characterWidth();
-        multilineString.stream().forEach(line -> {
-            List<TOKEN> characterSection = line.subList(indexFrom, indexTo);
-            character.add(characterSection);
-        });
+        multilineString.stream()
+                .forEach(line -> character.add(line.subList(indexFrom, indexTo)));
         return character;
     }
 
@@ -46,7 +44,7 @@ public class MultilineString<TOKEN extends IToken> implements IMultilineString<T
     }
 
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
