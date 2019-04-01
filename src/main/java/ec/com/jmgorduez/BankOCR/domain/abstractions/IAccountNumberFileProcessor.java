@@ -14,7 +14,7 @@ public interface IAccountNumberFileProcessor<TYPE_CLASSIFICATION extends Enum> {
                      IMultilineStringReader multilineStringReader,
                      IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
                      IAccountNumberReader<DigitToken.TokenType> accountNumberReader,
-                     Consumer<IAccountNumber> writeOutput) throws IOException;
+                     Consumer<IAccountNumber<TYPE_CLASSIFICATION>> writeOutput) throws IOException;
     List<IAccountNumber<TYPE_CLASSIFICATION>> repairAccountNumbers(IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
-                     Consumer<IAccountNumber> writeOutput) throws IOException;
+                     Consumer<IAccountNumber<TYPE_CLASSIFICATION>> writeOutput) throws IOException;
 }

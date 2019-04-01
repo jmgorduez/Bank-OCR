@@ -20,7 +20,7 @@ public class AccountNumberFileProcessor implements IAccountNumberFileProcessor<A
                             IMultilineStringReader multilineStringReader,
                             IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
                             IAccountNumberReader<DigitToken.TokenType> accountNumberReader,
-                            Consumer<IAccountNumber> writeOutput)
+                            Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput)
             throws IOException {
         List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbers
                 = new ArrayList<>();
@@ -41,7 +41,7 @@ public class AccountNumberFileProcessor implements IAccountNumberFileProcessor<A
 
     @Override
     public List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> repairAccountNumbers(IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
-                                     Consumer<IAccountNumber> writeOutput) throws IOException {
+                                     Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput) throws IOException {
         List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbers
                 = new ArrayList<>();
         accountNumbers.stream().forEach(accountNumber -> {

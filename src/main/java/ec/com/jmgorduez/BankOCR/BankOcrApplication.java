@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.function.Consumer;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 
@@ -26,7 +27,7 @@ public class BankOcrApplication {
             new MultilineDigitReader();
     private static IAccountNumberReader<DigitToken.TokenType> accountNumberReader =
             new AccountNumberReader();
-    private static IAccountNumberFileProcessor accountNumberFileProcessor =
+    private static IAccountNumberFileProcessor<AccountNumber.IntegerAccountNumberClassification> accountNumberFileProcessor =
             new AccountNumberFileProcessor();
 
     public static void main(String[] args) {
