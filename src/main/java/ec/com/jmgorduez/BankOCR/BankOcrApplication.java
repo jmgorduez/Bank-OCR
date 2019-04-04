@@ -1,6 +1,8 @@
 package ec.com.jmgorduez.BankOCR;
 
-import ec.com.jmgorduez.BankOCR.domain.*;
+import ec.com.jmgorduez.BankOCR.domain.AccountNumber;
+import ec.com.jmgorduez.BankOCR.domain.AccountNumberFileProcessor;
+import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.*;
 import ec.com.jmgorduez.BankOCR.domain.readers.AccountNumberReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.LineReader;

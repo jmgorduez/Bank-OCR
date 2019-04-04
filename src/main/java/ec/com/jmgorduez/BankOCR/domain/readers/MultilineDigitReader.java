@@ -1,12 +1,12 @@
 package ec.com.jmgorduez.BankOCR.domain.readers;
 
 import ec.com.jmgorduez.BankOCR.domain.Digit;
+import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.UndefinedDigit;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import ec.com.jmgorduez.BankOCR.domain.DigitToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineCharacterReader;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 
 import java.util.ArrayList;
 import java.util.HashMap;

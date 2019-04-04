@@ -1,9 +1,9 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
 import ec.com.jmgorduez.BankOCR.domain.abstractions.AbstractCharacter;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Objects;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 

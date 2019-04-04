@@ -1,7 +1,7 @@
 package ec.com.jmgorduez.BankOCR.domain;
 
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 
 import java.util.ArrayList;
 import java.util.List;

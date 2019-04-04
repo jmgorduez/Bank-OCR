@@ -1,23 +1,16 @@
 package ec.com.jmgorduez.BankOCR.domain.readers;
 
 import ec.com.jmgorduez.BankOCR.domain.MultilineString;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineCharacterReader;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.ILineReader;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineString;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineStringReader;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.math.BigInteger;
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;
 
 public class MultilineStringReader<TOKEN_TYPE extends Enum> implements IMultilineStringReader<TOKEN_TYPE> {
 

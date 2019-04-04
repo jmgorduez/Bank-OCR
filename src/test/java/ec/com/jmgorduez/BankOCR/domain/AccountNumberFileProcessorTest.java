@@ -5,7 +5,6 @@ import ec.com.jmgorduez.BankOCR.domain.readers.AccountNumberReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.LineReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.MultilineStringReader;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,16 +13,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import java.util.function.Consumer;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
-import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.accountNumberReader;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.BLANK_SPACE_STRING;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 
 class AccountNumberFileProcessorTest {
 

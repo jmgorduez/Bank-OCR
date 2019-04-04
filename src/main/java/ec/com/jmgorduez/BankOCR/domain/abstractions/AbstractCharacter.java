@@ -1,13 +1,9 @@
 package ec.com.jmgorduez.BankOCR.domain.abstractions;
 
-import ec.com.jmgorduez.BankOCR.domain.UndefinedDigit;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.ICharacter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ONE;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.ZERO;

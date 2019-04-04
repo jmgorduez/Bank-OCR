@@ -1,7 +1,6 @@
 package ec.com.jmgorduez.BankOCR;
 
-import ec.com.jmgorduez.BankOCR.domain.*;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.*;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IAccountNumber;
 import ec.com.jmgorduez.BankOCR.domain.readers.AccountNumberReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.LineReader;
 import ec.com.jmgorduez.BankOCR.domain.readers.MultilineDigitReader;
@@ -15,7 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.STRING_LENGTH;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class BankOcrApplicationTests {

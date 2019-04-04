@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.*;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
-import static org.mockito.Mockito.mock;
 
 public class DataTestGenerator {
 

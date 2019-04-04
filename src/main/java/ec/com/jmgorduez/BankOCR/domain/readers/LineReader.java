@@ -1,18 +1,17 @@
 package ec.com.jmgorduez.BankOCR.domain.readers;
 
 import ec.com.jmgorduez.BankOCR.domain.DigitToken;
-import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 import ec.com.jmgorduez.BankOCR.domain.abstractions.ILineReader;
+import ec.com.jmgorduez.BankOCR.domain.abstractions.IToken;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.BLANK_SPACE;
-import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
+import static ec.com.jmgorduez.BankOCR.utils.Constants.MATRIX_WIDTH_27;
 
 public class LineReader implements ILineReader<DigitToken.TokenType> {
     @Override
