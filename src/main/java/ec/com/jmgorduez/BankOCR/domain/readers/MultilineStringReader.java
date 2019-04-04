@@ -10,8 +10,10 @@ import ec.com.jmgorduez.BankOCR.domain.abstractions.IMultilineStringReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,7 +33,7 @@ public class MultilineStringReader<TOKEN_TYPE extends Enum> implements IMultilin
     public List<ICharacter> readMultilineString(BufferedReader bufferedReader,
                                                 ILineReader<TOKEN_TYPE> lineReader,
                                                 IMultilineCharacterReader<TOKEN_TYPE> characterReader)
-            throws IOException {
+            throws IOException, StringIndexOutOfBoundsException {
         IMultilineString<IToken<TOKEN_TYPE>> multilineString = new MultilineString<>(CHARACTER_WIDTH);
         int lineCounter = 0;
         do {
@@ -47,10 +49,11 @@ public class MultilineStringReader<TOKEN_TYPE extends Enum> implements IMultilin
     }
 
     List<ICharacter> generateCharactersString(IMultilineString<IToken<TOKEN_TYPE>> multilineString,
-                                              IMultilineCharacterReader<TOKEN_TYPE> characterReader) {
+                                              IMultilineCharacterReader<TOKEN_TYPE> characterReader)
+            throws StringIndexOutOfBoundsException {
         List<ICharacter> charactersString =
                 Stream.iterate(ZERO, index -> index + ONE).limit(stringLength)
-                        .map(index -> characterReader.readCharacter(multilineString
+                        .map( index ->  characterReader.readCharacter(multilineString
                                 .getCharacterSection(index)))
                         .collect(Collectors.toList());
         return charactersString;

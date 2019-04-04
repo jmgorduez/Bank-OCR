@@ -21,11 +21,11 @@ class AccountNumberReaderTest {
 
     private AccountNumberReader accountNumberReaderUnderTest;
     @Mock
-    private IMultilineStringReader< DigitToken.TokenType> multilineString111111111ReaderMock;
+    private IMultilineStringReader<DigitToken.TokenType> multilineString111111111ReaderMock;
     @Mock
-    private IMultilineStringReader< DigitToken.TokenType> multilineString000000000ReaderMock;
+    private IMultilineStringReader<DigitToken.TokenType> multilineString000000000ReaderMock;
     @Mock
-    private IMultilineStringReader< DigitToken.TokenType> multilineString49006771_ReaderMock;
+    private IMultilineStringReader<DigitToken.TokenType> multilineString49006771_ReaderMock;
 
     @BeforeEach
     void setUp() {

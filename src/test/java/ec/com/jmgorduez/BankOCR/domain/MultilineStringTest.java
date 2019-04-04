@@ -11,6 +11,7 @@ import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.*;
 import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.BLANK_SPACE;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MultilineStringTest {
 
@@ -19,9 +20,7 @@ class MultilineStringTest {
     void setUp() {
         multilineStringUnderTest = new MultilineString<>(MATRIX_WIDTH_3);
         List<List<IToken<DigitToken.TokenType>>> lines = generateThreeRowsWithTwentySevenTokensThatRepresentsDigitOneMutilineString();
-        lines.stream().forEach(line -> {
-            multilineStringUnderTest.add(line);
-        });
+        lines.stream().forEach(line -> multilineStringUnderTest.add(line));
     }
 
     @Test
@@ -34,7 +33,7 @@ class MultilineStringTest {
         listExpected.add(generateListTokens(BLANK_SPACE, MATRIX_WIDTH_27));
         assertThat(multilineStringUnderTest.rows())
                 .isEqualTo(listExpected);
-        listExpected.add(generateListTokens(BLANK_SPACE,MATRIX_WIDTH_27));
+        listExpected.add(generateListTokens(BLANK_SPACE, MATRIX_WIDTH_27));
         assertThat(multilineStringUnderTest.rows())
                 .isNotEqualTo(listExpected);
     }
@@ -53,23 +52,20 @@ class MultilineStringTest {
         setUp();
         assertThat(multilineStringUnderTest.getCharacterSection(ZERO))
                 .isEqualTo(multilineThatRepresentsDigitOne());
+        assertThatThrownBy(() -> multilineStringUnderTest.getCharacterSection(MATRIX_WIDTH_27))
+                .isInstanceOf(StringIndexOutOfBoundsException.class);
     }
 
     @Test
     @DisplayName("It should return if the multiline is equal to other")
     void equals() {
         setUp();
-        assertThat(multilineStringUnderTest.equals(multilineStringUnderTest))
-                .isTrue();
+        assertThat(multilineStringUnderTest.equals(multilineStringUnderTest)).isTrue();
         MultilineString<IToken<DigitToken.TokenType>> otherMultiline = new MultilineString<>(MATRIX_WIDTH_3);
         List<List<IToken<DigitToken.TokenType>>> lines = generateThreeRowsWithTwentySevenTokensThatRepresentsDigitOneMutilineString();
-        lines.stream().forEach(line -> {
-            otherMultiline.add(line);
-        });
-        assertThat(multilineStringUnderTest.equals(otherMultiline))
-                .isTrue();
-        assertThat(multilineStringUnderTest.equals(this))
-                .isFalse();
+        lines.stream().forEach(line -> otherMultiline.add(line));
+        assertThat(multilineStringUnderTest.equals(otherMultiline)).isTrue();
+        assertThat(multilineStringUnderTest.equals(this)).isFalse();
     }
 
     @Test

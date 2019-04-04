@@ -29,12 +29,17 @@ public class MultilineString<TOKEN extends IToken> implements IMultilineString<T
     }
 
     @Override
-    public IMultilineString<TOKEN> getCharacterSection(Integer index) {
+    public IMultilineString<TOKEN> getCharacterSection(Integer index)
+            throws StringIndexOutOfBoundsException {
         IMultilineString<TOKEN> character = new MultilineString<>(MATRIX_WIDTH_3);
         int indexFrom = index * characterWidth();
         int indexTo = indexFrom + characterWidth();
-        multilineString.stream()
-                .forEach(line -> character.add(line.subList(indexFrom, indexTo)));
+        try {
+            multilineString.stream()
+                    .forEach(line -> character.add(line.subList(indexFrom, indexTo)));
+        }catch (IndexOutOfBoundsException error){
+            throw new StringIndexOutOfBoundsException();
+        }
         return character;
     }
 

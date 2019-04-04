@@ -40,6 +40,8 @@ public class BankOcrApplication {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (StringIndexOutOfBoundsException e){
+            e.printStackTrace();
         }
     }
 
@@ -53,7 +55,8 @@ public class BankOcrApplication {
         System.out.println("-------------------------------------------------------------");
     }
 
-    static List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> processFile() throws IOException {
+    static List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> processFile()
+            throws IOException, StringIndexOutOfBoundsException {
         return accountNumberFileProcessor.processFile(
                 new BufferedReader(new FileReader(FILE_PATH_NAME)),
                 lineReader,

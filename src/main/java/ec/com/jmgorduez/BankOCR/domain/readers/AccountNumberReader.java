@@ -14,7 +14,8 @@ public class AccountNumberReader implements IAccountNumberReader<DigitToken.Toke
     public IAccountNumber readAccountNumber(BufferedReader bufferedReader,
                                             ILineReader<DigitToken.TokenType> readLine,
                                             IMultilineCharacterReader< DigitToken.TokenType> charaterReader,
-                                            IMultilineStringReader< DigitToken.TokenType> multilineStringReader) throws IOException {
+                                            IMultilineStringReader< DigitToken.TokenType> multilineStringReader)
+            throws IOException, StringIndexOutOfBoundsException {
         List<ICharacter> characters =
                 multilineStringReader.readMultilineString(bufferedReader, readLine, charaterReader);
         return new AccountNumber(characters);

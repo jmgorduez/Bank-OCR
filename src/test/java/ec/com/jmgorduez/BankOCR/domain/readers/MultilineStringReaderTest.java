@@ -22,6 +22,7 @@ import static ec.com.jmgorduez.BankOCR.dataGenerator.DataTestGenerator.generateL
 import static ec.com.jmgorduez.BankOCR.domain.DigitToken.TokenType.BLANK_SPACE;
 import static ec.com.jmgorduez.BankOCR.utils.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 class MultilineStringReaderTest {
@@ -30,11 +31,15 @@ class MultilineStringReaderTest {
     @Mock
     private IMultilineCharacterReader< DigitToken.TokenType> characterReaderMock;
     @Mock
+    private IMultilineCharacterReader< DigitToken.TokenType> characterReaderThrowUnsopportedOperationMock;
+    @Mock
     private ILineReader<DigitToken.TokenType> lineReaderMock;
     @Mock
     private ILineReader<DigitToken.TokenType> emptyLineReaderMock;
     @Mock
     private IMultilineString<IToken<DigitToken.TokenType>> multilineStringMock;
+    @Mock
+    private IMultilineString<IToken<DigitToken.TokenType>> multilineStringThrowUnsopportedOperationMock;
 
     @BeforeEach
     void setUp() {
@@ -53,8 +58,12 @@ class MultilineStringReaderTest {
         }
         when(characterReaderMock.readCharacter(any(MultilineString.class)))
                 .thenReturn(new Digit(ONE));
+        when(characterReaderThrowUnsopportedOperationMock.readCharacter(any(IMultilineString.class)))
+                .thenThrow(UnsupportedOperationException.class);
         when(multilineStringMock.getCharacterSection(any()))
                 .thenReturn(multilineThatRepresentsDigitOne());
+        when(multilineStringThrowUnsopportedOperationMock.getCharacterSection(any()))
+                .thenThrow(UnsupportedOperationException.class);
     }
 
     @Test
@@ -66,6 +75,10 @@ class MultilineStringReaderTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assertThatThrownBy(() -> {
+            multilineStringReaderUnderTest.readMultilineString(any(), lineReaderMock,
+                    characterReaderThrowUnsopportedOperationMock);
+        }).isInstanceOf(UnsupportedOperationException.class);
     }
 
     @Test
@@ -74,6 +87,11 @@ class MultilineStringReaderTest {
         assertThat(multilineStringReaderUnderTest.generateCharactersString(
                 multilineStringMock, characterReaderMock))
                                         .isEqualTo(generateListSameDigits(ONE));
+        assertThatThrownBy(() -> {
+            multilineStringReaderUnderTest.generateCharactersString(
+                    multilineStringThrowUnsopportedOperationMock,
+                    characterReaderMock);
+        }).isInstanceOf(UnsupportedOperationException.class);
     }
 
     @Test

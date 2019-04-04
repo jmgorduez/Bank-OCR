@@ -8,5 +8,5 @@ public interface IMultilineStringReader<TOKEN_TYPE extends Enum> {
     List<ICharacter> readMultilineString(BufferedReader bufferedReader,
                                                          ILineReader<TOKEN_TYPE> lineReader,
                                                          IMultilineCharacterReader< TOKEN_TYPE> charaterReader)
-            throws IOException;
+            throws IOException, StringIndexOutOfBoundsException;
 }

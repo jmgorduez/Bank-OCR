@@ -15,7 +15,8 @@ public interface IAccountNumberFileProcessor<CHARACTER_TYPE extends Enum, TYPE_C
                      IMultilineStringReader multilineStringReader,
                      IMultilineCharacterReader<CHARACTER_TYPE> multilineCharacterReader,
                      IAccountNumberReader<DigitToken.TokenType> accountNumberReader,
-                     Consumer<IAccountNumber<TYPE_CLASSIFICATION>> writeOutput) throws IOException;
+                     Consumer<IAccountNumber<TYPE_CLASSIFICATION>> writeOutput)
+            throws IOException, StringIndexOutOfBoundsException;
     List<IAccountNumber<TYPE_CLASSIFICATION>> repairAccountNumbers(List<IAccountNumber<TYPE_CLASSIFICATION>> accountNumbersToRepair,
                                                                    IMultilineCharacterReader<CHARACTER_TYPE> multilineCharacterReader,
                                                                    Consumer<IAccountNumber<TYPE_CLASSIFICATION>> writeOutput);

@@ -5,6 +5,7 @@ import java.util.List;
 public interface IMultilineString<TOKEN extends IToken> {
     void add(List<TOKEN> line);
     Integer characterWidth();
-    IMultilineString<TOKEN> getCharacterSection(Integer index);
+    IMultilineString<TOKEN> getCharacterSection(Integer index)
+            throws StringIndexOutOfBoundsException;
     List<List<TOKEN>> rows();
 }

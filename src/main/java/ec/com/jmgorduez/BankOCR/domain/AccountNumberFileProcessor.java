@@ -23,7 +23,7 @@ public class AccountNumberFileProcessor implements IAccountNumberFileProcessor<D
                                                                                               IMultilineCharacterReader<DigitToken.TokenType> multilineCharacterReader,
                                                                                               IAccountNumberReader<DigitToken.TokenType> accountNumberReader,
                                                                                               Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput)
-            throws IOException {
+            throws IOException, StringIndexOutOfBoundsException {
         List<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> accountNumbers
                 = new ArrayList<>();
         try {
