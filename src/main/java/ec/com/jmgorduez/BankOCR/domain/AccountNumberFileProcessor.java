@@ -48,9 +48,7 @@ public class AccountNumberFileProcessor implements IAccountNumberFileProcessor<D
             Consumer<IAccountNumber<AccountNumber.IntegerAccountNumberClassification>> writeOutput) {
         return accountNumbersToRepair.stream()
                 .map(accountNumber ->
-                        repairAccountNumber(multilineCharacterReader,
-                                writeOutput,
-                                accountNumber))
+                        repairAccountNumber(multilineCharacterReader, writeOutput, accountNumber))
                 .filter(accountNumber -> accountNumber.isPresent())
                 .map(accountNumber -> accountNumber.get())
                 .collect(Collectors.toList());
